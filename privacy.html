@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chronos — Privacy Policy</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans CJK SC", sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; line-height: 1.6; color: #222; }
+  h1 { font-size: 1.6em; } h2 { font-size: 1.2em; margin-top: 2em; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.95em; }
+  th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f2f2f2; }
+  .lang-nav { background: #f2f2f2; padding: 8px 12px; border-radius: 8px; position: sticky; top: 0; }
+  hr.divider { margin: 48px 0; border: none; border-top: 2px solid #ccc; }
+  .muted { color: #666; font-size: 0.9em; }
+</style>
+</head>
+<body>
+
+<p class="lang-nav">
+  <a href="#en">English</a> · <a href="#es">Español</a> · <a href="#fr">Français</a> ·
+  <a href="#de">Deutsch</a> · <a href="#pt">Português</a> · <a href="#it">Italiano</a> ·
+  <a href="#zh">中文</a> · <a href="#ja">日本語</a> · <a href="#ko">한국어</a>
+</p>
+
+<!-- ============================== EN ============================== -->
+<h1 id="en">Chronos — Privacy Policy</h1>
+<p class="muted">Effective date: July 4, 2026</p>
+
+<p>Chronos ("the App") is an Android alarm clock app developed by Luis Martín
+("we", "us"). This policy explains what data the App handles and why. The short
+version: <strong>Chronos works locally on your device, requires no account, shows
+no ads, and includes no analytics or tracking SDKs.</strong></p>
+
+<h2>1. Data stored on your device</h2>
+<p>Everything you configure in the App — alarms, schedules, dismiss challenges,
+holidays and free days, app settings, and premium status flags — is stored
+<strong>locally on your device</strong> in the App's private storage. We do not
+operate any server, and this data is never uploaded to us. Uninstalling the App
+deletes it.</p>
+
+<h2>2. Location</h2>
+<p>Two optional features use your device's location, and both process it
+<strong>entirely on your device</strong>:</p>
+<ul>
+  <li><strong>Location-conditioned alarms (geofencing):</strong> if you attach a
+  location condition to an alarm, the App asks Android's geofencing service to
+  tell it when you enter or leave the zone you chose. This requires background
+  location permission so the condition keeps working when the App is closed.</li>
+  <li><strong>Solar alarms:</strong> if you anchor an alarm to sunrise, sunset,
+  or twilight, the App uses your approximate location to compute those times on
+  the device.</li>
+</ul>
+<p>Your location is <strong>never transmitted off your device</strong>, never
+stored in any history, and never shared with anyone. If you don't use these
+features, the App never requests location permission.</p>
+
+<h2>3. Purchases</h2>
+<p>Premium features are sold as in-app purchases processed by
+<strong>Google Play Billing</strong>. We never see your payment details (card
+numbers, etc.) — Google handles payment entirely.</p>
+<p>To validate purchases and keep your premium status active across reinstalls,
+the App uses <strong>RevenueCat</strong>, a purchase-infrastructure service.
+RevenueCat receives: a randomly generated anonymous ID (not linked to your name
+or email), your purchase receipts/tokens from Google Play, and basic device
+information (device model, OS version, app version, locale, and transiently your
+IP address). RevenueCat acts as our service provider and does not sell this
+data. See the
+<a href="https://www.revenuecat.com/privacy/">RevenueCat Privacy Policy</a>.</p>
+
+<h2>4. Other network services</h2>
+<p>The App contacts two public services for specific optional features. As with
+any internet request, these services technically receive your IP address:</p>
+<ul>
+  <li><strong>Public holidays (Nager.Date, date.nager.at):</strong> if you enable
+  automatic holiday sync, the App downloads the public-holiday list for the
+  country and year you selected. No personal data is sent — only the country
+  code and year.</li>
+  <li><strong>Map tiles (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  when you pick a location on the map while editing an alarm, the map images are
+  loaded from CARTO's servers. The tile requests reveal the map area you are
+  viewing, but the App does not send your identity or your device's location to
+  CARTO.</li>
+</ul>
+
+<h2>5. Permissions the App requests</h2>
+<table>
+  <tr><th>Permission</th><th>Why</th></tr>
+  <tr><td>Notifications, full-screen alarms</td><td>To ring and show the alarm screen, including over the lock screen.</td></tr>
+  <tr><td>Exact alarms</td><td>So alarms fire at the precise time you set.</td></tr>
+  <tr><td>Run at startup</td><td>To re-arm your alarms after the phone reboots.</td></tr>
+  <tr><td>Foreground service, wake lock, vibration</td><td>To keep the alarm sounding and vibrating reliably until you dismiss it.</td></tr>
+  <tr><td>Location (foreground &amp; background)</td><td>Only for the optional geofence and solar-alarm features described above.</td></tr>
+  <tr><td>Internet</td><td>Only for purchases (RevenueCat), holiday sync, and map tiles as described above.</td></tr>
+</table>
+
+<h2>6. Data sharing and selling</h2>
+<p>We do not sell, rent, or trade any data. The only third parties that process
+any data are the service providers listed above (Google Play, RevenueCat,
+Nager.Date, CARTO), each strictly for the feature described.</p>
+
+<h2>7. Data retention and deletion</h2>
+<p>Local data lives only on your device: uninstalling the App deletes it. To
+request deletion of the anonymous purchase records held by RevenueCat, contact
+us at the email below and we will process the request.</p>
+
+<h2>8. Children</h2>
+<p>The App is not directed at children under 13 and does not knowingly collect
+personal information from them.</p>
+
+<h2>9. Changes to this policy</h2>
+<p>If we change this policy, we will update this page and the effective date
+above. Material changes will be noted in the App's release notes.</p>
+
+<h2>10. Contact</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== ES ============================== -->
+<h1 id="es">Chronos — Política de Privacidad</h1>
+<p class="muted">Fecha de entrada en vigor: 4 de julio de 2026</p>
+
+<p>Chronos («la App») es una aplicación de alarmas para Android desarrollada por
+Luis Martín («nosotros»). Esta política explica qué datos maneja la App y por
+qué. La versión corta: <strong>Chronos funciona localmente en tu dispositivo, no
+requiere cuenta, no muestra anuncios y no incluye SDKs de analítica ni de
+rastreo.</strong></p>
+
+<h2>1. Datos almacenados en tu dispositivo</h2>
+<p>Todo lo que configuras en la App — alarmas, horarios, desafíos para apagarlas,
+festivos y días libres, ajustes y el estado premium — se guarda
+<strong>localmente en tu dispositivo</strong>, en el almacenamiento privado de la
+App. No operamos ningún servidor y estos datos nunca se nos envían. Al
+desinstalar la App se eliminan.</p>
+
+<h2>2. Ubicación</h2>
+<p>Dos funciones opcionales usan la ubicación del dispositivo, y ambas la
+procesan <strong>íntegramente en tu dispositivo</strong>:</p>
+<ul>
+  <li><strong>Alarmas condicionadas por ubicación (geovallas):</strong> si añades
+  una condición de ubicación a una alarma, la App pide al servicio de geovallas
+  de Android que le avise cuando entras o sales de la zona elegida. Esto requiere
+  el permiso de ubicación en segundo plano para que la condición siga funcionando
+  con la App cerrada.</li>
+  <li><strong>Alarmas solares:</strong> si anclas una alarma al amanecer, al
+  atardecer o al crepúsculo, la App usa tu ubicación aproximada para calcular
+  esas horas en el propio dispositivo.</li>
+</ul>
+<p>Tu ubicación <strong>nunca sale de tu dispositivo</strong>, no se guarda en
+ningún historial y no se comparte con nadie. Si no usas estas funciones, la App
+nunca solicita el permiso de ubicación.</p>
+
+<h2>3. Compras</h2>
+<p>Las funciones premium se venden como compras dentro de la aplicación
+procesadas por <strong>Google Play Billing</strong>. Nunca vemos tus datos de
+pago (números de tarjeta, etc.): Google gestiona el pago por completo.</p>
+<p>Para validar las compras y mantener tu estado premium activo entre
+reinstalaciones, la App usa <strong>RevenueCat</strong>, un servicio de
+infraestructura de compras. RevenueCat recibe: un identificador anónimo generado
+aleatoriamente (no vinculado a tu nombre ni a tu correo), los recibos/tokens de
+compra de Google Play y datos básicos del dispositivo (modelo, versión del
+sistema, versión de la app, idioma y, de forma transitoria, tu dirección IP).
+RevenueCat actúa como nuestro encargado de tratamiento y no vende estos datos.
+Consulta la <a href="https://www.revenuecat.com/privacy/">Política de
+Privacidad de RevenueCat</a>.</p>
+
+<h2>4. Otros servicios de red</h2>
+<p>La App se conecta a dos servicios públicos para funciones opcionales
+concretas. Como en cualquier petición por internet, estos servicios reciben
+técnicamente tu dirección IP:</p>
+<ul>
+  <li><strong>Festivos públicos (Nager.Date, date.nager.at):</strong> si activas
+  la sincronización automática de festivos, la App descarga la lista de festivos
+  del país y año que seleccionaste. No se envía ningún dato personal — solo el
+  código de país y el año.</li>
+  <li><strong>Teselas de mapa (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  al elegir una ubicación en el mapa mientras editas una alarma, las imágenes del
+  mapa se cargan desde los servidores de CARTO. Las peticiones revelan la zona
+  del mapa que estás viendo, pero la App no envía tu identidad ni la ubicación
+  del dispositivo a CARTO.</li>
+</ul>
+
+<h2>5. Permisos que solicita la App</h2>
+<table>
+  <tr><th>Permiso</th><th>Para qué</th></tr>
+  <tr><td>Notificaciones, alarmas a pantalla completa</td><td>Para sonar y mostrar la pantalla de alarma, incluso sobre la pantalla de bloqueo.</td></tr>
+  <tr><td>Alarmas exactas</td><td>Para que las alarmas suenen a la hora exacta que configuraste.</td></tr>
+  <tr><td>Ejecutarse al inicio</td><td>Para reprogramar tus alarmas tras reiniciar el teléfono.</td></tr>
+  <tr><td>Servicio en primer plano, wake lock, vibración</td><td>Para que la alarma siga sonando y vibrando de forma fiable hasta que la apagues.</td></tr>
+  <tr><td>Ubicación (en uso y en segundo plano)</td><td>Solo para las funciones opcionales de geovallas y alarmas solares descritas arriba.</td></tr>
+  <tr><td>Internet</td><td>Solo para compras (RevenueCat), sincronización de festivos y teselas de mapa, según lo descrito arriba.</td></tr>
+</table>
+
+<h2>6. Compartición y venta de datos</h2>
+<p>No vendemos, alquilamos ni intercambiamos ningún dato. Los únicos terceros
+que procesan algún dato son los proveedores de servicio listados arriba (Google
+Play, RevenueCat, Nager.Date, CARTO), cada uno estrictamente para la función
+descrita.</p>
+
+<h2>7. Conservación y eliminación de datos</h2>
+<p>Los datos locales viven solo en tu dispositivo: al desinstalar la App se
+eliminan. Para solicitar la eliminación de los registros anónimos de compra que
+conserva RevenueCat, escríbenos al correo de abajo y tramitaremos la
+solicitud.</p>
+
+<h2>8. Menores</h2>
+<p>La App no está dirigida a menores de 13 años y no recoge conscientemente
+información personal de menores.</p>
+
+<h2>9. Cambios en esta política</h2>
+<p>Si cambiamos esta política, actualizaremos esta página y la fecha de entrada
+en vigor. Los cambios relevantes se indicarán en las notas de versión de la
+App.</p>
+
+<h2>10. Contacto</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== FR ============================== -->
+<h1 id="fr">Chronos — Politique de Confidentialité</h1>
+<p class="muted">Date d'entrée en vigueur : 4 juillet 2026</p>
+
+<p>Chronos (« l'App ») est une application de réveil pour Android développée par
+Luis Martín (« nous »). Cette politique explique quelles données l'App traite et
+pourquoi. En résumé : <strong>Chronos fonctionne localement sur votre appareil,
+ne nécessite aucun compte, n'affiche aucune publicité et n'intègre aucun SDK
+d'analyse ni de suivi.</strong></p>
+
+<h2>1. Données stockées sur votre appareil</h2>
+<p>Tout ce que vous configurez dans l'App — alarmes, horaires, défis d'arrêt,
+jours fériés et jours de repos, réglages et statut premium — est stocké
+<strong>localement sur votre appareil</strong>, dans l'espace privé de l'App.
+Nous n'exploitons aucun serveur et ces données ne nous sont jamais envoyées.
+Désinstaller l'App les supprime.</p>
+
+<h2>2. Localisation</h2>
+<p>Deux fonctions optionnelles utilisent la localisation de l'appareil, et
+toutes deux la traitent <strong>entièrement sur votre appareil</strong> :</p>
+<ul>
+  <li><strong>Alarmes conditionnées par la position (géorepérage) :</strong> si
+  vous associez une condition de localisation à une alarme, l'App demande au
+  service de géorepérage d'Android de la prévenir lorsque vous entrez dans la
+  zone choisie ou en sortez. Cela nécessite l'autorisation de localisation en
+  arrière-plan pour que la condition continue de fonctionner quand l'App est
+  fermée.</li>
+  <li><strong>Alarmes solaires :</strong> si vous ancrez une alarme au lever du
+  soleil, au coucher du soleil ou au crépuscule, l'App utilise votre position
+  approximative pour calculer ces horaires sur l'appareil.</li>
+</ul>
+<p>Votre position n'est <strong>jamais transmise hors de votre appareil</strong>,
+jamais conservée dans un historique et jamais partagée. Si vous n'utilisez pas
+ces fonctions, l'App ne demande jamais l'autorisation de localisation.</p>
+
+<h2>3. Achats</h2>
+<p>Les fonctions premium sont vendues sous forme d'achats intégrés traités par
+<strong>Google Play Billing</strong>. Nous ne voyons jamais vos informations de
+paiement (numéros de carte, etc.) — Google gère intégralement le paiement.</p>
+<p>Pour valider les achats et maintenir votre statut premium après une
+réinstallation, l'App utilise <strong>RevenueCat</strong>, un service
+d'infrastructure d'achats. RevenueCat reçoit : un identifiant anonyme généré
+aléatoirement (non lié à votre nom ni à votre e-mail), vos reçus/jetons d'achat
+Google Play et des informations basiques sur l'appareil (modèle, version du
+système, version de l'app, langue et, de façon transitoire, votre adresse IP).
+RevenueCat agit comme notre sous-traitant et ne vend pas ces données. Voir la
+<a href="https://www.revenuecat.com/privacy/">politique de confidentialité de
+RevenueCat</a>.</p>
+
+<h2>4. Autres services réseau</h2>
+<p>L'App contacte deux services publics pour des fonctions optionnelles
+précises. Comme pour toute requête internet, ces services reçoivent
+techniquement votre adresse IP :</p>
+<ul>
+  <li><strong>Jours fériés (Nager.Date, date.nager.at) :</strong> si vous activez
+  la synchronisation automatique des jours fériés, l'App télécharge la liste des
+  jours fériés du pays et de l'année sélectionnés. Aucune donnée personnelle
+  n'est envoyée — uniquement le code pays et l'année.</li>
+  <li><strong>Tuiles de carte (CARTO / OpenStreetMap, basemaps.cartocdn.com) :</strong>
+  lorsque vous choisissez un lieu sur la carte en modifiant une alarme, les
+  images de la carte sont chargées depuis les serveurs de CARTO. Ces requêtes
+  révèlent la zone de carte consultée, mais l'App n'envoie ni votre identité ni
+  la position de votre appareil à CARTO.</li>
+</ul>
+
+<h2>5. Autorisations demandées par l'App</h2>
+<table>
+  <tr><th>Autorisation</th><th>Pourquoi</th></tr>
+  <tr><td>Notifications, alarmes plein écran</td><td>Pour sonner et afficher l'écran d'alarme, y compris sur l'écran de verrouillage.</td></tr>
+  <tr><td>Alarmes exactes</td><td>Pour que les alarmes se déclenchent à l'heure précise que vous avez définie.</td></tr>
+  <tr><td>Exécution au démarrage</td><td>Pour réarmer vos alarmes après un redémarrage du téléphone.</td></tr>
+  <tr><td>Service au premier plan, wake lock, vibration</td><td>Pour que l'alarme continue de sonner et de vibrer de manière fiable jusqu'à ce que vous l'arrêtiez.</td></tr>
+  <tr><td>Localisation (active et en arrière-plan)</td><td>Uniquement pour les fonctions optionnelles de géorepérage et d'alarmes solaires décrites ci-dessus.</td></tr>
+  <tr><td>Internet</td><td>Uniquement pour les achats (RevenueCat), la synchronisation des jours fériés et les tuiles de carte, comme décrit ci-dessus.</td></tr>
+</table>
+
+<h2>6. Partage et vente de données</h2>
+<p>Nous ne vendons, ne louons ni n'échangeons aucune donnée. Les seuls tiers qui
+traitent des données sont les prestataires listés ci-dessus (Google Play,
+RevenueCat, Nager.Date, CARTO), chacun strictement pour la fonction décrite.</p>
+
+<h2>7. Conservation et suppression des données</h2>
+<p>Les données locales ne résident que sur votre appareil : désinstaller l'App
+les supprime. Pour demander la suppression des enregistrements d'achat anonymes
+conservés par RevenueCat, contactez-nous à l'adresse ci-dessous et nous
+traiterons la demande.</p>
+
+<h2>8. Enfants</h2>
+<p>L'App ne s'adresse pas aux enfants de moins de 13 ans et ne collecte pas
+sciemment d'informations personnelles les concernant.</p>
+
+<h2>9. Modifications de cette politique</h2>
+<p>Si nous modifions cette politique, nous mettrons à jour cette page et la date
+d'entrée en vigueur ci-dessus. Les changements importants seront signalés dans
+les notes de version de l'App.</p>
+
+<h2>10. Contact</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== DE ============================== -->
+<h1 id="de">Chronos — Datenschutzerklärung</h1>
+<p class="muted">Gültig ab: 4. Juli 2026</p>
+
+<p>Chronos („die App") ist eine Wecker-App für Android, entwickelt von Luis
+Martín („wir"). Diese Erklärung beschreibt, welche Daten die App verarbeitet und
+warum. Kurz gesagt: <strong>Chronos arbeitet lokal auf Ihrem Gerät, benötigt
+kein Konto, zeigt keine Werbung und enthält keine Analyse- oder
+Tracking-SDKs.</strong></p>
+
+<h2>1. Auf Ihrem Gerät gespeicherte Daten</h2>
+<p>Alles, was Sie in der App konfigurieren — Wecker, Zeitpläne,
+Ausschalt-Aufgaben, Feiertage und freie Tage, Einstellungen und der
+Premium-Status — wird <strong>lokal auf Ihrem Gerät</strong> im privaten
+Speicher der App abgelegt. Wir betreiben keinen Server, und diese Daten werden
+niemals an uns übertragen. Beim Deinstallieren der App werden sie gelöscht.</p>
+
+<h2>2. Standort</h2>
+<p>Zwei optionale Funktionen nutzen den Gerätestandort, und beide verarbeiten
+ihn <strong>vollständig auf Ihrem Gerät</strong>:</p>
+<ul>
+  <li><strong>Standortabhängige Wecker (Geofencing):</strong> Wenn Sie einem
+  Wecker eine Standortbedingung zuweisen, bittet die App den Geofencing-Dienst
+  von Android, sie zu benachrichtigen, wenn Sie die gewählte Zone betreten oder
+  verlassen. Dafür ist die Hintergrund-Standortberechtigung nötig, damit die
+  Bedingung auch bei geschlossener App funktioniert.</li>
+  <li><strong>Solar-Wecker:</strong> Wenn Sie einen Wecker an Sonnenaufgang,
+  Sonnenuntergang oder Dämmerung koppeln, verwendet die App Ihren ungefähren
+  Standort, um diese Zeiten auf dem Gerät zu berechnen.</li>
+</ul>
+<p>Ihr Standort wird <strong>niemals von Ihrem Gerät übertragen</strong>, nie in
+einem Verlauf gespeichert und nie mit Dritten geteilt. Wenn Sie diese Funktionen
+nicht nutzen, fordert die App die Standortberechtigung gar nicht erst an.</p>
+
+<h2>3. Käufe</h2>
+<p>Premium-Funktionen werden als In-App-Käufe über <strong>Google Play
+Billing</strong> abgewickelt. Wir sehen Ihre Zahlungsdaten (Kartennummern usw.)
+niemals — Google wickelt die Zahlung vollständig ab.</p>
+<p>Zur Validierung der Käufe und damit Ihr Premium-Status Neuinstallationen
+übersteht, nutzt die App <strong>RevenueCat</strong>, einen
+Kauf-Infrastrukturdienst. RevenueCat erhält: eine zufällig generierte anonyme ID
+(nicht mit Ihrem Namen oder Ihrer E-Mail verknüpft), Ihre Kaufbelege/-tokens von
+Google Play sowie grundlegende Geräteinformationen (Gerätemodell,
+Betriebssystemversion, App-Version, Sprache und vorübergehend Ihre IP-Adresse).
+RevenueCat handelt als unser Auftragsverarbeiter und verkauft diese Daten nicht.
+Siehe die <a href="https://www.revenuecat.com/privacy/">Datenschutzerklärung von
+RevenueCat</a>.</p>
+
+<h2>4. Weitere Netzwerkdienste</h2>
+<p>Die App kontaktiert zwei öffentliche Dienste für bestimmte optionale
+Funktionen. Wie bei jeder Internetanfrage erhalten diese Dienste technisch
+bedingt Ihre IP-Adresse:</p>
+<ul>
+  <li><strong>Gesetzliche Feiertage (Nager.Date, date.nager.at):</strong> Wenn
+  Sie die automatische Feiertagssynchronisierung aktivieren, lädt die App die
+  Feiertagsliste für das gewählte Land und Jahr herunter. Es werden keine
+  personenbezogenen Daten gesendet — nur Ländercode und Jahr.</li>
+  <li><strong>Kartenkacheln (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  Wenn Sie beim Bearbeiten eines Weckers einen Ort auf der Karte auswählen,
+  werden die Kartenbilder von den Servern von CARTO geladen. Die Anfragen
+  verraten den betrachteten Kartenausschnitt, aber die App sendet weder Ihre
+  Identität noch den Gerätestandort an CARTO.</li>
+</ul>
+
+<h2>5. Von der App angeforderte Berechtigungen</h2>
+<table>
+  <tr><th>Berechtigung</th><th>Zweck</th></tr>
+  <tr><td>Benachrichtigungen, Vollbild-Wecker</td><td>Um zu klingeln und den Weckbildschirm anzuzeigen, auch über dem Sperrbildschirm.</td></tr>
+  <tr><td>Exakte Wecker</td><td>Damit Wecker genau zur eingestellten Zeit auslösen.</td></tr>
+  <tr><td>Start beim Hochfahren</td><td>Um Ihre Wecker nach einem Neustart des Telefons neu zu aktivieren.</td></tr>
+  <tr><td>Vordergrunddienst, Wake Lock, Vibration</td><td>Damit der Wecker zuverlässig weiterklingelt und vibriert, bis Sie ihn ausschalten.</td></tr>
+  <tr><td>Standort (Vordergrund &amp; Hintergrund)</td><td>Nur für die oben beschriebenen optionalen Geofencing- und Solar-Wecker-Funktionen.</td></tr>
+  <tr><td>Internet</td><td>Nur für Käufe (RevenueCat), Feiertagssynchronisierung und Kartenkacheln, wie oben beschrieben.</td></tr>
+</table>
+
+<h2>6. Weitergabe und Verkauf von Daten</h2>
+<p>Wir verkaufen, vermieten oder tauschen keinerlei Daten. Die einzigen Dritten,
+die Daten verarbeiten, sind die oben genannten Dienstleister (Google Play,
+RevenueCat, Nager.Date, CARTO), jeweils ausschließlich für die beschriebene
+Funktion.</p>
+
+<h2>7. Aufbewahrung und Löschung von Daten</h2>
+<p>Lokale Daten existieren nur auf Ihrem Gerät: Beim Deinstallieren der App
+werden sie gelöscht. Um die Löschung der von RevenueCat gespeicherten anonymen
+Kaufdaten zu beantragen, kontaktieren Sie uns unter der unten stehenden
+E-Mail-Adresse — wir bearbeiten die Anfrage.</p>
+
+<h2>8. Kinder</h2>
+<p>Die App richtet sich nicht an Kinder unter 13 Jahren und erhebt wissentlich
+keine personenbezogenen Daten von ihnen.</p>
+
+<h2>9. Änderungen dieser Erklärung</h2>
+<p>Wenn wir diese Erklärung ändern, aktualisieren wir diese Seite und das oben
+genannte Gültigkeitsdatum. Wesentliche Änderungen werden in den
+Versionshinweisen der App vermerkt.</p>
+
+<h2>10. Kontakt</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== PT ============================== -->
+<h1 id="pt">Chronos — Política de Privacidade</h1>
+<p class="muted">Data de entrada em vigor: 4 de julho de 2026</p>
+
+<p>O Chronos («a App») é uma aplicação de despertador para Android desenvolvida
+por Luis Martín («nós»). Esta política explica que dados a App trata e porquê.
+Em resumo: <strong>o Chronos funciona localmente no seu dispositivo, não requer
+conta, não mostra anúncios e não inclui SDKs de análise nem de
+rastreamento.</strong></p>
+
+<h2>1. Dados armazenados no seu dispositivo</h2>
+<p>Tudo o que configura na App — alarmes, horários, desafios para desligar,
+feriados e dias livres, definições e o estado premium — é guardado
+<strong>localmente no seu dispositivo</strong>, no armazenamento privado da App.
+Não operamos nenhum servidor e estes dados nunca nos são enviados. Ao
+desinstalar a App, são eliminados.</p>
+
+<h2>2. Localização</h2>
+<p>Duas funções opcionais usam a localização do dispositivo, e ambas a processam
+<strong>inteiramente no seu dispositivo</strong>:</p>
+<ul>
+  <li><strong>Alarmes condicionados por localização (geovedação):</strong> se
+  associar uma condição de localização a um alarme, a App pede ao serviço de
+  geovedação do Android que a avise quando entra ou sai da zona escolhida. Isto
+  requer a permissão de localização em segundo plano para que a condição
+  continue a funcionar com a App fechada.</li>
+  <li><strong>Alarmes solares:</strong> se ancorar um alarme ao nascer do sol,
+  ao pôr do sol ou ao crepúsculo, a App usa a sua localização aproximada para
+  calcular essas horas no próprio dispositivo.</li>
+</ul>
+<p>A sua localização <strong>nunca sai do seu dispositivo</strong>, nunca é
+guardada em nenhum histórico e nunca é partilhada com ninguém. Se não usar estas
+funções, a App nunca pede a permissão de localização.</p>
+
+<h2>3. Compras</h2>
+<p>As funções premium são vendidas como compras na aplicação processadas pelo
+<strong>Google Play Billing</strong>. Nunca vemos os seus dados de pagamento
+(números de cartão, etc.) — a Google trata do pagamento por completo.</p>
+<p>Para validar as compras e manter o seu estado premium ativo entre
+reinstalações, a App usa o <strong>RevenueCat</strong>, um serviço de
+infraestrutura de compras. O RevenueCat recebe: um identificador anónimo gerado
+aleatoriamente (não associado ao seu nome nem ao seu e-mail), os recibos/tokens
+de compra do Google Play e dados básicos do dispositivo (modelo, versão do
+sistema, versão da app, idioma e, de forma transitória, o seu endereço IP). O
+RevenueCat atua como nosso subcontratante e não vende estes dados. Consulte a
+<a href="https://www.revenuecat.com/privacy/">Política de Privacidade do
+RevenueCat</a>.</p>
+
+<h2>4. Outros serviços de rede</h2>
+<p>A App liga-se a dois serviços públicos para funções opcionais concretas. Como
+em qualquer pedido pela internet, estes serviços recebem tecnicamente o seu
+endereço IP:</p>
+<ul>
+  <li><strong>Feriados públicos (Nager.Date, date.nager.at):</strong> se ativar
+  a sincronização automática de feriados, a App descarrega a lista de feriados
+  do país e do ano que selecionou. Não é enviado nenhum dado pessoal — apenas o
+  código do país e o ano.</li>
+  <li><strong>Mosaicos de mapa (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  ao escolher uma localização no mapa enquanto edita um alarme, as imagens do
+  mapa são carregadas dos servidores da CARTO. Os pedidos revelam a área do mapa
+  que está a ver, mas a App não envia a sua identidade nem a localização do
+  dispositivo à CARTO.</li>
+</ul>
+
+<h2>5. Permissões que a App solicita</h2>
+<table>
+  <tr><th>Permissão</th><th>Para quê</th></tr>
+  <tr><td>Notificações, alarmes em ecrã inteiro</td><td>Para tocar e mostrar o ecrã de alarme, mesmo sobre o ecrã de bloqueio.</td></tr>
+  <tr><td>Alarmes exatos</td><td>Para que os alarmes toquem à hora exata que definiu.</td></tr>
+  <tr><td>Executar no arranque</td><td>Para reprogramar os seus alarmes depois de o telemóvel reiniciar.</td></tr>
+  <tr><td>Serviço em primeiro plano, wake lock, vibração</td><td>Para que o alarme continue a tocar e a vibrar de forma fiável até o desligar.</td></tr>
+  <tr><td>Localização (em uso e em segundo plano)</td><td>Apenas para as funções opcionais de geovedação e alarmes solares descritas acima.</td></tr>
+  <tr><td>Internet</td><td>Apenas para compras (RevenueCat), sincronização de feriados e mosaicos de mapa, conforme descrito acima.</td></tr>
+</table>
+
+<h2>6. Partilha e venda de dados</h2>
+<p>Não vendemos, alugamos nem trocamos nenhum dado. Os únicos terceiros que
+processam dados são os fornecedores de serviços listados acima (Google Play,
+RevenueCat, Nager.Date, CARTO), cada um estritamente para a função descrita.</p>
+
+<h2>7. Conservação e eliminação de dados</h2>
+<p>Os dados locais vivem apenas no seu dispositivo: ao desinstalar a App, são
+eliminados. Para pedir a eliminação dos registos anónimos de compra guardados
+pelo RevenueCat, escreva-nos para o e-mail abaixo e trataremos do pedido.</p>
+
+<h2>8. Menores</h2>
+<p>A App não se destina a menores de 13 anos e não recolhe conscientemente
+informações pessoais de menores.</p>
+
+<h2>9. Alterações a esta política</h2>
+<p>Se alterarmos esta política, atualizaremos esta página e a data de entrada em
+vigor acima. As alterações relevantes serão indicadas nas notas de versão da
+App.</p>
+
+<h2>10. Contacto</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== IT ============================== -->
+<h1 id="it">Chronos — Informativa sulla Privacy</h1>
+<p class="muted">Data di entrata in vigore: 4 luglio 2026</p>
+
+<p>Chronos («l'App») è un'app sveglia per Android sviluppata da Luis Martín
+(«noi»). Questa informativa spiega quali dati tratta l'App e perché. In breve:
+<strong>Chronos funziona localmente sul tuo dispositivo, non richiede alcun
+account, non mostra pubblicità e non include SDK di analisi né di
+tracciamento.</strong></p>
+
+<h2>1. Dati memorizzati sul tuo dispositivo</h2>
+<p>Tutto ciò che configuri nell'App — sveglie, orari, sfide di spegnimento,
+festività e giorni liberi, impostazioni e stato premium — viene salvato
+<strong>localmente sul tuo dispositivo</strong>, nello spazio privato dell'App.
+Non gestiamo alcun server e questi dati non ci vengono mai inviati.
+Disinstallando l'App vengono eliminati.</p>
+
+<h2>2. Posizione</h2>
+<p>Due funzioni opzionali usano la posizione del dispositivo, ed entrambe la
+elaborano <strong>interamente sul tuo dispositivo</strong>:</p>
+<ul>
+  <li><strong>Sveglie condizionate dalla posizione (geofencing):</strong> se
+  associ una condizione di posizione a una sveglia, l'App chiede al servizio di
+  geofencing di Android di avvisarla quando entri o esci dalla zona scelta.
+  Questo richiede l'autorizzazione alla posizione in background affinché la
+  condizione continui a funzionare con l'App chiusa.</li>
+  <li><strong>Sveglie solari:</strong> se ancori una sveglia all'alba, al
+  tramonto o al crepuscolo, l'App usa la tua posizione approssimativa per
+  calcolare quegli orari sul dispositivo.</li>
+</ul>
+<p>La tua posizione <strong>non viene mai trasmessa fuori dal dispositivo</strong>,
+non viene salvata in alcuna cronologia e non viene condivisa con nessuno. Se non
+usi queste funzioni, l'App non richiede mai l'autorizzazione alla posizione.</p>
+
+<h2>3. Acquisti</h2>
+<p>Le funzioni premium sono vendute come acquisti in-app elaborati da
+<strong>Google Play Billing</strong>. Non vediamo mai i tuoi dati di pagamento
+(numeri di carta, ecc.) — Google gestisce interamente il pagamento.</p>
+<p>Per convalidare gli acquisti e mantenere attivo il tuo stato premium tra le
+reinstallazioni, l'App usa <strong>RevenueCat</strong>, un servizio di
+infrastruttura per gli acquisti. RevenueCat riceve: un identificativo anonimo
+generato casualmente (non collegato al tuo nome né alla tua e-mail), le
+ricevute/i token di acquisto di Google Play e informazioni di base sul
+dispositivo (modello, versione del sistema, versione dell'app, lingua e, in modo
+transitorio, il tuo indirizzo IP). RevenueCat agisce come nostro responsabile
+del trattamento e non vende questi dati. Consulta l'<a
+href="https://www.revenuecat.com/privacy/">informativa sulla privacy di
+RevenueCat</a>.</p>
+
+<h2>4. Altri servizi di rete</h2>
+<p>L'App contatta due servizi pubblici per specifiche funzioni opzionali. Come
+per qualsiasi richiesta internet, questi servizi ricevono tecnicamente il tuo
+indirizzo IP:</p>
+<ul>
+  <li><strong>Festività pubbliche (Nager.Date, date.nager.at):</strong> se
+  attivi la sincronizzazione automatica delle festività, l'App scarica l'elenco
+  delle festività del paese e dell'anno selezionati. Non viene inviato alcun
+  dato personale — solo il codice del paese e l'anno.</li>
+  <li><strong>Riquadri della mappa (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  quando scegli una posizione sulla mappa mentre modifichi una sveglia, le
+  immagini della mappa vengono caricate dai server di CARTO. Le richieste
+  rivelano l'area della mappa che stai guardando, ma l'App non invia a CARTO la
+  tua identità né la posizione del dispositivo.</li>
+</ul>
+
+<h2>5. Autorizzazioni richieste dall'App</h2>
+<table>
+  <tr><th>Autorizzazione</th><th>Perché</th></tr>
+  <tr><td>Notifiche, sveglie a schermo intero</td><td>Per suonare e mostrare la schermata della sveglia, anche sopra la schermata di blocco.</td></tr>
+  <tr><td>Sveglie esatte</td><td>Perché le sveglie suonino all'ora esatta che hai impostato.</td></tr>
+  <tr><td>Esecuzione all'avvio</td><td>Per riattivare le tue sveglie dopo il riavvio del telefono.</td></tr>
+  <tr><td>Servizio in primo piano, wake lock, vibrazione</td><td>Perché la sveglia continui a suonare e vibrare in modo affidabile finché non la spegni.</td></tr>
+  <tr><td>Posizione (in uso e in background)</td><td>Solo per le funzioni opzionali di geofencing e sveglie solari descritte sopra.</td></tr>
+  <tr><td>Internet</td><td>Solo per gli acquisti (RevenueCat), la sincronizzazione delle festività e i riquadri della mappa, come descritto sopra.</td></tr>
+</table>
+
+<h2>6. Condivisione e vendita di dati</h2>
+<p>Non vendiamo, affittiamo né scambiamo alcun dato. Gli unici terzi che
+trattano dati sono i fornitori di servizi elencati sopra (Google Play,
+RevenueCat, Nager.Date, CARTO), ciascuno strettamente per la funzione
+descritta.</p>
+
+<h2>7. Conservazione ed eliminazione dei dati</h2>
+<p>I dati locali risiedono solo sul tuo dispositivo: disinstallando l'App
+vengono eliminati. Per richiedere l'eliminazione dei record anonimi di acquisto
+conservati da RevenueCat, scrivici all'indirizzo e-mail qui sotto ed evaderemo
+la richiesta.</p>
+
+<h2>8. Minori</h2>
+<p>L'App non è rivolta a minori di 13 anni e non raccoglie consapevolmente
+informazioni personali da loro.</p>
+
+<h2>9. Modifiche a questa informativa</h2>
+<p>Se modifichiamo questa informativa, aggiorneremo questa pagina e la data di
+entrata in vigore indicata sopra. Le modifiche rilevanti saranno segnalate nelle
+note di rilascio dell'App.</p>
+
+<h2>10. Contatto</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== ZH ============================== -->
+<h1 id="zh">Chronos — 隐私政策</h1>
+<p class="muted">生效日期：2026年7月4日</p>
+
+<p>Chronos（“本应用”）是由 Luis Martín（“我们”）开发的 Android 闹钟应用。
+本政策说明本应用处理哪些数据及其原因。简而言之：<strong>Chronos 在您的设备上
+本地运行，无需账号，不显示广告，也不包含任何分析或跟踪 SDK。</strong></p>
+
+<h2>1. 存储在您设备上的数据</h2>
+<p>您在本应用中配置的所有内容——闹钟、时间表、关闭挑战、节假日和休息日、
+应用设置以及高级版状态——均<strong>本地存储在您的设备上</strong>（应用的私有
+存储空间中）。我们不运营任何服务器，这些数据也绝不会上传给我们。卸载本应用即
+删除这些数据。</p>
+
+<h2>2. 位置信息</h2>
+<p>有两项可选功能会使用设备的位置信息，且两者均<strong>完全在您的设备上</strong>
+处理：</p>
+<ul>
+  <li><strong>基于位置条件的闹钟（地理围栏）：</strong>如果您为闹钟设置位置条件，
+  本应用会请求 Android 的地理围栏服务在您进入或离开所选区域时通知它。这需要
+  后台位置权限，以便在应用关闭时该条件仍能生效。</li>
+  <li><strong>太阳闹钟：</strong>如果您将闹钟锚定到日出、日落或晨昏时刻，
+  本应用会使用您的大致位置在设备上计算这些时间。</li>
+</ul>
+<p>您的位置信息<strong>绝不会传出您的设备</strong>，不会存储在任何历史记录中，
+也不会与任何人共享。如果您不使用这些功能，本应用永远不会请求位置权限。</p>
+
+<h2>3. 购买</h2>
+<p>高级版功能通过 <strong>Google Play 结算系统</strong>以应用内购买的形式出售。
+我们永远看不到您的付款信息（银行卡号等）——付款完全由 Google 处理。</p>
+<p>为了验证购买并在重新安装后保持您的高级版状态，本应用使用购买基础设施服务
+<strong>RevenueCat</strong>。RevenueCat 会收到：一个随机生成的匿名 ID（不与您的
+姓名或电子邮箱关联）、您在 Google Play 的购买凭据/令牌，以及基本设备信息
+（设备型号、系统版本、应用版本、语言，以及临时性的 IP 地址）。RevenueCat 作为
+我们的服务提供商行事，不会出售这些数据。请参阅
+<a href="https://www.revenuecat.com/privacy/">RevenueCat 隐私政策</a>。</p>
+
+<h2>4. 其他网络服务</h2>
+<p>本应用会为特定的可选功能连接两个公共服务。与任何互联网请求一样，这些服务
+在技术上会收到您的 IP 地址：</p>
+<ul>
+  <li><strong>公共节假日（Nager.Date，date.nager.at）：</strong>如果您启用节假日
+  自动同步，本应用会下载您所选国家/地区和年份的公共节假日列表。不会发送任何
+  个人数据——仅发送国家/地区代码和年份。</li>
+  <li><strong>地图图块（CARTO / OpenStreetMap，basemaps.cartocdn.com）：</strong>
+  当您在编辑闹钟时在地图上选择位置，地图图像会从 CARTO 的服务器加载。这些请求
+  会显示您正在查看的地图区域，但本应用不会向 CARTO 发送您的身份或设备位置。</li>
+</ul>
+
+<h2>5. 本应用请求的权限</h2>
+<table>
+  <tr><th>权限</th><th>用途</th></tr>
+  <tr><td>通知、全屏闹钟</td><td>用于响铃并显示闹钟界面，包括在锁屏之上。</td></tr>
+  <tr><td>精确闹钟</td><td>确保闹钟在您设定的准确时间响起。</td></tr>
+  <tr><td>开机自启动</td><td>在手机重启后重新设置您的闹钟。</td></tr>
+  <tr><td>前台服务、唤醒锁、振动</td><td>确保闹钟持续可靠地响铃和振动，直到您将其关闭。</td></tr>
+  <tr><td>位置（前台和后台）</td><td>仅用于上文所述的可选地理围栏和太阳闹钟功能。</td></tr>
+  <tr><td>互联网</td><td>仅用于上文所述的购买（RevenueCat）、节假日同步和地图图块。</td></tr>
+</table>
+
+<h2>6. 数据共享与出售</h2>
+<p>我们不出售、出租或交换任何数据。处理数据的第三方仅限于上文列出的服务提供商
+（Google Play、RevenueCat、Nager.Date、CARTO），且各自严格限于所述功能。</p>
+
+<h2>7. 数据保留与删除</h2>
+<p>本地数据仅存在于您的设备上：卸载本应用即删除。如需删除 RevenueCat 保存的
+匿名购买记录，请通过下方电子邮箱联系我们，我们会处理您的请求。</p>
+
+<h2>8. 儿童</h2>
+<p>本应用不面向 13 岁以下儿童，也不会有意收集他们的个人信息。</p>
+
+<h2>9. 本政策的变更</h2>
+<p>如果我们更改本政策，将更新本页面及上方的生效日期。重大变更会在应用的版本
+说明中注明。</p>
+
+<h2>10. 联系方式</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== JA ============================== -->
+<h1 id="ja">Chronos — プライバシーポリシー</h1>
+<p class="muted">発効日：2026年7月4日</p>
+
+<p>Chronos（以下「本アプリ」）は、Luis Martín（以下「当方」）が開発した
+Android 向け目覚ましアプリです。本ポリシーでは、本アプリがどのようなデータを
+どのような目的で扱うかを説明します。要約すると、<strong>Chronos は端末内で
+ローカルに動作し、アカウント不要、広告なし、分析・トラッキング SDK も一切
+含みません。</strong></p>
+
+<h2>1. 端末に保存されるデータ</h2>
+<p>本アプリで設定するすべての内容 — アラーム、スケジュール、解除チャレンジ、
+祝日や休日、アプリ設定、プレミアム状態 — は、本アプリの専用領域に
+<strong>端末内にローカル保存</strong>されます。当方はサーバーを運営しておらず、
+これらのデータが当方に送信されることはありません。本アプリをアンインストール
+すると削除されます。</p>
+
+<h2>2. 位置情報</h2>
+<p>2つのオプション機能が端末の位置情報を使用しますが、いずれも
+<strong>すべて端末内で</strong>処理されます。</p>
+<ul>
+  <li><strong>位置条件付きアラーム（ジオフェンス）：</strong>アラームに位置条件を
+  設定すると、本アプリは Android のジオフェンスサービスに、選択したゾーンへの
+  出入りを通知するよう依頼します。アプリを閉じていても条件が機能するよう、
+  バックグラウンド位置情報の権限が必要です。</li>
+  <li><strong>太陽アラーム：</strong>アラームを日の出・日の入り・薄明に
+  合わせると、本アプリはおおよその位置情報を使って端末上でその時刻を
+  計算します。</li>
+</ul>
+<p>位置情報が<strong>端末の外に送信されることは一切なく</strong>、履歴として
+保存されることも、誰かと共有されることもありません。これらの機能を使用しない
+場合、本アプリが位置情報の権限を求めることはありません。</p>
+
+<h2>3. 購入</h2>
+<p>プレミアム機能は、<strong>Google Play 課金システム</strong>で処理される
+アプリ内購入として販売されます。お支払い情報（カード番号など)を当方が見る
+ことはありません — 決済はすべて Google が処理します。</p>
+<p>購入の検証と、再インストール後もプレミアム状態を維持するために、本アプリは
+購入インフラサービスの <strong>RevenueCat</strong> を使用しています。RevenueCat
+が受け取るのは、ランダムに生成された匿名 ID（氏名やメールアドレスとは
+紐付きません）、Google Play の購入レシート／トークン、および基本的な端末情報
+（機種、OS バージョン、アプリバージョン、言語、一時的な IP アドレス）です。
+RevenueCat は当方のサービスプロバイダーとして行動し、これらのデータを販売する
+ことはありません。詳細は
+<a href="https://www.revenuecat.com/privacy/">RevenueCat のプライバシー
+ポリシー</a>をご覧ください。</p>
+
+<h2>4. その他のネットワークサービス</h2>
+<p>本アプリは、特定のオプション機能のために2つの公開サービスに接続します。
+あらゆるインターネット通信と同様、技術上これらのサービスに IP アドレスが
+送信されます。</p>
+<ul>
+  <li><strong>祝日（Nager.Date、date.nager.at）：</strong>祝日の自動同期を
+  有効にすると、本アプリは選択した国と年の祝日リストをダウンロードします。
+  個人データは送信されません — 国コードと年のみです。</li>
+  <li><strong>地図タイル（CARTO / OpenStreetMap、basemaps.cartocdn.com）：</strong>
+  アラーム編集中に地図上で場所を選ぶと、地図画像が CARTO のサーバーから
+  読み込まれます。このリクエストから閲覧中の地図の範囲は分かりますが、
+  本アプリがあなたの身元や端末の位置情報を CARTO に送ることはありません。</li>
+</ul>
+
+<h2>5. 本アプリが要求する権限</h2>
+<table>
+  <tr><th>権限</th><th>目的</th></tr>
+  <tr><td>通知、全画面アラーム</td><td>ロック画面の上でも鳴動し、アラーム画面を表示するため。</td></tr>
+  <tr><td>正確なアラーム</td><td>設定したとおりの正確な時刻にアラームを鳴らすため。</td></tr>
+  <tr><td>起動時の実行</td><td>端末の再起動後にアラームを再設定するため。</td></tr>
+  <tr><td>フォアグラウンドサービス、ウェイクロック、バイブレーション</td><td>アラームを解除するまで確実に鳴動・振動させ続けるため。</td></tr>
+  <tr><td>位置情報（フォアグラウンドおよびバックグラウンド）</td><td>上記のオプションのジオフェンス機能と太陽アラーム機能のためだけに使用します。</td></tr>
+  <tr><td>インターネット</td><td>上記のとおり、購入（RevenueCat）、祝日の同期、地図タイルのためだけに使用します。</td></tr>
+</table>
+
+<h2>6. データの共有と販売</h2>
+<p>当方はいかなるデータも販売・貸与・交換しません。データを処理する第三者は
+上記のサービスプロバイダー（Google Play、RevenueCat、Nager.Date、CARTO）のみで、
+それぞれ記載された機能に厳密に限定されます。</p>
+
+<h2>7. データの保持と削除</h2>
+<p>ローカルデータは端末内にのみ存在します。本アプリをアンインストールすると
+削除されます。RevenueCat が保持する匿名の購入記録の削除をご希望の場合は、
+下記メールアドレスまでご連絡ください。対応いたします。</p>
+
+<h2>8. お子様について</h2>
+<p>本アプリは13歳未満の子供を対象としておらず、故意に子供の個人情報を収集する
+ことはありません。</p>
+
+<h2>9. 本ポリシーの変更</h2>
+<p>本ポリシーを変更する場合は、本ページと上記の発効日を更新します。重要な
+変更は本アプリのリリースノートでお知らせします。</p>
+
+<h2>10. お問い合わせ</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+<hr class="divider">
+
+<!-- ============================== KO ============================== -->
+<h1 id="ko">Chronos — 개인정보 처리방침</h1>
+<p class="muted">시행일: 2026년 7월 4일</p>
+
+<p>Chronos(이하 "본 앱")는 Luis Martín(이하 "당사")이 개발한 Android 알람
+앱입니다. 본 방침은 본 앱이 어떤 데이터를 왜 처리하는지 설명합니다. 요약하면:
+<strong>Chronos는 기기에서 로컬로 작동하며, 계정이 필요 없고, 광고를 표시하지
+않으며, 분석·추적 SDK를 일절 포함하지 않습니다.</strong></p>
+
+<h2>1. 기기에 저장되는 데이터</h2>
+<p>본 앱에서 설정하는 모든 것 — 알람, 일정, 해제 챌린지, 공휴일과 휴일, 앱
+설정, 프리미엄 상태 — 은 본 앱의 전용 저장 공간에 <strong>기기 내 로컬로
+저장</strong>됩니다. 당사는 서버를 운영하지 않으며, 이 데이터가 당사로 전송되는
+일은 없습니다. 본 앱을 삭제하면 함께 삭제됩니다.</p>
+
+<h2>2. 위치 정보</h2>
+<p>두 가지 선택 기능이 기기의 위치 정보를 사용하며, 둘 다 <strong>전적으로 기기
+내에서</strong> 처리됩니다.</p>
+<ul>
+  <li><strong>위치 조건 알람(지오펜싱):</strong> 알람에 위치 조건을 설정하면 본
+  앱은 Android의 지오펜싱 서비스에 선택한 구역에 들어가거나 나갈 때 알려 달라고
+  요청합니다. 앱이 닫혀 있어도 조건이 작동하도록 백그라운드 위치 권한이
+  필요합니다.</li>
+  <li><strong>태양 알람:</strong> 알람을 일출·일몰·박명에 맞추면 본 앱은 대략적인
+  위치를 사용해 해당 시각을 기기에서 계산합니다.</li>
+</ul>
+<p>위치 정보는 <strong>절대 기기 밖으로 전송되지 않으며</strong>, 어떤 기록에도
+저장되지 않고, 누구와도 공유되지 않습니다. 이 기능들을 사용하지 않으면 본 앱은
+위치 권한을 요청하지 않습니다.</p>
+
+<h2>3. 구매</h2>
+<p>프리미엄 기능은 <strong>Google Play 결제</strong>로 처리되는 인앱 구매로
+판매됩니다. 당사는 결제 정보(카드 번호 등)를 절대 볼 수 없으며, 결제는 전적으로
+Google이 처리합니다.</p>
+<p>구매를 검증하고 재설치 후에도 프리미엄 상태를 유지하기 위해 본 앱은 구매
+인프라 서비스인 <strong>RevenueCat</strong>을 사용합니다. RevenueCat이 받는
+정보는 무작위로 생성된 익명 ID(이름이나 이메일과 연결되지 않음), Google Play
+구매 영수증/토큰, 기본 기기 정보(기기 모델, OS 버전, 앱 버전, 언어, 일시적인 IP
+주소)입니다. RevenueCat은 당사의 서비스 제공업체로서 활동하며 이 데이터를
+판매하지 않습니다. 자세한 내용은
+<a href="https://www.revenuecat.com/privacy/">RevenueCat 개인정보
+처리방침</a>을 참조하세요.</p>
+
+<h2>4. 기타 네트워크 서비스</h2>
+<p>본 앱은 특정 선택 기능을 위해 두 개의 공개 서비스에 접속합니다. 모든 인터넷
+요청과 마찬가지로 이들 서비스는 기술적으로 IP 주소를 수신합니다.</p>
+<ul>
+  <li><strong>공휴일(Nager.Date, date.nager.at):</strong> 공휴일 자동 동기화를
+  활성화하면 본 앱은 선택한 국가와 연도의 공휴일 목록을 다운로드합니다. 개인
+  데이터는 전송되지 않으며 국가 코드와 연도만 전송됩니다.</li>
+  <li><strong>지도 타일(CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  알람을 편집하며 지도에서 위치를 선택하면 지도 이미지가 CARTO 서버에서
+  로드됩니다. 이 요청으로 보고 있는 지도 영역은 드러나지만, 본 앱이 사용자의
+  신원이나 기기 위치를 CARTO에 보내지는 않습니다.</li>
+</ul>
+
+<h2>5. 본 앱이 요청하는 권한</h2>
+<table>
+  <tr><th>권한</th><th>용도</th></tr>
+  <tr><td>알림, 전체 화면 알람</td><td>잠금 화면 위에서도 울리고 알람 화면을 표시하기 위해.</td></tr>
+  <tr><td>정확한 알람</td><td>설정한 정확한 시각에 알람이 울리도록 하기 위해.</td></tr>
+  <tr><td>부팅 시 실행</td><td>휴대폰 재부팅 후 알람을 다시 설정하기 위해.</td></tr>
+  <tr><td>포그라운드 서비스, 웨이크락, 진동</td><td>알람을 끌 때까지 확실하게 계속 울리고 진동하도록 하기 위해.</td></tr>
+  <tr><td>위치(포그라운드 및 백그라운드)</td><td>위에서 설명한 선택적 지오펜싱 및 태양 알람 기능에만 사용됩니다.</td></tr>
+  <tr><td>인터넷</td><td>위에서 설명한 구매(RevenueCat), 공휴일 동기화, 지도 타일에만 사용됩니다.</td></tr>
+</table>
+
+<h2>6. 데이터 공유 및 판매</h2>
+<p>당사는 어떤 데이터도 판매·대여·교환하지 않습니다. 데이터를 처리하는 제3자는
+위에 나열된 서비스 제공업체(Google Play, RevenueCat, Nager.Date, CARTO)뿐이며,
+각각 설명된 기능에 엄격히 한정됩니다.</p>
+
+<h2>7. 데이터 보관 및 삭제</h2>
+<p>로컬 데이터는 기기에만 존재합니다. 본 앱을 삭제하면 함께 삭제됩니다.
+RevenueCat이 보관하는 익명 구매 기록의 삭제를 원하시면 아래 이메일로 연락해
+주세요. 요청을 처리해 드리겠습니다.</p>
+
+<h2>8. 아동</h2>
+<p>본 앱은 13세 미만 아동을 대상으로 하지 않으며, 고의로 아동의 개인정보를
+수집하지 않습니다.</p>
+
+<h2>9. 본 방침의 변경</h2>
+<p>본 방침을 변경할 경우 이 페이지와 위의 시행일을 업데이트합니다. 중요한
+변경 사항은 본 앱의 릴리스 노트에 안내됩니다.</p>
+
+<h2>10. 문의</h2>
+<p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+
+</body>
+</html>
