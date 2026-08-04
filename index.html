@@ -26,14 +26,15 @@
 
 <!-- ============================== EN ============================== -->
 <h1 id="en">Chronos — Privacy Policy</h1>
-<p class="muted">Effective date: July 15, 2026</p>
+<p class="muted">Effective date: August 4, 2026</p>
 
 <p>Chronos ("the App") is an Android alarm clock app developed by Luis Martín
 ("we", "us"). This policy explains what data the App handles and why. The short
 version: <strong>Chronos works locally on your device, requires no account, shows
-no ads, and includes no advertising or user-tracking SDKs.</strong> It does use a
-crash/error-reporting service to help us catch bugs — see Section 4 — which is on
-by default and can be turned off anytime in Settings.</p>
+no ads, and includes no advertising SDKs.</strong> It does use a crash/error-reporting
+service to help us catch bugs, and an optional, anonymous product-analytics service
+to see which features get used — see Section 4. Crash reporting is on by default
+and analytics is off by default; both can be changed anytime in Settings.</p>
 
 <h2>1. Data stored on your device</h2>
 <p>Everything you configure in the App — alarms, schedules, dismiss challenges,
@@ -74,7 +75,7 @@ data. See the
 <a href="https://www.revenuecat.com/privacy/">RevenueCat Privacy Policy</a>.</p>
 
 <h2>4. Other network services</h2>
-<p>The App contacts three services for specific features. As with any internet
+<p>The App contacts four services for specific features. As with any internet
 request, these services technically receive your IP address:</p>
 <ul>
   <li><strong>Public holidays (Nager.Date, date.nager.at):</strong> if you enable
@@ -94,6 +95,14 @@ request, these services technically receive your IP address:</p>
   error reports"). These reports contain technical details (stack traces,
   device model, OS and app version) and <strong>never include your alarm
   names, descriptions, or any other free-text content you entered</strong>.</li>
+  <li><strong>Anonymous usage analytics (PostHog):</strong> to see which features
+  actually get used, so we know what to improve — this is <strong>off by
+  default</strong>; you can turn it on in Settings ("Share anonymous usage
+  analytics"). When enabled, the App sends anonymized feature-usage events (e.g.
+  "an alarm was saved with these options," "the paywall was shown") to PostHog,
+  hosted in the EU. These events <strong>never include your alarm names,
+  descriptions, locations, or any other free-text content you entered</strong>.
+  See the <a href="https://posthog.com/privacy">PostHog Privacy Policy</a>.</li>
 </ul>
 
 <h2>5. Permissions the App requests</h2>
@@ -104,13 +113,13 @@ request, these services technically receive your IP address:</p>
   <tr><td>Run at startup</td><td>To re-arm your alarms after the phone reboots.</td></tr>
   <tr><td>Foreground service, wake lock, vibration</td><td>To keep the alarm sounding and vibrating reliably until you dismiss it.</td></tr>
   <tr><td>Location (foreground &amp; background)</td><td>Only for the optional geofence and solar-alarm features described above.</td></tr>
-  <tr><td>Internet</td><td>Only for purchases (RevenueCat), holiday sync, map tiles, and error reporting (Sentry), as described above.</td></tr>
+  <tr><td>Internet</td><td>Only for purchases (RevenueCat), holiday sync, map tiles, error reporting (Sentry), and — if you opt in — usage analytics (PostHog), as described above.</td></tr>
 </table>
 
 <h2>6. Data sharing and selling</h2>
 <p>We do not sell, rent, or trade any data. The only third parties that process
 any data are the service providers listed above (Google Play, RevenueCat,
-Nager.Date, CARTO, Sentry), each strictly for the feature described.</p>
+Nager.Date, CARTO, Sentry, PostHog), each strictly for the feature described.</p>
 
 <h2>7. Data retention and deletion</h2>
 <p>Local data lives only on your device: uninstalling the App deletes it. To
@@ -132,15 +141,17 @@ above. Material changes will be noted in the App's release notes.</p>
 
 <!-- ============================== ES ============================== -->
 <h1 id="es">Chronos — Política de Privacidad</h1>
-<p class="muted">Fecha de entrada en vigor: 15 de julio de 2026</p>
+<p class="muted">Fecha de entrada en vigor: 4 de agosto de 2026</p>
 
 <p>Chronos («la App») es una aplicación de alarmas para Android desarrollada por
 Luis Martín («nosotros»). Esta política explica qué datos maneja la App y por
 qué. La versión corta: <strong>Chronos funciona localmente en tu dispositivo, no
-requiere cuenta, no muestra anuncios y no incluye SDKs de publicidad ni de
-rastreo de usuarios.</strong> Sí usa un servicio de informes de errores para
-ayudarnos a detectar fallos — ver la sección 4 — activado por defecto y que
-puedes desactivar en cualquier momento en Ajustes.</p>
+requiere cuenta, no muestra anuncios y no incluye SDKs de publicidad.</strong> Sí
+usa un servicio de informes de errores para ayudarnos a detectar fallos, y un
+servicio opcional y anónimo de analítica de producto para saber qué funciones se
+usan — ver la sección 4. Los informes de errores están activados por defecto y
+la analítica está desactivada por defecto; ambos se pueden cambiar en cualquier
+momento en Ajustes.</p>
 
 <h2>1. Datos almacenados en tu dispositivo</h2>
 <p>Todo lo que configuras en la App — alarmas, horarios, desafíos para apagarlas,
@@ -184,7 +195,7 @@ Consulta la <a href="https://www.revenuecat.com/privacy/">Política de
 Privacidad de RevenueCat</a>.</p>
 
 <h2>4. Otros servicios de red</h2>
-<p>La App se conecta a tres servicios para funciones concretas. Como en
+<p>La App se conecta a cuatro servicios para funciones concretas. Como en
 cualquier petición por internet, estos servicios reciben técnicamente tu
 dirección IP:</p>
 <ul>
@@ -208,6 +219,16 @@ dirección IP:</p>
   modelo de dispositivo, versión del sistema y de la app) y
   <strong>nunca incluyen el nombre, la descripción ni ningún otro texto libre
   que hayas introducido en tus alarmas</strong>.</li>
+  <li><strong>Analítica de uso anónima (PostHog):</strong> para saber qué
+  funciones se usan realmente y así saber qué mejorar — está
+  <strong>desactivada por defecto</strong>; puedes activarla en Ajustes
+  ("Compartir análisis de uso anónimos"). Si la activas, la App envía a PostHog
+  eventos anonimizados de uso de funciones (por ejemplo, «se guardó una alarma
+  con estas opciones», «se mostró el muro de pago»), alojado en la UE. Estos
+  eventos <strong>nunca incluyen los nombres, descripciones o ubicaciones de tus
+  alarmas, ni ningún otro contenido de texto libre que hayas introducido</strong>.
+  Consulta la <a href="https://posthog.com/privacy">Política de Privacidad de
+  PostHog</a>.</li>
 </ul>
 
 <h2>5. Permisos que solicita la App</h2>
@@ -218,14 +239,14 @@ dirección IP:</p>
   <tr><td>Ejecutarse al inicio</td><td>Para reprogramar tus alarmas tras reiniciar el teléfono.</td></tr>
   <tr><td>Servicio en primer plano, wake lock, vibración</td><td>Para que la alarma siga sonando y vibrando de forma fiable hasta que la apagues.</td></tr>
   <tr><td>Ubicación (en uso y en segundo plano)</td><td>Solo para las funciones opcionales de geovallas y alarmas solares descritas arriba.</td></tr>
-  <tr><td>Internet</td><td>Solo para compras (RevenueCat), sincronización de festivos, teselas de mapa e informes de errores (Sentry), según lo descrito arriba.</td></tr>
+  <tr><td>Internet</td><td>Solo para compras (RevenueCat), sincronización de festivos, teselas de mapa, informes de errores (Sentry) y — si la activas — analítica de uso (PostHog), según lo descrito arriba.</td></tr>
 </table>
 
 <h2>6. Compartición y venta de datos</h2>
 <p>No vendemos, alquilamos ni intercambiamos ningún dato. Los únicos terceros
 que procesan algún dato son los proveedores de servicio listados arriba (Google
-Play, RevenueCat, Nager.Date, CARTO, Sentry), cada uno estrictamente para la
-función descrita.</p>
+Play, RevenueCat, Nager.Date, CARTO, Sentry, PostHog), cada uno estrictamente
+para la función descrita.</p>
 
 <h2>7. Conservación y eliminación de datos</h2>
 <p>Los datos locales viven solo en tu dispositivo: al desinstalar la App se
@@ -249,15 +270,17 @@ App.</p>
 
 <!-- ============================== FR ============================== -->
 <h1 id="fr">Chronos — Politique de Confidentialité</h1>
-<p class="muted">Date d'entrée en vigueur : 15 juillet 2026</p>
+<p class="muted">Date d'entrée en vigueur : 4 août 2026</p>
 
 <p>Chronos (« l'App ») est une application de réveil pour Android développée par
 Luis Martín (« nous »). Cette politique explique quelles données l'App traite et
 pourquoi. En résumé : <strong>Chronos fonctionne localement sur votre appareil,
 ne nécessite aucun compte, n'affiche aucune publicité et n'intègre aucun SDK
-publicitaire ni de suivi des utilisateurs.</strong> Elle utilise un service de
-rapports d'erreurs pour nous aider à détecter des bugs — voir la section 4 —
-activé par défaut et désactivable à tout moment dans les Paramètres.</p>
+publicitaire.</strong> Elle utilise un service de rapports d'erreurs pour nous
+aider à détecter des bugs, ainsi qu'un service optionnel et anonyme d'analyse
+produit pour savoir quelles fonctionnalités sont utilisées — voir la section 4.
+Les rapports d'erreurs sont activés par défaut et l'analyse est désactivée par
+défaut ; les deux peuvent être modifiés à tout moment dans les Paramètres.</p>
 
 <h2>1. Données stockées sur votre appareil</h2>
 <p>Tout ce que vous configurez dans l'App — alarmes, horaires, défis d'arrêt,
@@ -303,7 +326,7 @@ RevenueCat agit comme notre sous-traitant et ne vend pas ces données. Voir la
 RevenueCat</a>.</p>
 
 <h2>4. Autres services réseau</h2>
-<p>L'App contacte trois services pour des fonctions précises. Comme pour toute
+<p>L'App contacte quatre services pour des fonctions précises. Comme pour toute
 requête internet, ces services reçoivent techniquement votre adresse IP :</p>
 <ul>
   <li><strong>Jours fériés (Nager.Date, date.nager.at) :</strong> si vous activez
@@ -326,6 +349,17 @@ requête internet, ces services reçoivent techniquement votre adresse IP :</p>
   modèle de l'appareil, version du système et de l'app) et
   <strong>n'incluent jamais le nom, la description ni aucun autre texte libre
   que vous avez saisi dans vos alarmes</strong>.</li>
+  <li><strong>Statistiques d'utilisation anonymes (PostHog) :</strong> pour
+  savoir quelles fonctionnalités sont réellement utilisées, afin de savoir quoi
+  améliorer — c'est <strong>désactivé par défaut</strong> ; vous pouvez
+  l'activer dans les Paramètres (« Partager des données d'utilisation
+  anonymes »). Une fois activé, l'App envoie à PostHog des événements
+  anonymisés d'utilisation des fonctionnalités (par exemple « une alarme a été
+  enregistrée avec ces options », « le mur de paiement a été affiché »),
+  hébergé dans l'UE. Ces événements <strong>n'incluent jamais le nom, la
+  description, la localisation ni aucun autre texte libre de vos
+  alarmes</strong>. Voir la <a href="https://posthog.com/privacy">politique de
+  confidentialité de PostHog</a>.</li>
 </ul>
 
 <h2>5. Autorisations demandées par l'App</h2>
@@ -336,14 +370,14 @@ requête internet, ces services reçoivent techniquement votre adresse IP :</p>
   <tr><td>Exécution au démarrage</td><td>Pour réarmer vos alarmes après un redémarrage du téléphone.</td></tr>
   <tr><td>Service au premier plan, wake lock, vibration</td><td>Pour que l'alarme continue de sonner et de vibrer de manière fiable jusqu'à ce que vous l'arrêtiez.</td></tr>
   <tr><td>Localisation (active et en arrière-plan)</td><td>Uniquement pour les fonctions optionnelles de géorepérage et d'alarmes solaires décrites ci-dessus.</td></tr>
-  <tr><td>Internet</td><td>Uniquement pour les achats (RevenueCat), la synchronisation des jours fériés, les tuiles de carte et les rapports d'erreurs (Sentry), comme décrit ci-dessus.</td></tr>
+  <tr><td>Internet</td><td>Uniquement pour les achats (RevenueCat), la synchronisation des jours fériés, les tuiles de carte, les rapports d'erreurs (Sentry) et — si vous l'activez — les statistiques d'utilisation (PostHog), comme décrit ci-dessus.</td></tr>
 </table>
 
 <h2>6. Partage et vente de données</h2>
 <p>Nous ne vendons, ne louons ni n'échangeons aucune donnée. Les seuls tiers qui
 traitent des données sont les prestataires listés ci-dessus (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry), chacun strictement pour la fonction
-décrite.</p>
+RevenueCat, Nager.Date, CARTO, Sentry, PostHog), chacun strictement pour la
+fonction décrite.</p>
 
 <h2>7. Conservation et suppression des données</h2>
 <p>Les données locales ne résident que sur votre appareil : désinstaller l'App
@@ -367,15 +401,17 @@ les notes de version de l'App.</p>
 
 <!-- ============================== DE ============================== -->
 <h1 id="de">Chronos — Datenschutzerklärung</h1>
-<p class="muted">Gültig ab: 15. Juli 2026</p>
+<p class="muted">Gültig ab: 4. August 2026</p>
 
 <p>Chronos („die App") ist eine Wecker-App für Android, entwickelt von Luis
 Martín („wir"). Diese Erklärung beschreibt, welche Daten die App verarbeitet und
 warum. Kurz gesagt: <strong>Chronos arbeitet lokal auf Ihrem Gerät, benötigt
-kein Konto, zeigt keine Werbung und enthält keine Werbe- oder
-Nutzer-Tracking-SDKs.</strong> Sie nutzt einen Fehlerberichtsdienst, der uns
-hilft, Bugs zu finden — siehe Abschnitt 4 —, standardmäßig aktiviert und
-jederzeit in den Einstellungen abschaltbar.</p>
+kein Konto, zeigt keine Werbung und enthält keine Werbe-SDKs.</strong> Sie
+nutzt einen Fehlerberichtsdienst, der uns hilft, Bugs zu finden, sowie einen
+optionalen, anonymen Produktanalysedienst, um zu sehen, welche Funktionen genutzt
+werden — siehe Abschnitt 4. Die Fehlerberichte sind standardmäßig aktiviert, die
+Analyse standardmäßig deaktiviert; beides lässt sich jederzeit in den
+Einstellungen ändern.</p>
 
 <h2>1. Auf Ihrem Gerät gespeicherte Daten</h2>
 <p>Alles, was Sie in der App konfigurieren — Wecker, Zeitpläne,
@@ -420,7 +456,7 @@ Siehe die <a href="https://www.revenuecat.com/privacy/">Datenschutzerklärung vo
 RevenueCat</a>.</p>
 
 <h2>4. Weitere Netzwerkdienste</h2>
-<p>Die App kontaktiert drei Dienste für bestimmte Funktionen. Wie bei jeder
+<p>Die App kontaktiert vier Dienste für bestimmte Funktionen. Wie bei jeder
 Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
 <ul>
   <li><strong>Gesetzliche Feiertage (Nager.Date, date.nager.at):</strong> Wenn
@@ -442,6 +478,17 @@ Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
   Diese Berichte enthalten technische Details (Stacktraces, Gerätemodell,
   System- und App-Version) und <strong>enthalten niemals den Namen, die
   Beschreibung oder anderen frei eingegebenen Text Ihrer Wecker</strong>.</li>
+  <li><strong>Anonyme Nutzungsanalyse (PostHog):</strong> um zu sehen, welche
+  Funktionen tatsächlich genutzt werden und was wir verbessern sollten — dies
+  ist <strong>standardmäßig deaktiviert</strong>; Sie können es in den
+  Einstellungen aktivieren („Anonyme Nutzungsanalysen teilen"). Bei Aktivierung
+  sendet die App anonymisierte Feature-Nutzungsereignisse (z. B. „ein Wecker
+  wurde mit diesen Optionen gespeichert", „die Paywall wurde angezeigt") an
+  PostHog, gehostet in der EU. Diese Ereignisse <strong>enthalten niemals die
+  Namen, Beschreibungen oder Standorte Ihrer Wecker oder anderen frei
+  eingegebenen Text</strong>. Siehe die
+  <a href="https://posthog.com/privacy">Datenschutzerklärung von
+  PostHog</a>.</li>
 </ul>
 
 <h2>5. Von der App angeforderte Berechtigungen</h2>
@@ -452,13 +499,13 @@ Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
   <tr><td>Start beim Hochfahren</td><td>Um Ihre Wecker nach einem Neustart des Telefons neu zu aktivieren.</td></tr>
   <tr><td>Vordergrunddienst, Wake Lock, Vibration</td><td>Damit der Wecker zuverlässig weiterklingelt und vibriert, bis Sie ihn ausschalten.</td></tr>
   <tr><td>Standort (Vordergrund &amp; Hintergrund)</td><td>Nur für die oben beschriebenen optionalen Geofencing- und Solar-Wecker-Funktionen.</td></tr>
-  <tr><td>Internet</td><td>Nur für Käufe (RevenueCat), Feiertagssynchronisierung, Kartenkacheln und Fehlerberichte (Sentry), wie oben beschrieben.</td></tr>
+  <tr><td>Internet</td><td>Nur für Käufe (RevenueCat), Feiertagssynchronisierung, Kartenkacheln, Fehlerberichte (Sentry) und — falls aktiviert — Nutzungsanalyse (PostHog), wie oben beschrieben.</td></tr>
 </table>
 
 <h2>6. Weitergabe und Verkauf von Daten</h2>
 <p>Wir verkaufen, vermieten oder tauschen keinerlei Daten. Die einzigen Dritten,
 die Daten verarbeiten, sind die oben genannten Dienstleister (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry), jeweils ausschließlich für die
+RevenueCat, Nager.Date, CARTO, Sentry, PostHog), jeweils ausschließlich für die
 beschriebene Funktion.</p>
 
 <h2>7. Aufbewahrung und Löschung von Daten</h2>
@@ -483,15 +530,17 @@ Versionshinweisen der App vermerkt.</p>
 
 <!-- ============================== PT ============================== -->
 <h1 id="pt">Chronos — Política de Privacidade</h1>
-<p class="muted">Data de entrada em vigor: 15 de julho de 2026</p>
+<p class="muted">Data de entrada em vigor: 4 de agosto de 2026</p>
 
 <p>O Chronos («a App») é uma aplicação de despertador para Android desenvolvida
 por Luis Martín («nós»). Esta política explica que dados a App trata e porquê.
 Em resumo: <strong>o Chronos funciona localmente no seu dispositivo, não requer
-conta, não mostra anúncios e não inclui SDKs de publicidade nem de rastreamento
-de utilizadores.</strong> Usa sim um serviço de relatórios de erro para nos
-ajudar a detetar falhas — ver a secção 4 — ativado por predefinição e que pode
-desativar a qualquer momento em Configurações.</p>
+conta, não mostra anúncios e não inclui SDKs de publicidade.</strong> Usa sim um
+serviço de relatórios de erro para nos ajudar a detetar falhas, e um serviço
+opcional e anónimo de análise de produto para ver que funcionalidades são
+usadas — ver a secção 4. Os relatórios de erro estão ativados por predefinição
+e a análise está desativada por predefinição; ambos podem ser alterados a
+qualquer momento em Configurações.</p>
 
 <h2>1. Dados armazenados no seu dispositivo</h2>
 <p>Tudo o que configura na App — alarmes, horários, desafios para desligar,
@@ -535,7 +584,7 @@ RevenueCat atua como nosso subcontratante e não vende estes dados. Consulte a
 RevenueCat</a>.</p>
 
 <h2>4. Outros serviços de rede</h2>
-<p>A App liga-se a três serviços para funções concretas. Como em qualquer
+<p>A App liga-se a quatro serviços para funções concretas. Como em qualquer
 pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</p>
 <ul>
   <li><strong>Feriados públicos (Nager.Date, date.nager.at):</strong> se ativar
@@ -557,6 +606,17 @@ pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</
   relatórios contêm detalhes técnicos (stack traces, modelo do dispositivo,
   versão do sistema e da app) e <strong>nunca incluem o nome, a descrição nem
   qualquer outro texto livre introduzido nos seus alarmes</strong>.</li>
+  <li><strong>Análise de utilização anónima (PostHog):</strong> para ver que
+  funcionalidades são realmente usadas, para sabermos o que melhorar — está
+  <strong>desativada por predefinição</strong>; pode ativá-la em Configurações
+  ("Partilhar dados de utilização anónimos"). Quando ativada, a App envia à
+  PostHog eventos anonimizados de utilização de funcionalidades (por exemplo,
+  «um alarme foi guardado com estas opções», «o ecrã de subscrição foi
+  mostrado»), alojada na UE. Estes eventos <strong>nunca incluem os nomes,
+  descrições ou localizações dos seus alarmes, nem qualquer outro texto livre
+  que tenha introduzido</strong>. Consulte a
+  <a href="https://posthog.com/privacy">Política de Privacidade da
+  PostHog</a>.</li>
 </ul>
 
 <h2>5. Permissões que a App solicita</h2>
@@ -567,14 +627,14 @@ pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</
   <tr><td>Executar no arranque</td><td>Para reprogramar os seus alarmes depois de o telemóvel reiniciar.</td></tr>
   <tr><td>Serviço em primeiro plano, wake lock, vibração</td><td>Para que o alarme continue a tocar e a vibrar de forma fiável até o desligar.</td></tr>
   <tr><td>Localização (em uso e em segundo plano)</td><td>Apenas para as funções opcionais de geovedação e alarmes solares descritas acima.</td></tr>
-  <tr><td>Internet</td><td>Apenas para compras (RevenueCat), sincronização de feriados, mosaicos de mapa e relatórios de erro (Sentry), conforme descrito acima.</td></tr>
+  <tr><td>Internet</td><td>Apenas para compras (RevenueCat), sincronização de feriados, mosaicos de mapa, relatórios de erro (Sentry) e — se ativar — análise de utilização (PostHog), conforme descrito acima.</td></tr>
 </table>
 
 <h2>6. Partilha e venda de dados</h2>
 <p>Não vendemos, alugamos nem trocamos nenhum dado. Os únicos terceiros que
 processam dados são os fornecedores de serviços listados acima (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry), cada um estritamente para a função
-descrita.</p>
+RevenueCat, Nager.Date, CARTO, Sentry, PostHog), cada um estritamente para a
+função descrita.</p>
 
 <h2>7. Conservação e eliminação de dados</h2>
 <p>Os dados locais vivem apenas no seu dispositivo: ao desinstalar a App, são
@@ -597,15 +657,17 @@ App.</p>
 
 <!-- ============================== IT ============================== -->
 <h1 id="it">Chronos — Informativa sulla Privacy</h1>
-<p class="muted">Data di entrata in vigore: 15 luglio 2026</p>
+<p class="muted">Data di entrata in vigore: 4 agosto 2026</p>
 
 <p>Chronos («l'App») è un'app sveglia per Android sviluppata da Luis Martín
 («noi»). Questa informativa spiega quali dati tratta l'App e perché. In breve:
 <strong>Chronos funziona localmente sul tuo dispositivo, non richiede alcun
-account, non mostra pubblicità e non include SDK pubblicitari né di
-tracciamento degli utenti.</strong> Utilizza invece un servizio di
-segnalazione errori che ci aiuta a individuare i bug — vedi la sezione 4 —
-attivo di default e disattivabile in qualsiasi momento nelle Impostazioni.</p>
+account, non mostra pubblicità e non include SDK pubblicitari.</strong>
+Utilizza invece un servizio di segnalazione errori che ci aiuta a individuare i
+bug, e un servizio facoltativo e anonimo di analisi del prodotto per capire
+quali funzioni vengono usate — vedi la sezione 4. La segnalazione errori è
+attiva di default, l'analisi è disattivata di default; entrambe possono essere
+modificate in qualsiasi momento nelle Impostazioni.</p>
 
 <h2>1. Dati memorizzati sul tuo dispositivo</h2>
 <p>Tutto ciò che configuri nell'App — sveglie, orari, sfide di spegnimento,
@@ -650,7 +712,7 @@ href="https://www.revenuecat.com/privacy/">informativa sulla privacy di
 RevenueCat</a>.</p>
 
 <h2>4. Altri servizi di rete</h2>
-<p>L'App contatta tre servizi per funzioni specifiche. Come per qualsiasi
+<p>L'App contatta quattro servizi per funzioni specifiche. Come per qualsiasi
 richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p>
 <ul>
   <li><strong>Festività pubbliche (Nager.Date, date.nager.at):</strong> se
@@ -672,6 +734,16 @@ richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p
   Queste segnalazioni contengono dettagli tecnici (stack trace, modello del
   dispositivo, versione del sistema e dell'app) e <strong>non includono mai il
   nome, la descrizione né altro testo libero inserito nelle tue sveglie</strong>.</li>
+  <li><strong>Analisi d'uso anonima (PostHog):</strong> per capire quali
+  funzioni vengono effettivamente usate, così da sapere cosa migliorare — è
+  <strong>disattivata di default</strong>; puoi attivarla nelle Impostazioni
+  ("Condividi analisi d'uso anonime"). Se attivata, l'App invia a PostHog
+  eventi anonimizzati sull'uso delle funzioni (ad es. "è stata salvata una
+  sveglia con queste opzioni", "è stato mostrato il paywall"), ospitato
+  nell'UE. Questi eventi <strong>non includono mai i nomi, le descrizioni o le
+  posizioni delle tue sveglie, né altro testo libero che hai inserito</strong>.
+  Consulta l'<a href="https://posthog.com/privacy">informativa sulla privacy
+  di PostHog</a>.</li>
 </ul>
 
 <h2>5. Autorizzazioni richieste dall'App</h2>
@@ -682,14 +754,14 @@ richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p
   <tr><td>Esecuzione all'avvio</td><td>Per riattivare le tue sveglie dopo il riavvio del telefono.</td></tr>
   <tr><td>Servizio in primo piano, wake lock, vibrazione</td><td>Perché la sveglia continui a suonare e vibrare in modo affidabile finché non la spegni.</td></tr>
   <tr><td>Posizione (in uso e in background)</td><td>Solo per le funzioni opzionali di geofencing e sveglie solari descritte sopra.</td></tr>
-  <tr><td>Internet</td><td>Solo per gli acquisti (RevenueCat), la sincronizzazione delle festività, i riquadri della mappa e la segnalazione errori (Sentry), come descritto sopra.</td></tr>
+  <tr><td>Internet</td><td>Solo per gli acquisti (RevenueCat), la sincronizzazione delle festività, i riquadri della mappa, la segnalazione errori (Sentry) e — se attivata — l'analisi d'uso (PostHog), come descritto sopra.</td></tr>
 </table>
 
 <h2>6. Condivisione e vendita di dati</h2>
 <p>Non vendiamo, affittiamo né scambiamo alcun dato. Gli unici terzi che
 trattano dati sono i fornitori di servizi elencati sopra (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry), ciascuno strettamente per la funzione
-descritta.</p>
+RevenueCat, Nager.Date, CARTO, Sentry, PostHog), ciascuno strettamente per la
+funzione descritta.</p>
 
 <h2>7. Conservazione ed eliminazione dei dati</h2>
 <p>I dati locali risiedono solo sul tuo dispositivo: disinstallando l'App
@@ -713,13 +785,14 @@ note di rilascio dell'App.</p>
 
 <!-- ============================== ZH ============================== -->
 <h1 id="zh">Chronos — 隐私政策</h1>
-<p class="muted">生效日期：2026年7月15日</p>
+<p class="muted">生效日期：2026年8月4日</p>
 
 <p>Chronos（“本应用”）是由 Luis Martín（“我们”）开发的 Android 闹钟应用。
 本政策说明本应用处理哪些数据及其原因。简而言之：<strong>Chronos 在您的设备上
-本地运行，无需账号，不显示广告，也不包含任何广告或用户跟踪 SDK。</strong>
-不过，本应用确实使用了一项错误报告服务，帮助我们发现程序缺陷——详见第 4
-节——该功能默认开启，您可以随时在设置中关闭。</p>
+本地运行，无需账号，不显示广告，也不包含任何广告 SDK。</strong>
+不过，本应用确实使用了一项错误报告服务，帮助我们发现程序缺陷，以及一项可选的、
+匿名的产品分析服务，用于了解哪些功能被使用——详见第 4 节。错误报告默认开启，
+分析功能默认关闭；您可以随时在设置中更改这两项。</p>
 
 <h2>1. 存储在您设备上的数据</h2>
 <p>您在本应用中配置的所有内容——闹钟、时间表、关闭挑战、节假日和休息日、
@@ -753,7 +826,7 @@ note di rilascio dell'App.</p>
 <a href="https://www.revenuecat.com/privacy/">RevenueCat 隐私政策</a>。</p>
 
 <h2>4. 其他网络服务</h2>
-<p>本应用会为特定功能连接三个服务。与任何互联网请求一样，这些服务在技术上
+<p>本应用会为特定功能连接四个服务。与任何互联网请求一样，这些服务在技术上
 会收到您的 IP 地址：</p>
 <ul>
   <li><strong>公共节假日（Nager.Date，date.nager.at）：</strong>如果您启用节假日
@@ -769,6 +842,13 @@ note di rilascio dell'App.</p>
   该功能<strong>默认开启</strong>；您可以随时在设置中关闭（“发送匿名错误报告”）。
   这些报告仅包含技术细节（堆栈跟踪、设备型号、系统与应用版本），
   <strong>绝不会包含您闹钟的名称、描述或您输入的任何其他自由文本内容</strong>。</li>
+  <li><strong>匿名使用情况分析（PostHog）：</strong>用于了解哪些功能被实际使用，
+  以便我们知道该改进什么——该功能<strong>默认关闭</strong>；您可以在设置中开启
+  （"分享匿名使用分析数据"）。启用后，本应用会向 PostHog 发送匿名化的功能使用
+  事件（例如“使用这些选项保存了一个闹钟”“显示了付费墙”），该服务托管在欧盟。
+  这些事件<strong>绝不会包含您闹钟的名称、描述、位置或您输入的任何其他自由文本
+  内容</strong>。请参阅
+  <a href="https://posthog.com/privacy">PostHog 隐私政策</a>。</li>
 </ul>
 
 <h2>5. 本应用请求的权限</h2>
@@ -779,12 +859,12 @@ note di rilascio dell'App.</p>
   <tr><td>开机自启动</td><td>在手机重启后重新设置您的闹钟。</td></tr>
   <tr><td>前台服务、唤醒锁、振动</td><td>确保闹钟持续可靠地响铃和振动，直到您将其关闭。</td></tr>
   <tr><td>位置（前台和后台）</td><td>仅用于上文所述的可选地理围栏和太阳闹钟功能。</td></tr>
-  <tr><td>互联网</td><td>仅用于上文所述的购买（RevenueCat）、节假日同步、地图图块和错误报告（Sentry）。</td></tr>
+  <tr><td>互联网</td><td>仅用于上文所述的购买（RevenueCat）、节假日同步、地图图块、错误报告（Sentry），以及（如果您选择开启）使用情况分析（PostHog）。</td></tr>
 </table>
 
 <h2>6. 数据共享与出售</h2>
 <p>我们不出售、出租或交换任何数据。处理数据的第三方仅限于上文列出的服务提供商
-（Google Play、RevenueCat、Nager.Date、CARTO、Sentry），且各自严格限于所述功能。</p>
+（Google Play、RevenueCat、Nager.Date、CARTO、Sentry、PostHog），且各自严格限于所述功能。</p>
 
 <h2>7. 数据保留与删除</h2>
 <p>本地数据仅存在于您的设备上：卸载本应用即删除。如需删除 RevenueCat 保存的
@@ -804,15 +884,16 @@ note di rilascio dell'App.</p>
 
 <!-- ============================== JA ============================== -->
 <h1 id="ja">Chronos — プライバシーポリシー</h1>
-<p class="muted">発効日：2026年7月15日</p>
+<p class="muted">発効日：2026年8月4日</p>
 
 <p>Chronos（以下「本アプリ」）は、Luis Martín（以下「当方」）が開発した
 Android 向け目覚ましアプリです。本ポリシーでは、本アプリがどのようなデータを
 どのような目的で扱うかを説明します。要約すると、<strong>Chronos は端末内で
-ローカルに動作し、アカウント不要、広告なし、広告・ユーザートラッキング SDK も
-一切含みません。</strong>ただし、不具合の把握に役立てるためのエラーレポート
-サービスは利用しています（第4項参照）。これはデフォルトで有効になっており、
-設定からいつでもオフにできます。</p>
+ローカルに動作し、アカウント不要、広告なし、広告 SDK も一切含みません。</strong>
+ただし、不具合の把握に役立てるためのエラーレポートサービスと、どの機能が使われて
+いるかを把握するための、任意かつ匿名の製品分析サービスを利用しています
+（第4項参照）。エラーレポートはデフォルトで有効、分析機能はデフォルトで無効に
+なっており、いずれも設定からいつでも変更できます。</p>
 
 <h2>1. 端末に保存されるデータ</h2>
 <p>本アプリで設定するすべての内容 — アラーム、スケジュール、解除チャレンジ、
@@ -854,7 +935,7 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
 ポリシー</a>をご覧ください。</p>
 
 <h2>4. その他のネットワークサービス</h2>
-<p>本アプリは、特定の機能のために3つのサービスに接続します。あらゆる
+<p>本アプリは、特定の機能のために4つのサービスに接続します。あらゆる
 インターネット通信と同様、技術上これらのサービスに IP アドレスが送信されます。</p>
 <ul>
   <li><strong>祝日（Nager.Date、date.nager.at）：</strong>祝日の自動同期を
@@ -874,6 +955,16 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
   端末機種、OS・アプリのバージョンなどの技術情報のみが含まれ、
   <strong>アラームの名前・説明文など、入力した自由記述の内容が含まれることは
   一切ありません</strong>。</li>
+  <li><strong>匿名の利用状況分析（PostHog）：</strong>実際にどの機能が使われて
+  いるかを把握し、改善点を知るためのものです。これは<strong>デフォルトで
+  無効</strong>になっており、設定（「匿名の利用分析を共有」）からオンに
+  できます。有効にすると、本アプリは匿名化された機能利用イベント（例:「これらの
+  オプションでアラームが保存された」「有料版の案内が表示された」）を、EU で
+  ホストされている PostHog に送信します。これらのイベントには
+  <strong>アラームの名前・説明・場所や、入力したその他の自由記述の内容が
+  含まれることは一切ありません</strong>。詳細は
+  <a href="https://posthog.com/privacy">PostHog のプライバシーポリシー</a>を
+  ご覧ください。</li>
 </ul>
 
 <h2>5. 本アプリが要求する権限</h2>
@@ -884,13 +975,13 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
   <tr><td>起動時の実行</td><td>端末の再起動後にアラームを再設定するため。</td></tr>
   <tr><td>フォアグラウンドサービス、ウェイクロック、バイブレーション</td><td>アラームを解除するまで確実に鳴動・振動させ続けるため。</td></tr>
   <tr><td>位置情報（フォアグラウンドおよびバックグラウンド）</td><td>上記のオプションのジオフェンス機能と太陽アラーム機能のためだけに使用します。</td></tr>
-  <tr><td>インターネット</td><td>上記のとおり、購入（RevenueCat）、祝日の同期、地図タイル、エラーレポート（Sentry）のためだけに使用します。</td></tr>
+  <tr><td>インターネット</td><td>上記のとおり、購入（RevenueCat）、祝日の同期、地図タイル、エラーレポート（Sentry）、そして（オンにした場合のみ）利用状況分析（PostHog）のためだけに使用します。</td></tr>
 </table>
 
 <h2>6. データの共有と販売</h2>
 <p>当方はいかなるデータも販売・貸与・交換しません。データを処理する第三者は
 上記のサービスプロバイダー（Google Play、RevenueCat、Nager.Date、CARTO、
-Sentry）のみで、それぞれ記載された機能に厳密に限定されます。</p>
+Sentry、PostHog）のみで、それぞれ記載された機能に厳密に限定されます。</p>
 
 <h2>7. データの保持と削除</h2>
 <p>ローカルデータは端末内にのみ存在します。本アプリをアンインストールすると
@@ -912,14 +1003,16 @@ Sentry）のみで、それぞれ記載された機能に厳密に限定され�
 
 <!-- ============================== KO ============================== -->
 <h1 id="ko">Chronos — 개인정보 처리방침</h1>
-<p class="muted">시행일: 2026년 7월 15일</p>
+<p class="muted">시행일: 2026년 8월 4일</p>
 
 <p>Chronos(이하 "본 앱")는 Luis Martín(이하 "당사")이 개발한 Android 알람
 앱입니다. 본 방침은 본 앱이 어떤 데이터를 왜 처리하는지 설명합니다. 요약하면:
 <strong>Chronos는 기기에서 로컬로 작동하며, 계정이 필요 없고, 광고를 표시하지
-않으며, 광고·사용자 추적 SDK를 일절 포함하지 않습니다.</strong> 다만 오류를
-파악하는 데 도움이 되는 오류 보고 서비스는 사용합니다(4항 참조). 이 기능은
-기본적으로 켜져 있으며 설정에서 언제든지 끌 수 있습니다.</p>
+않으며, 광고 SDK를 일절 포함하지 않습니다.</strong> 다만 오류를 파악하는 데
+도움이 되는 오류 보고 서비스와, 어떤 기능이 사용되는지 확인하기 위한 선택적이고
+익명인 제품 분석 서비스를 사용합니다(4항 참조). 오류 보고는 기본적으로 켜져
+있고 분석 기능은 기본적으로 꺼져 있으며, 두 가지 모두 설정에서 언제든지 변경할
+수 있습니다.</p>
 
 <h2>1. 기기에 저장되는 데이터</h2>
 <p>본 앱에서 설정하는 모든 것 — 알람, 일정, 해제 챌린지, 공휴일과 휴일, 앱
@@ -958,7 +1051,7 @@ Google이 처리합니다.</p>
 처리방침</a>을 참조하세요.</p>
 
 <h2>4. 기타 네트워크 서비스</h2>
-<p>본 앱은 특정 기능을 위해 세 개의 서비스에 접속합니다. 모든 인터넷
+<p>본 앱은 특정 기능을 위해 네 개의 서비스에 접속합니다. 모든 인터넷
 요청과 마찬가지로 이들 서비스는 기술적으로 IP 주소를 수신합니다.</p>
 <ul>
   <li><strong>공휴일(Nager.Date, date.nager.at):</strong> 공휴일 자동 동기화를
@@ -977,6 +1070,15 @@ Google이 처리합니다.</p>
   언제든지 끌 수 있습니다. 이 보고에는 스택 트레이스, 기기 모델, OS 및 앱
   버전과 같은 기술 정보만 포함되며, <strong>알람의 이름, 설명 등 사용자가
   입력한 자유 텍스트 내용은 절대 포함되지 않습니다</strong>.</li>
+  <li><strong>익명 사용 분석(PostHog):</strong> 실제로 어떤 기능이 사용되는지
+  파악해 개선할 점을 알기 위한 것으로, <strong>기본적으로 꺼져 있으며</strong>,
+  설정("익명 사용 분석 공유")에서 켤 수 있습니다. 활성화하면 본 앱은 익명화된
+  기능 사용 이벤트(예: "이러한 옵션으로 알람이 저장됨", "결제 화면이
+  표시됨")를 EU에서 호스팅되는 PostHog로 전송합니다. 이 이벤트에는
+  <strong>알람의 이름, 설명, 위치 또는 사용자가 입력한 다른 자유 텍스트
+  내용이 절대 포함되지 않습니다</strong>. 자세한 내용은
+  <a href="https://posthog.com/privacy">PostHog 개인정보 처리방침</a>을
+  참조하세요.</li>
 </ul>
 
 <h2>5. 본 앱이 요청하는 권한</h2>
@@ -987,13 +1089,13 @@ Google이 처리합니다.</p>
   <tr><td>부팅 시 실행</td><td>휴대폰 재부팅 후 알람을 다시 설정하기 위해.</td></tr>
   <tr><td>포그라운드 서비스, 웨이크락, 진동</td><td>알람을 끌 때까지 확실하게 계속 울리고 진동하도록 하기 위해.</td></tr>
   <tr><td>위치(포그라운드 및 백그라운드)</td><td>위에서 설명한 선택적 지오펜싱 및 태양 알람 기능에만 사용됩니다.</td></tr>
-  <tr><td>인터넷</td><td>위에서 설명한 구매(RevenueCat), 공휴일 동기화, 지도 타일, 오류 보고(Sentry)에만 사용됩니다.</td></tr>
+  <tr><td>인터넷</td><td>위에서 설명한 구매(RevenueCat), 공휴일 동기화, 지도 타일, 오류 보고(Sentry), 그리고 (동의한 경우) 사용 분석(PostHog)에만 사용됩니다.</td></tr>
 </table>
 
 <h2>6. 데이터 공유 및 판매</h2>
 <p>당사는 어떤 데이터도 판매·대여·교환하지 않습니다. 데이터를 처리하는 제3자는
 위에 나열된 서비스 제공업체(Google Play, RevenueCat, Nager.Date, CARTO,
-Sentry)뿐이며, 각각 설명된 기능에 엄격히 한정됩니다.</p>
+Sentry, PostHog)뿐이며, 각각 설명된 기능에 엄격히 한정됩니다.</p>
 
 <h2>7. 데이터 보관 및 삭제</h2>
 <p>로컬 데이터는 기기에만 존재합니다. 본 앱을 삭제하면 함께 삭제됩니다.
