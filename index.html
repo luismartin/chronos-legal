@@ -30,18 +30,21 @@
 
 <p>Chronos ("the App") is an Android alarm clock app developed by Luis Martín
 ("we", "us"). This policy explains what data the App handles and why. The short
-version: <strong>Chronos works locally on your device, requires no account, shows
-no ads, and includes no advertising SDKs.</strong> It does use a crash/error-reporting
-service to help us catch bugs, and an optional, anonymous product-analytics service
-to see which features get used — see Section 4. Crash reporting is on by default
-and analytics is off by default; both can be changed anytime in Settings.</p>
+version: <strong>Chronos works locally on your device, never shows ads, and
+includes no advertising SDKs.</strong> Creating an account is entirely
+optional — the App is 100% functional without one, and the only reason to
+create one is to sync your alarms and holidays across your devices; see
+Section 3. It does use a crash/error-reporting service to help us catch bugs,
+and an optional, anonymous product-analytics service to see which features get
+used — see Section 5. Crash reporting is on by default and analytics is off by
+default; both can be changed anytime in Settings.</p>
 
 <h2>1. Data stored on your device</h2>
 <p>Everything you configure in the App — alarms, schedules, dismiss challenges,
 holidays and free days, app settings, and premium status flags — is stored
-<strong>locally on your device</strong> in the App's private storage. We do not
-operate any server, and this data is never uploaded to us. Uninstalling the App
-deletes it.</p>
+<strong>locally on your device</strong> in the App's private storage.
+Uninstalling the App deletes it. This data is only ever uploaded elsewhere if
+you choose to create an account to sync it across devices — see Section 3.</p>
 
 <h2>2. Location</h2>
 <p>Two optional features use your device's location, and both process it
@@ -58,10 +61,45 @@ deletes it.</p>
 <p>Neither feature transmits your location off your device, and it is never
 stored in any history nor shared with anyone. One exception applies while you
 are choosing the zone: the map you mark it on is loaded from CARTO, so the area
-you browse — normally the area you are in — reaches CARTO. See section 4. If you
+you browse — normally the area you are in — reaches CARTO. See section 5. If you
 don't use these features, the App never requests location permission.</p>
 
-<h2>3. Purchases</h2>
+<h2>3. Accounts and cross-device sync</h2>
+<p>Creating an account is entirely optional. Chronos is 100% functional without
+one, on a single device, forever — you never need an account to create alarms,
+use premium features, or anything else the App does. The only reason to create
+one is to keep your alarms and manually-added holidays in sync if you use
+Chronos on more than one device, or to recover them after reinstalling.</p>
+<p>If you choose to create an account (Settings → Account), the App uses
+<strong>Supabase</strong>, a backend-as-a-service provider, to store:</p>
+<ul>
+  <li><strong>Your email address and password</strong>, used only to sign you
+  in and, if you request it, to reset your password. Your password is handled
+  entirely by Supabase's authentication service — the App never stores it or
+  has access to it in plain text. We never add your email to any mailing
+  list.</li>
+  <li><strong>Your alarms and any holidays you added manually</strong> (not the
+  automatically-downloaded public-holiday lists described in Section 5, which
+  are the same for everyone in your country and always stay local). This is the
+  same data described in Section 1 — with an account, a copy also lives in your
+  Supabase account so it can be restored on your other devices or after a
+  reinstall. Each row is tied to your account and only readable by you.</li>
+</ul>
+<p>While you're signed in, the App compares and merges your local alarms/holidays
+with the copy in your account each time you open the App or bring it back to the
+foreground, so every signed-in device eventually has the same data. This isn't
+real-time: a change made on one device appears on another the next time that
+other device's App is opened or resumed, not instantly.</p>
+<p>You can delete your account at any time from Settings → Account → Delete
+account. This immediately and permanently erases your account, email, and all
+synced alarms and holidays from our systems — there is no waiting period, and
+you don't need to email us for this. It cannot be undone.</p>
+<p>Supabase acts as our service provider (data processor) for this feature only,
+hosted in the EU (Stockholm, Sweden); we don't sell or share this data with
+anyone else. See the
+<a href="https://supabase.com/privacy">Supabase Privacy Policy</a>.</p>
+
+<h2>4. Purchases</h2>
 <p>Premium features are sold as in-app purchases processed by
 <strong>Google Play Billing</strong>. We never see your payment details (card
 numbers, etc.) — Google handles payment entirely.</p>
@@ -74,8 +112,8 @@ IP address). RevenueCat acts as our service provider and does not sell this
 data. See the
 <a href="https://www.revenuecat.com/privacy/">RevenueCat Privacy Policy</a>.</p>
 
-<h2>4. Other network services</h2>
-<p>The App contacts four services for specific features. As with any internet
+<h2>5. Other network services</h2>
+<p>The App contacts five services for specific features. As with any internet
 request, these services technically receive your IP address:</p>
 <ul>
   <li><strong>Public holidays (Nager.Date, date.nager.at):</strong> if you enable
@@ -103,9 +141,20 @@ request, these services technically receive your IP address:</p>
   hosted in the EU. These events <strong>never include your alarm names,
   descriptions, locations, or any other free-text content you entered</strong>.
   See the <a href="https://aptabase.com/legal/privacy">Aptabase Privacy Policy</a>.</li>
+  <li><strong>Anonymous usage analytics with device traits (Amplitude):</strong>
+  the same "Share anonymous usage analytics" toggle above also sends the same
+  kind of anonymized feature-usage events to Amplitude, plus a handful of
+  device-level traits attached to future events (e.g. "has an active premium
+  subscription," "the alarm reliability checklist is fully resolved," "uses
+  gentle wake") so we can tell which features tend to be used together. These
+  events and traits <strong>never include your alarm names, descriptions,
+  locations, or any other free-text content you entered</strong>, and
+  Amplitude's optional screen-recording feature ("Session Replay") is
+  <strong>not enabled</strong>. See the
+  <a href="https://amplitude.com/privacy">Amplitude Privacy Notice</a>.</li>
 </ul>
 
-<h2>5. Permissions the App requests</h2>
+<h2>6. Permissions the App requests</h2>
 <table>
   <tr><th>Permission</th><th>Why</th></tr>
   <tr><td>Notifications, full-screen alarms</td><td>To ring and show the alarm screen, including over the lock screen.</td></tr>
@@ -113,28 +162,31 @@ request, these services technically receive your IP address:</p>
   <tr><td>Run at startup</td><td>To re-arm your alarms after the phone reboots.</td></tr>
   <tr><td>Foreground service, wake lock, vibration</td><td>To keep the alarm sounding and vibrating reliably until you dismiss it.</td></tr>
   <tr><td>Location (foreground &amp; background)</td><td>Only for the optional geofence and solar-alarm features described above.</td></tr>
-  <tr><td>Internet</td><td>Only for purchases (RevenueCat), holiday sync, map tiles, error reporting (Sentry), and — if you opt in — usage analytics (Aptabase), as described above.</td></tr>
+  <tr><td>Internet</td><td>Only for purchases (RevenueCat), holiday sync, map tiles, error reporting (Sentry), account sign-in and cross-device sync if you create an account (Supabase), and — if you opt in — usage analytics (Aptabase and Amplitude), as described above.</td></tr>
 </table>
 
-<h2>6. Data sharing and selling</h2>
+<h2>7. Data sharing and selling</h2>
 <p>We do not sell, rent, or trade any data. The only third parties that process
 any data are the service providers listed above (Google Play, RevenueCat,
-Nager.Date, CARTO, Sentry, Aptabase), each strictly for the feature described.</p>
+Nager.Date, CARTO, Sentry, Aptabase, Amplitude, and — if you create an account
+— Supabase), each strictly for the feature described.</p>
 
-<h2>7. Data retention and deletion</h2>
-<p>Local data lives only on your device: uninstalling the App deletes it. To
-request deletion of the anonymous purchase records held by RevenueCat, contact
-us at the email below and we will process the request.</p>
+<h2>8. Data retention and deletion</h2>
+<p>Local data lives only on your device: uninstalling the App deletes it. If you
+created an account, deleting it from Settings → Account → Delete account
+immediately erases your account, email, and synced alarms/holidays too — see
+Section 3. To request deletion of the anonymous purchase records held by
+RevenueCat, contact us at the email below and we will process the request.</p>
 
-<h2>8. Children</h2>
+<h2>9. Children</h2>
 <p>The App is not directed at children under 13 and does not knowingly collect
 personal information from them.</p>
 
-<h2>9. Changes to this policy</h2>
+<h2>10. Changes to this policy</h2>
 <p>If we change this policy, we will update this page and the effective date
 above. Material changes will be noted in the App's release notes.</p>
 
-<h2>10. Contact</h2>
+<h2>11. Contact</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -145,20 +197,23 @@ above. Material changes will be noted in the App's release notes.</p>
 
 <p>Chronos («la App») es una aplicación de alarmas para Android desarrollada por
 Luis Martín («nosotros»). Esta política explica qué datos maneja la App y por
-qué. La versión corta: <strong>Chronos funciona localmente en tu dispositivo, no
-requiere cuenta, no muestra anuncios y no incluye SDKs de publicidad.</strong> Sí
-usa un servicio de informes de errores para ayudarnos a detectar fallos, y un
-servicio opcional y anónimo de analítica de producto para saber qué funciones se
-usan — ver la sección 4. Los informes de errores están activados por defecto y
-la analítica está desactivada por defecto; ambos se pueden cambiar en cualquier
-momento en Ajustes.</p>
+qué. La versión corta: <strong>Chronos funciona localmente en tu dispositivo,
+nunca muestra anuncios y no incluye SDKs de publicidad.</strong> Crear una
+cuenta es totalmente opcional — la App es 100 % funcional sin ella, y la única
+razón para crear una es sincronizar tus alarmas y festivos entre tus
+dispositivos; ver la sección 3. Sí usa un servicio de informes de errores para
+ayudarnos a detectar fallos, y un servicio opcional y anónimo de analítica de
+producto para saber qué funciones se usan — ver la sección 5. Los informes de
+errores están activados por defecto y la analítica está desactivada por
+defecto; ambos se pueden cambiar en cualquier momento en Ajustes.</p>
 
 <h2>1. Datos almacenados en tu dispositivo</h2>
 <p>Todo lo que configuras en la App — alarmas, horarios, desafíos para apagarlas,
 festivos y días libres, ajustes y el estado premium — se guarda
 <strong>localmente en tu dispositivo</strong>, en el almacenamiento privado de la
-App. No operamos ningún servidor y estos datos nunca se nos envían. Al
-desinstalar la App se eliminan.</p>
+App. Al desinstalar la App se eliminan. Estos datos solo se suben a algún otro
+sitio si decides crear una cuenta para sincronizarlos entre dispositivos — ver
+la sección 3.</p>
 
 <h2>2. Ubicación</h2>
 <p>Dos funciones opcionales usan la ubicación del dispositivo, y ambas la
@@ -177,10 +232,50 @@ procesan <strong>íntegramente en tu dispositivo</strong>:</p>
 tampoco se guarda en ningún historial ni se comparte con nadie. Hay una
 excepción mientras eliges la zona: el mapa en el que la marcas se carga desde
 CARTO, así que la zona que consultas — normalmente aquella en la que estás —
-llega a CARTO. Ver la sección 4. Si no usas estas funciones, la App nunca
+llega a CARTO. Ver la sección 5. Si no usas estas funciones, la App nunca
 solicita el permiso de ubicación.</p>
 
-<h2>3. Compras</h2>
+<h2>3. Cuentas y sincronización entre dispositivos</h2>
+<p>Crear una cuenta es totalmente opcional. Chronos es 100 % funcional sin
+ella, en un solo dispositivo, para siempre — nunca necesitas una cuenta para
+crear alarmas, usar las funciones premium ni nada más de lo que hace la App.
+La única razón para crear una es mantener sincronizados tus alarmas y los
+festivos que añades manualmente si usas Chronos en más de un dispositivo, o
+para recuperarlos tras reinstalar la App.</p>
+<p>Si decides crear una cuenta (Ajustes → Cuenta), la App usa
+<strong>Supabase</strong>, un proveedor de infraestructura backend, para
+guardar:</p>
+<ul>
+  <li><strong>Tu correo electrónico y contraseña</strong>, usados solo para
+  iniciar sesión y, si lo solicitas, restablecer tu contraseña. Tu contraseña la
+  gestiona por completo el servicio de autenticación de Supabase — la App nunca
+  la guarda ni tiene acceso a ella en texto plano. Nunca añadimos tu correo a
+  ninguna lista de distribución.</li>
+  <li><strong>Tus alarmas y los festivos que añadas manualmente</strong> (no las
+  listas de festivos descargadas automáticamente descritas en la sección 5, que
+  son las mismas para todos en tu país y siempre se quedan en el dispositivo).
+  Son los mismos datos descritos en la sección 1 — con una cuenta, una copia
+  también vive en tu cuenta de Supabase, para poder restaurarla en tus otros
+  dispositivos o tras una reinstalación. Cada fila está vinculada a tu cuenta y
+  solo tú puedes leerla.</li>
+</ul>
+<p>Mientras tienes la sesión iniciada, la App compara y fusiona tus alarmas y
+festivos locales con la copia de tu cuenta cada vez que abres la App o la
+vuelves a poner en primer plano, para que todos tus dispositivos con sesión
+iniciada acaben con los mismos datos. No es en tiempo real: un cambio hecho en
+un dispositivo aparece en otro la próxima vez que ese otro dispositivo abra la
+App o la reanude, no al instante.</p>
+<p>Puedes eliminar tu cuenta en cualquier momento desde Ajustes → Cuenta →
+Eliminar cuenta. Esto borra de inmediato y de forma permanente tu cuenta, tu
+correo y todas las alarmas y festivos sincronizados de nuestros sistemas — no
+hay ningún periodo de espera y no necesitas escribirnos para esto. No se puede
+deshacer.</p>
+<p>Supabase actúa como nuestro encargado de tratamiento solo para esta función,
+alojado en la UE (Estocolmo, Suecia); no vendemos ni compartimos estos datos
+con nadie más. Consulta la
+<a href="https://supabase.com/privacy">Política de Privacidad de Supabase</a>.</p>
+
+<h2>4. Compras</h2>
 <p>Las funciones premium se venden como compras dentro de la aplicación
 procesadas por <strong>Google Play Billing</strong>. Nunca vemos tus datos de
 pago (números de tarjeta, etc.): Google gestiona el pago por completo.</p>
@@ -194,8 +289,8 @@ RevenueCat actúa como nuestro encargado de tratamiento y no vende estos datos.
 Consulta la <a href="https://www.revenuecat.com/privacy/">Política de
 Privacidad de RevenueCat</a>.</p>
 
-<h2>4. Otros servicios de red</h2>
-<p>La App se conecta a cuatro servicios para funciones concretas. Como en
+<h2>5. Otros servicios de red</h2>
+<p>La App se conecta a cinco servicios para funciones concretas. Como en
 cualquier petición por internet, estos servicios reciben técnicamente tu
 dirección IP:</p>
 <ul>
@@ -229,9 +324,22 @@ dirección IP:</p>
   alarmas, ni ningún otro contenido de texto libre que hayas introducido</strong>.
   Consulta la <a href="https://aptabase.com/legal/privacy">Política de Privacidad de
   Aptabase</a>.</li>
+  <li><strong>Analítica de uso anónima con rasgos de dispositivo (Amplitude):</strong>
+  el mismo interruptor "Compartir análisis de uso anónimos" de arriba también
+  envía el mismo tipo de eventos anonimizados de uso de funciones a Amplitude,
+  además de un puñado de rasgos a nivel de dispositivo que se adjuntan a los
+  eventos futuros (p. ej. «tiene una suscripción premium activa», «la
+  checklist de fiabilidad de alarmas está completa», «usa el despertar
+  suave») para poder ver qué funciones tienden a usarse juntas. Estos eventos
+  y rasgos <strong>nunca incluyen los nombres, descripciones o ubicaciones de
+  tus alarmas, ni ningún otro contenido de texto libre que hayas
+  introducido</strong>, y la función opcional de grabación de pantalla de
+  Amplitude ("Session Replay") <strong>no está activada</strong>. Consulta el
+  <a href="https://amplitude.com/privacy">Aviso de Privacidad de
+  Amplitude</a>.</li>
 </ul>
 
-<h2>5. Permisos que solicita la App</h2>
+<h2>6. Permisos que solicita la App</h2>
 <table>
   <tr><th>Permiso</th><th>Para qué</th></tr>
   <tr><td>Notificaciones, alarmas a pantalla completa</td><td>Para sonar y mostrar la pantalla de alarma, incluso sobre la pantalla de bloqueo.</td></tr>
@@ -239,31 +347,33 @@ dirección IP:</p>
   <tr><td>Ejecutarse al inicio</td><td>Para reprogramar tus alarmas tras reiniciar el teléfono.</td></tr>
   <tr><td>Servicio en primer plano, wake lock, vibración</td><td>Para que la alarma siga sonando y vibrando de forma fiable hasta que la apagues.</td></tr>
   <tr><td>Ubicación (en uso y en segundo plano)</td><td>Solo para las funciones opcionales de geovallas y alarmas solares descritas arriba.</td></tr>
-  <tr><td>Internet</td><td>Solo para compras (RevenueCat), sincronización de festivos, teselas de mapa, informes de errores (Sentry) y — si la activas — analítica de uso (Aptabase), según lo descrito arriba.</td></tr>
+  <tr><td>Internet</td><td>Solo para compras (RevenueCat), sincronización de festivos, teselas de mapa, informes de errores (Sentry), inicio de sesión y sincronización entre dispositivos si creas una cuenta (Supabase) y — si la activas — analítica de uso (Aptabase y Amplitude), según lo descrito arriba.</td></tr>
 </table>
 
-<h2>6. Compartición y venta de datos</h2>
+<h2>7. Compartición y venta de datos</h2>
 <p>No vendemos, alquilamos ni intercambiamos ningún dato. Los únicos terceros
 que procesan algún dato son los proveedores de servicio listados arriba (Google
-Play, RevenueCat, Nager.Date, CARTO, Sentry, Aptabase), cada uno estrictamente
-para la función descrita.</p>
+Play, RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude y — si creas
+una cuenta — Supabase), cada uno estrictamente para la función descrita.</p>
 
-<h2>7. Conservación y eliminación de datos</h2>
+<h2>8. Conservación y eliminación de datos</h2>
 <p>Los datos locales viven solo en tu dispositivo: al desinstalar la App se
-eliminan. Para solicitar la eliminación de los registros anónimos de compra que
-conserva RevenueCat, escríbenos al correo de abajo y tramitaremos la
-solicitud.</p>
+eliminan. Si creaste una cuenta, eliminarla desde Ajustes → Cuenta → Eliminar
+cuenta borra de inmediato tu cuenta, tu correo y las alarmas/festivos
+sincronizados también — ver la sección 3. Para solicitar la eliminación de los
+registros anónimos de compra que conserva RevenueCat, escríbenos al correo de
+abajo y tramitaremos la solicitud.</p>
 
-<h2>8. Menores</h2>
+<h2>9. Menores</h2>
 <p>La App no está dirigida a menores de 13 años y no recoge conscientemente
 información personal de menores.</p>
 
-<h2>9. Cambios en esta política</h2>
+<h2>10. Cambios en esta política</h2>
 <p>Si cambiamos esta política, actualizaremos esta página y la fecha de entrada
 en vigor. Los cambios relevantes se indicarán en las notas de versión de la
 App.</p>
 
-<h2>10. Contacto</h2>
+<h2>11. Contacto</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -275,19 +385,23 @@ App.</p>
 <p>Chronos (« l'App ») est une application de réveil pour Android développée par
 Luis Martín (« nous »). Cette politique explique quelles données l'App traite et
 pourquoi. En résumé : <strong>Chronos fonctionne localement sur votre appareil,
-ne nécessite aucun compte, n'affiche aucune publicité et n'intègre aucun SDK
-publicitaire.</strong> Elle utilise un service de rapports d'erreurs pour nous
-aider à détecter des bugs, ainsi qu'un service optionnel et anonyme d'analyse
-produit pour savoir quelles fonctionnalités sont utilisées — voir la section 4.
-Les rapports d'erreurs sont activés par défaut et l'analyse est désactivée par
-défaut ; les deux peuvent être modifiés à tout moment dans les Paramètres.</p>
+n'affiche jamais de publicité et n'intègre aucun SDK publicitaire.</strong>
+Créer un compte est entièrement optionnel — l'App est fonctionnelle à 100 %
+sans compte, et la seule raison d'en créer un est de synchroniser vos alarmes
+et jours fériés entre vos appareils ; voir la section 3. Elle utilise un
+service de rapports d'erreurs pour nous aider à détecter des bugs, ainsi qu'un
+service optionnel et anonyme d'analyse produit pour savoir quelles
+fonctionnalités sont utilisées — voir la section 5. Les rapports d'erreurs sont
+activés par défaut et l'analyse est désactivée par défaut ; les deux peuvent
+être modifiés à tout moment dans les Paramètres.</p>
 
 <h2>1. Données stockées sur votre appareil</h2>
 <p>Tout ce que vous configurez dans l'App — alarmes, horaires, défis d'arrêt,
 jours fériés et jours de repos, réglages et statut premium — est stocké
 <strong>localement sur votre appareil</strong>, dans l'espace privé de l'App.
-Nous n'exploitons aucun serveur et ces données ne nous sont jamais envoyées.
-Désinstaller l'App les supprime.</p>
+Désinstaller l'App les supprime. Ces données ne sont envoyées ailleurs que si
+vous choisissez de créer un compte pour les synchroniser entre appareils — voir
+la section 3.</p>
 
 <h2>2. Localisation</h2>
 <p>Deux fonctions optionnelles utilisent la localisation de l'appareil, et
@@ -307,11 +421,53 @@ toutes deux la traitent <strong>entièrement sur votre appareil</strong> :</p>
 appareil ; elle n'est jamais conservée dans un historique ni partagée. Une
 exception s'applique pendant que vous choisissez la zone : la carte sur laquelle
 vous la placez est chargée depuis CARTO, de sorte que la zone que vous consultez
-— normalement celle où vous vous trouvez — parvient à CARTO. Voir la section 4.
+— normalement celle où vous vous trouvez — parvient à CARTO. Voir la section 5.
 Si vous n'utilisez pas ces fonctions, l'App ne demande jamais l'autorisation de
 localisation.</p>
 
-<h2>3. Achats</h2>
+<h2>3. Comptes et synchronisation entre appareils</h2>
+<p>Créer un compte est entièrement optionnel. Chronos est fonctionnelle à 100 %
+sans compte, sur un seul appareil, pour toujours — vous n'avez jamais besoin
+d'un compte pour créer des alarmes, utiliser les fonctions premium, ou quoi que
+ce soit d'autre que fait l'App. La seule raison d'en créer un est de garder vos
+alarmes et les jours fériés ajoutés manuellement synchronisés si vous utilisez
+Chronos sur plusieurs appareils, ou de les récupérer après une réinstallation.</p>
+<p>Si vous choisissez de créer un compte (Paramètres → Compte), l'App utilise
+<strong>Supabase</strong>, un fournisseur d'infrastructure backend, pour
+stocker :</p>
+<ul>
+  <li><strong>Votre adresse e-mail et votre mot de passe</strong>, utilisés
+  uniquement pour vous connecter et, si vous le demandez, réinitialiser votre
+  mot de passe. Votre mot de passe est géré entièrement par le service
+  d'authentification de Supabase — l'App ne le stocke jamais et n'y a jamais
+  accès en clair. Nous n'ajoutons jamais votre e-mail à aucune liste de
+  diffusion.</li>
+  <li><strong>Vos alarmes et les jours fériés que vous ajoutez manuellement</strong>
+  (pas les listes de jours fériés téléchargées automatiquement décrites à la
+  section 5, qui sont les mêmes pour tout le monde dans votre pays et restent
+  toujours locales). Ce sont les mêmes données décrites à la section 1 — avec
+  un compte, une copie vit aussi dans votre compte Supabase afin de pouvoir
+  être restaurée sur vos autres appareils ou après une réinstallation. Chaque
+  ligne est liée à votre compte et n'est lisible que par vous.</li>
+</ul>
+<p>Tant que vous êtes connecté, l'App compare et fusionne vos alarmes/jours
+fériés locaux avec la copie de votre compte à chaque fois que vous ouvrez l'App
+ou la ramenez au premier plan, afin que chaque appareil connecté finisse par
+avoir les mêmes données. Ce n'est pas en temps réel : un changement effectué sur
+un appareil apparaît sur un autre la prochaine fois que l'App de cet autre
+appareil est ouverte ou reprise, pas instantanément.</p>
+<p>Vous pouvez supprimer votre compte à tout moment depuis Paramètres → Compte
+→ Supprimer le compte. Cela efface immédiatement et définitivement votre
+compte, votre e-mail et toutes les alarmes/jours fériés synchronisés de nos
+systèmes — il n'y a aucun délai d'attente et vous n'avez pas besoin de nous
+écrire pour cela. C'est irréversible.</p>
+<p>Supabase agit comme notre sous-traitant uniquement pour cette fonction,
+hébergé dans l'UE (Stockholm, Suède) ; nous ne vendons ni ne partageons ces
+données avec personne d'autre. Voir la
+<a href="https://supabase.com/privacy">politique de confidentialité de
+Supabase</a>.</p>
+
+<h2>4. Achats</h2>
 <p>Les fonctions premium sont vendues sous forme d'achats intégrés traités par
 <strong>Google Play Billing</strong>. Nous ne voyons jamais vos informations de
 paiement (numéros de carte, etc.) — Google gère intégralement le paiement.</p>
@@ -325,8 +481,8 @@ RevenueCat agit comme notre sous-traitant et ne vend pas ces données. Voir la
 <a href="https://www.revenuecat.com/privacy/">politique de confidentialité de
 RevenueCat</a>.</p>
 
-<h2>4. Autres services réseau</h2>
-<p>L'App contacte quatre services pour des fonctions précises. Comme pour toute
+<h2>5. Autres services réseau</h2>
+<p>L'App contacte cinq services pour des fonctions précises. Comme pour toute
 requête internet, ces services reçoivent techniquement votre adresse IP :</p>
 <ul>
   <li><strong>Jours fériés (Nager.Date, date.nager.at) :</strong> si vous activez
@@ -360,9 +516,23 @@ requête internet, ces services reçoivent techniquement votre adresse IP :</p>
   description, la localisation ni aucun autre texte libre de vos
   alarmes</strong>. Voir la <a href="https://aptabase.com/legal/privacy">politique de
   confidentialité d'Aptabase</a>.</li>
+  <li><strong>Statistiques d'utilisation anonymes avec traits d'appareil
+  (Amplitude) :</strong> le même interrupteur « Partager des données
+  d'utilisation anonymes » ci-dessus envoie aussi le même type d'événements
+  anonymisés d'utilisation des fonctionnalités à Amplitude, ainsi qu'une
+  poignée de traits au niveau de l'appareil rattachés aux événements futurs
+  (par ex. « dispose d'un abonnement premium actif », « la checklist de
+  fiabilité des alarmes est entièrement validée », « utilise le réveil en
+  douceur ») afin de savoir quelles fonctionnalités sont utilisées ensemble.
+  Ces événements et traits <strong>n'incluent jamais le nom, la description,
+  la localisation ni aucun autre texte libre de vos alarmes</strong>, et la
+  fonction optionnelle d'enregistrement d'écran d'Amplitude (« Session
+  Replay ») n'est <strong>pas activée</strong>. Voir l'
+  <a href="https://amplitude.com/privacy">avis de confidentialité
+  d'Amplitude</a>.</li>
 </ul>
 
-<h2>5. Autorisations demandées par l'App</h2>
+<h2>6. Autorisations demandées par l'App</h2>
 <table>
   <tr><th>Autorisation</th><th>Pourquoi</th></tr>
   <tr><td>Notifications, alarmes plein écran</td><td>Pour sonner et afficher l'écran d'alarme, y compris sur l'écran de verrouillage.</td></tr>
@@ -370,31 +540,34 @@ requête internet, ces services reçoivent techniquement votre adresse IP :</p>
   <tr><td>Exécution au démarrage</td><td>Pour réarmer vos alarmes après un redémarrage du téléphone.</td></tr>
   <tr><td>Service au premier plan, wake lock, vibration</td><td>Pour que l'alarme continue de sonner et de vibrer de manière fiable jusqu'à ce que vous l'arrêtiez.</td></tr>
   <tr><td>Localisation (active et en arrière-plan)</td><td>Uniquement pour les fonctions optionnelles de géorepérage et d'alarmes solaires décrites ci-dessus.</td></tr>
-  <tr><td>Internet</td><td>Uniquement pour les achats (RevenueCat), la synchronisation des jours fériés, les tuiles de carte, les rapports d'erreurs (Sentry) et — si vous l'activez — les statistiques d'utilisation (Aptabase), comme décrit ci-dessus.</td></tr>
+  <tr><td>Internet</td><td>Uniquement pour les achats (RevenueCat), la synchronisation des jours fériés, les tuiles de carte, les rapports d'erreurs (Sentry), la connexion et la synchronisation entre appareils si vous créez un compte (Supabase) et — si vous l'activez — les statistiques d'utilisation (Aptabase et Amplitude), comme décrit ci-dessus.</td></tr>
 </table>
 
-<h2>6. Partage et vente de données</h2>
+<h2>7. Partage et vente de données</h2>
 <p>Nous ne vendons, ne louons ni n'échangeons aucune donnée. Les seuls tiers qui
 traitent des données sont les prestataires listés ci-dessus (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase), chacun strictement pour la
-fonction décrite.</p>
+RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude et — si vous créez un
+compte — Supabase), chacun strictement pour la fonction décrite.</p>
 
-<h2>7. Conservation et suppression des données</h2>
+<h2>8. Conservation et suppression des données</h2>
 <p>Les données locales ne résident que sur votre appareil : désinstaller l'App
-les supprime. Pour demander la suppression des enregistrements d'achat anonymes
-conservés par RevenueCat, contactez-nous à l'adresse ci-dessous et nous
-traiterons la demande.</p>
+les supprime. Si vous avez créé un compte, le supprimer depuis Paramètres →
+Compte → Supprimer le compte efface immédiatement votre compte, votre e-mail
+et les alarmes/jours fériés synchronisés aussi — voir la section 3. Pour
+demander la suppression des enregistrements d'achat anonymes conservés par
+RevenueCat, contactez-nous à l'adresse ci-dessous et nous traiterons la
+demande.</p>
 
-<h2>8. Enfants</h2>
+<h2>9. Enfants</h2>
 <p>L'App ne s'adresse pas aux enfants de moins de 13 ans et ne collecte pas
 sciemment d'informations personnelles les concernant.</p>
 
-<h2>9. Modifications de cette politique</h2>
+<h2>10. Modifications de cette politique</h2>
 <p>Si nous modifions cette politique, nous mettrons à jour cette page et la date
 d'entrée en vigueur ci-dessus. Les changements importants seront signalés dans
 les notes de version de l'App.</p>
 
-<h2>10. Contact</h2>
+<h2>11. Contact</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -405,20 +578,25 @@ les notes de version de l'App.</p>
 
 <p>Chronos („die App") ist eine Wecker-App für Android, entwickelt von Luis
 Martín („wir"). Diese Erklärung beschreibt, welche Daten die App verarbeitet und
-warum. Kurz gesagt: <strong>Chronos arbeitet lokal auf Ihrem Gerät, benötigt
-kein Konto, zeigt keine Werbung und enthält keine Werbe-SDKs.</strong> Sie
-nutzt einen Fehlerberichtsdienst, der uns hilft, Bugs zu finden, sowie einen
-optionalen, anonymen Produktanalysedienst, um zu sehen, welche Funktionen genutzt
-werden — siehe Abschnitt 4. Die Fehlerberichte sind standardmäßig aktiviert, die
-Analyse standardmäßig deaktiviert; beides lässt sich jederzeit in den
-Einstellungen ändern.</p>
+warum. Kurz gesagt: <strong>Chronos arbeitet lokal auf Ihrem Gerät, zeigt
+niemals Werbung und enthält keine Werbe-SDKs.</strong> Ein Konto anzulegen ist
+vollkommen optional — die App ist auch ohne Konto zu 100 % funktionsfähig, und
+der einzige Grund, eines anzulegen, ist die Synchronisierung Ihrer Wecker und
+Feiertage zwischen Ihren Geräten; siehe Abschnitt 3. Sie nutzt einen
+Fehlerberichtsdienst, der uns hilft, Bugs zu finden, sowie einen optionalen,
+anonymen Produktanalysedienst, um zu sehen, welche Funktionen genutzt werden —
+siehe Abschnitt 5. Die Fehlerberichte sind standardmäßig aktiviert, die Analyse
+standardmäßig deaktiviert; beides lässt sich jederzeit in den Einstellungen
+ändern.</p>
 
 <h2>1. Auf Ihrem Gerät gespeicherte Daten</h2>
 <p>Alles, was Sie in der App konfigurieren — Wecker, Zeitpläne,
 Ausschalt-Aufgaben, Feiertage und freie Tage, Einstellungen und der
 Premium-Status — wird <strong>lokal auf Ihrem Gerät</strong> im privaten
-Speicher der App abgelegt. Wir betreiben keinen Server, und diese Daten werden
-niemals an uns übertragen. Beim Deinstallieren der App werden sie gelöscht.</p>
+Speicher der App abgelegt. Beim Deinstallieren der App werden sie gelöscht.
+Diese Daten werden nur dann anderswohin übertragen, wenn Sie sich entscheiden,
+ein Konto anzulegen, um sie zwischen Geräten zu synchronisieren — siehe
+Abschnitt 3.</p>
 
 <h2>2. Standort</h2>
 <p>Zwei optionale Funktionen nutzen den Gerätestandort, und beide verarbeiten
@@ -437,11 +615,53 @@ ihn <strong>vollständig auf Ihrem Gerät</strong>:</p>
 auch nie in einem Verlauf gespeichert oder mit Dritten geteilt. Eine Ausnahme
 gilt, während Sie die Zone festlegen: Die Karte, auf der Sie sie markieren, wird
 von CARTO geladen, sodass der betrachtete Ausschnitt — normalerweise der, in dem
-Sie sich befinden — bei CARTO ankommt. Siehe Abschnitt 4. Wenn Sie diese
+Sie sich befinden — bei CARTO ankommt. Siehe Abschnitt 5. Wenn Sie diese
 Funktionen nicht nutzen, fordert die App die Standortberechtigung gar nicht erst
 an.</p>
 
-<h2>3. Käufe</h2>
+<h2>3. Konten und geräteübergreifende Synchronisierung</h2>
+<p>Ein Konto anzulegen ist vollkommen optional. Chronos ist auf einem einzigen
+Gerät dauerhaft zu 100 % funktionsfähig, auch ohne Konto — Sie brauchen nie ein
+Konto, um Wecker anzulegen, Premium-Funktionen zu nutzen, oder irgendetwas
+anderes, was die App tut. Der einzige Grund, eines anzulegen, ist, Ihre Wecker
+und manuell hinzugefügten Feiertage zu synchronisieren, wenn Sie Chronos auf
+mehr als einem Gerät verwenden, oder sie nach einer Neuinstallation
+wiederherzustellen.</p>
+<p>Wenn Sie sich entscheiden, ein Konto anzulegen (Einstellungen → Konto),
+nutzt die App <strong>Supabase</strong>, einen
+Backend-as-a-Service-Anbieter, um Folgendes zu speichern:</p>
+<ul>
+  <li><strong>Ihre E-Mail-Adresse und Ihr Passwort</strong>, verwendet nur, um
+  Sie anzumelden und, falls angefordert, Ihr Passwort zurückzusetzen. Ihr
+  Passwort wird vollständig vom Authentifizierungsdienst von Supabase
+  verwaltet — die App speichert es niemals und hat niemals Zugriff darauf im
+  Klartext. Wir fügen Ihre E-Mail-Adresse niemals einer Mailingliste hinzu.</li>
+  <li><strong>Ihre Wecker und alle manuell hinzugefügten Feiertage</strong>
+  (nicht die automatisch heruntergeladenen Feiertagslisten aus Abschnitt 5, die
+  für alle in Ihrem Land gleich sind und immer lokal bleiben). Das sind
+  dieselben in Abschnitt 1 beschriebenen Daten — mit einem Konto lebt eine
+  Kopie zusätzlich in Ihrem Supabase-Konto, damit sie auf Ihren anderen
+  Geräten oder nach einer Neuinstallation wiederhergestellt werden kann. Jede
+  Zeile ist an Ihr Konto gebunden und nur von Ihnen lesbar.</li>
+</ul>
+<p>Solange Sie angemeldet sind, gleicht die App Ihre lokalen Wecker/Feiertage
+mit der Kopie in Ihrem Konto ab und führt sie zusammen, jedes Mal, wenn Sie die
+App öffnen oder in den Vordergrund holen, sodass jedes angemeldete Gerät
+irgendwann dieselben Daten hat. Das ist nicht in Echtzeit: Eine auf einem Gerät
+vorgenommene Änderung erscheint auf einem anderen erst, wenn die App auf
+diesem anderen Gerät das nächste Mal geöffnet oder fortgesetzt wird, nicht
+sofort.</p>
+<p>Sie können Ihr Konto jederzeit über Einstellungen → Konto → Konto löschen
+entfernen. Dadurch werden Ihr Konto, Ihre E-Mail-Adresse und alle
+synchronisierten Wecker und Feiertage sofort und dauerhaft aus unseren
+Systemen gelöscht — es gibt keine Wartezeit, und Sie müssen uns dafür keine
+E-Mail schreiben. Dies kann nicht rückgängig gemacht werden.</p>
+<p>Supabase handelt nur für diese Funktion als unser Auftragsverarbeiter,
+gehostet in der EU (Stockholm, Schweden); wir verkaufen oder teilen diese
+Daten mit niemandem sonst. Siehe die
+<a href="https://supabase.com/privacy">Datenschutzerklärung von Supabase</a>.</p>
+
+<h2>4. Käufe</h2>
 <p>Premium-Funktionen werden als In-App-Käufe über <strong>Google Play
 Billing</strong> abgewickelt. Wir sehen Ihre Zahlungsdaten (Kartennummern usw.)
 niemals — Google wickelt die Zahlung vollständig ab.</p>
@@ -455,8 +675,8 @@ RevenueCat handelt als unser Auftragsverarbeiter und verkauft diese Daten nicht.
 Siehe die <a href="https://www.revenuecat.com/privacy/">Datenschutzerklärung von
 RevenueCat</a>.</p>
 
-<h2>4. Weitere Netzwerkdienste</h2>
-<p>Die App kontaktiert vier Dienste für bestimmte Funktionen. Wie bei jeder
+<h2>5. Weitere Netzwerkdienste</h2>
+<p>Die App kontaktiert fünf Dienste für bestimmte Funktionen. Wie bei jeder
 Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
 <ul>
   <li><strong>Gesetzliche Feiertage (Nager.Date, date.nager.at):</strong> Wenn
@@ -489,9 +709,22 @@ Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
   eingegebenen Text</strong>. Siehe die
   <a href="https://aptabase.com/legal/privacy">Datenschutzerklärung von
   Aptabase</a>.</li>
+  <li><strong>Anonyme Nutzungsanalyse mit Geräte-Merkmalen (Amplitude):</strong>
+  derselbe Schalter „Anonyme Nutzungsanalysen teilen" oben sendet dieselbe Art
+  anonymisierter Feature-Nutzungsereignisse auch an Amplitude, zusätzlich zu
+  einer Handvoll Geräte-Merkmalen, die künftigen Ereignissen angehängt werden
+  (z. B. „hat ein aktives Premium-Abo", „die Checklist zur
+  Wecker-Zuverlässigkeit ist vollständig erledigt", „nutzt das sanfte
+  Aufwachen"), damit wir sehen können, welche Funktionen tendenziell
+  zusammen genutzt werden. Diese Ereignisse und Merkmale <strong>enthalten
+  niemals die Namen, Beschreibungen oder Standorte Ihrer Wecker oder anderen
+  frei eingegebenen Text</strong>, und Amplitudes optionale
+  Bildschirmaufzeichnungsfunktion („Session Replay") ist <strong>nicht
+  aktiviert</strong>. Siehe den
+  <a href="https://amplitude.com/privacy">Amplitude-Datenschutzhinweis</a>.</li>
 </ul>
 
-<h2>5. Von der App angeforderte Berechtigungen</h2>
+<h2>6. Von der App angeforderte Berechtigungen</h2>
 <table>
   <tr><th>Berechtigung</th><th>Zweck</th></tr>
   <tr><td>Benachrichtigungen, Vollbild-Wecker</td><td>Um zu klingeln und den Weckbildschirm anzuzeigen, auch über dem Sperrbildschirm.</td></tr>
@@ -499,31 +732,35 @@ Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
   <tr><td>Start beim Hochfahren</td><td>Um Ihre Wecker nach einem Neustart des Telefons neu zu aktivieren.</td></tr>
   <tr><td>Vordergrunddienst, Wake Lock, Vibration</td><td>Damit der Wecker zuverlässig weiterklingelt und vibriert, bis Sie ihn ausschalten.</td></tr>
   <tr><td>Standort (Vordergrund &amp; Hintergrund)</td><td>Nur für die oben beschriebenen optionalen Geofencing- und Solar-Wecker-Funktionen.</td></tr>
-  <tr><td>Internet</td><td>Nur für Käufe (RevenueCat), Feiertagssynchronisierung, Kartenkacheln, Fehlerberichte (Sentry) und — falls aktiviert — Nutzungsanalyse (Aptabase), wie oben beschrieben.</td></tr>
+  <tr><td>Internet</td><td>Nur für Käufe (RevenueCat), Feiertagssynchronisierung, Kartenkacheln, Fehlerberichte (Sentry), Anmeldung und geräteübergreifende Synchronisierung bei Kontoerstellung (Supabase) und — falls aktiviert — Nutzungsanalyse (Aptabase und Amplitude), wie oben beschrieben.</td></tr>
 </table>
 
-<h2>6. Weitergabe und Verkauf von Daten</h2>
+<h2>7. Weitergabe und Verkauf von Daten</h2>
 <p>Wir verkaufen, vermieten oder tauschen keinerlei Daten. Die einzigen Dritten,
 die Daten verarbeiten, sind die oben genannten Dienstleister (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase), jeweils ausschließlich für die
-beschriebene Funktion.</p>
+RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude und — falls Sie ein
+Konto anlegen — Supabase), jeweils ausschließlich für die beschriebene
+Funktion.</p>
 
-<h2>7. Aufbewahrung und Löschung von Daten</h2>
+<h2>8. Aufbewahrung und Löschung von Daten</h2>
 <p>Lokale Daten existieren nur auf Ihrem Gerät: Beim Deinstallieren der App
-werden sie gelöscht. Um die Löschung der von RevenueCat gespeicherten anonymen
-Kaufdaten zu beantragen, kontaktieren Sie uns unter der unten stehenden
-E-Mail-Adresse — wir bearbeiten die Anfrage.</p>
+werden sie gelöscht. Falls Sie ein Konto angelegt haben, löscht das Entfernen
+über Einstellungen → Konto → Konto löschen sofort auch Ihr Konto, Ihre
+E-Mail-Adresse und die synchronisierten Wecker/Feiertage — siehe Abschnitt 3.
+Um die Löschung der von RevenueCat gespeicherten anonymen Kaufdaten zu
+beantragen, kontaktieren Sie uns unter der unten stehenden E-Mail-Adresse —
+wir bearbeiten die Anfrage.</p>
 
-<h2>8. Kinder</h2>
+<h2>9. Kinder</h2>
 <p>Die App richtet sich nicht an Kinder unter 13 Jahren und erhebt wissentlich
 keine personenbezogenen Daten von ihnen.</p>
 
-<h2>9. Änderungen dieser Erklärung</h2>
+<h2>10. Änderungen dieser Erklärung</h2>
 <p>Wenn wir diese Erklärung ändern, aktualisieren wir diese Seite und das oben
 genannte Gültigkeitsdatum. Wesentliche Änderungen werden in den
 Versionshinweisen der App vermerkt.</p>
 
-<h2>10. Kontakt</h2>
+<h2>11. Kontakt</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -534,20 +771,23 @@ Versionshinweisen der App vermerkt.</p>
 
 <p>O Chronos («a App») é uma aplicação de despertador para Android desenvolvida
 por Luis Martín («nós»). Esta política explica que dados a App trata e porquê.
-Em resumo: <strong>o Chronos funciona localmente no seu dispositivo, não requer
-conta, não mostra anúncios e não inclui SDKs de publicidade.</strong> Usa sim um
-serviço de relatórios de erro para nos ajudar a detetar falhas, e um serviço
-opcional e anónimo de análise de produto para ver que funcionalidades são
-usadas — ver a secção 4. Os relatórios de erro estão ativados por predefinição
-e a análise está desativada por predefinição; ambos podem ser alterados a
-qualquer momento em Configurações.</p>
+Em resumo: <strong>o Chronos funciona localmente no seu dispositivo, nunca
+mostra anúncios e não inclui SDKs de publicidade.</strong> Criar uma conta é
+totalmente opcional — a App é 100% funcional sem ela, e a única razão para
+criar uma é sincronizar os seus alarmes e feriados entre os seus dispositivos;
+ver a secção 3. Usa sim um serviço de relatórios de erro para nos ajudar a
+detetar falhas, e um serviço opcional e anónimo de análise de produto para ver
+que funcionalidades são usadas — ver a secção 5. Os relatórios de erro estão
+ativados por predefinição e a análise está desativada por predefinição; ambos
+podem ser alterados a qualquer momento em Configurações.</p>
 
 <h2>1. Dados armazenados no seu dispositivo</h2>
 <p>Tudo o que configura na App — alarmes, horários, desafios para desligar,
 feriados e dias livres, definições e o estado premium — é guardado
 <strong>localmente no seu dispositivo</strong>, no armazenamento privado da App.
-Não operamos nenhum servidor e estes dados nunca nos são enviados. Ao
-desinstalar a App, são eliminados.</p>
+Ao desinstalar a App, são eliminados. Estes dados só são enviados para outro
+lado se decidir criar uma conta para os sincronizar entre dispositivos — ver a
+secção 3.</p>
 
 <h2>2. Localização</h2>
 <p>Duas funções opcionais usam a localização do dispositivo, e ambas a processam
@@ -566,10 +806,50 @@ desinstalar a App, são eliminados.</p>
 também nunca é guardada em nenhum histórico nem partilhada com ninguém. Há uma
 exceção enquanto escolhe a zona: o mapa onde a marca é carregado da CARTO, por
 isso a área que consulta — normalmente aquela em que está — chega à CARTO. Ver a
-secção 4. Se não usar estas funções, a App nunca pede a permissão de
+secção 5. Se não usar estas funções, a App nunca pede a permissão de
 localização.</p>
 
-<h2>3. Compras</h2>
+<h2>3. Contas e sincronização entre dispositivos</h2>
+<p>Criar uma conta é totalmente opcional. O Chronos é 100% funcional sem ela,
+num único dispositivo, para sempre — nunca precisa de uma conta para criar
+alarmes, usar as funções premium, ou qualquer outra coisa que a App faça. A
+única razão para criar uma é manter os seus alarmes e os feriados que adiciona
+manualmente sincronizados se usar o Chronos em mais do que um dispositivo, ou
+para os recuperar depois de reinstalar a App.</p>
+<p>Se decidir criar uma conta (Configurações → Conta), a App usa o
+<strong>Supabase</strong>, um fornecedor de infraestrutura backend, para
+guardar:</p>
+<ul>
+  <li><strong>O seu e-mail e a sua palavra-passe</strong>, usados apenas para
+  iniciar sessão e, se o solicitar, para redefinir a palavra-passe. A sua
+  palavra-passe é gerida inteiramente pelo serviço de autenticação do
+  Supabase — a App nunca a guarda nem tem acesso a ela em texto simples.
+  Nunca adicionamos o seu e-mail a nenhuma lista de distribuição.</li>
+  <li><strong>Os seus alarmes e os feriados que adiciona manualmente</strong>
+  (não as listas de feriados descarregadas automaticamente descritas na
+  secção 5, que são as mesmas para todos no seu país e ficam sempre no
+  dispositivo). São os mesmos dados descritos na secção 1 — com uma conta,
+  uma cópia também vive na sua conta Supabase, para poder ser restaurada nos
+  seus outros dispositivos ou depois de reinstalar. Cada linha está associada
+  à sua conta e só é legível por si.</li>
+</ul>
+<p>Enquanto tem a sessão iniciada, a App compara e funde os seus alarmes/
+feriados locais com a cópia da sua conta cada vez que abre a App ou a traz de
+volta para primeiro plano, para que todos os dispositivos com sessão iniciada
+acabem com os mesmos dados. Não é em tempo real: uma alteração feita num
+dispositivo aparece noutro na próxima vez que esse outro dispositivo abrir a
+App ou a retomar, não instantaneamente.</p>
+<p>Pode eliminar a sua conta a qualquer momento em Configurações → Conta →
+Eliminar conta. Isto apaga imediata e permanentemente a sua conta, o seu
+e-mail e todos os alarmes/feriados sincronizados dos nossos sistemas — não há
+qualquer período de espera e não precisa de nos escrever para isso. Não pode
+ser desfeito.</p>
+<p>O Supabase atua como o nosso subcontratante apenas para esta função,
+alojado na UE (Estocolmo, Suécia); não vendemos nem partilhamos estes dados
+com mais ninguém. Consulte a
+<a href="https://supabase.com/privacy">Política de Privacidade do Supabase</a>.</p>
+
+<h2>4. Compras</h2>
 <p>As funções premium são vendidas como compras na aplicação processadas pelo
 <strong>Google Play Billing</strong>. Nunca vemos os seus dados de pagamento
 (números de cartão, etc.) — a Google trata do pagamento por completo.</p>
@@ -583,8 +863,8 @@ RevenueCat atua como nosso subcontratante e não vende estes dados. Consulte a
 <a href="https://www.revenuecat.com/privacy/">Política de Privacidade do
 RevenueCat</a>.</p>
 
-<h2>4. Outros serviços de rede</h2>
-<p>A App liga-se a quatro serviços para funções concretas. Como em qualquer
+<h2>5. Outros serviços de rede</h2>
+<p>A App liga-se a cinco serviços para funções concretas. Como em qualquer
 pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</p>
 <ul>
   <li><strong>Feriados públicos (Nager.Date, date.nager.at):</strong> se ativar
@@ -617,9 +897,24 @@ pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</
   que tenha introduzido</strong>. Consulte a
   <a href="https://aptabase.com/legal/privacy">Política de Privacidade da
   Aptabase</a>.</li>
+  <li><strong>Análise de utilização anónima com características do
+  dispositivo (Amplitude):</strong> o mesmo interruptor "Partilhar dados de
+  utilização anónimos" acima também envia o mesmo tipo de eventos
+  anonimizados de utilização de funcionalidades para a Amplitude, além de
+  algumas características ao nível do dispositivo associadas a eventos
+  futuros (por exemplo, «tem uma subscrição premium ativa», «a checklist de
+  fiabilidade de alarmes está totalmente concluída», «usa o despertar
+  suave»), para percebermos que funcionalidades costumam ser usadas em
+  conjunto. Estes eventos e características <strong>nunca incluem os nomes,
+  descrições ou localizações dos seus alarmes, nem qualquer outro texto
+  livre que tenha introduzido</strong>, e a funcionalidade opcional de
+  gravação de ecrã da Amplitude ("Session Replay") <strong>não está
+  ativada</strong>. Consulte o
+  <a href="https://amplitude.com/privacy">Aviso de Privacidade da
+  Amplitude</a>.</li>
 </ul>
 
-<h2>5. Permissões que a App solicita</h2>
+<h2>6. Permissões que a App solicita</h2>
 <table>
   <tr><th>Permissão</th><th>Para quê</th></tr>
   <tr><td>Notificações, alarmes em ecrã inteiro</td><td>Para tocar e mostrar o ecrã de alarme, mesmo sobre o ecrã de bloqueio.</td></tr>
@@ -627,30 +922,33 @@ pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</
   <tr><td>Executar no arranque</td><td>Para reprogramar os seus alarmes depois de o telemóvel reiniciar.</td></tr>
   <tr><td>Serviço em primeiro plano, wake lock, vibração</td><td>Para que o alarme continue a tocar e a vibrar de forma fiável até o desligar.</td></tr>
   <tr><td>Localização (em uso e em segundo plano)</td><td>Apenas para as funções opcionais de geovedação e alarmes solares descritas acima.</td></tr>
-  <tr><td>Internet</td><td>Apenas para compras (RevenueCat), sincronização de feriados, mosaicos de mapa, relatórios de erro (Sentry) e — se ativar — análise de utilização (Aptabase), conforme descrito acima.</td></tr>
+  <tr><td>Internet</td><td>Apenas para compras (RevenueCat), sincronização de feriados, mosaicos de mapa, relatórios de erro (Sentry), início de sessão e sincronização entre dispositivos se criar uma conta (Supabase) e — se ativar — análise de utilização (Aptabase e Amplitude), conforme descrito acima.</td></tr>
 </table>
 
-<h2>6. Partilha e venda de dados</h2>
+<h2>7. Partilha e venda de dados</h2>
 <p>Não vendemos, alugamos nem trocamos nenhum dado. Os únicos terceiros que
 processam dados são os fornecedores de serviços listados acima (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase), cada um estritamente para a
-função descrita.</p>
+RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude e — se criar uma
+conta — Supabase), cada um estritamente para a função descrita.</p>
 
-<h2>7. Conservação e eliminação de dados</h2>
+<h2>8. Conservação e eliminação de dados</h2>
 <p>Os dados locais vivem apenas no seu dispositivo: ao desinstalar a App, são
-eliminados. Para pedir a eliminação dos registos anónimos de compra guardados
-pelo RevenueCat, escreva-nos para o e-mail abaixo e trataremos do pedido.</p>
+eliminados. Se criou uma conta, eliminá-la em Configurações → Conta →
+Eliminar conta apaga imediatamente a sua conta, o seu e-mail e os alarmes/
+feriados sincronizados também — ver a secção 3. Para pedir a eliminação dos
+registos anónimos de compra guardados pelo RevenueCat, escreva-nos para o
+e-mail abaixo e trataremos do pedido.</p>
 
-<h2>8. Menores</h2>
+<h2>9. Menores</h2>
 <p>A App não se destina a menores de 13 anos e não recolhe conscientemente
 informações pessoais de menores.</p>
 
-<h2>9. Alterações a esta política</h2>
+<h2>10. Alterações a esta política</h2>
 <p>Se alterarmos esta política, atualizaremos esta página e a data de entrada em
 vigor acima. As alterações relevantes serão indicadas nas notas de versão da
 App.</p>
 
-<h2>10. Contacto</h2>
+<h2>11. Contacto</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -661,20 +959,24 @@ App.</p>
 
 <p>Chronos («l'App») è un'app sveglia per Android sviluppata da Luis Martín
 («noi»). Questa informativa spiega quali dati tratta l'App e perché. In breve:
-<strong>Chronos funziona localmente sul tuo dispositivo, non richiede alcun
-account, non mostra pubblicità e non include SDK pubblicitari.</strong>
-Utilizza invece un servizio di segnalazione errori che ci aiuta a individuare i
-bug, e un servizio facoltativo e anonimo di analisi del prodotto per capire
-quali funzioni vengono usate — vedi la sezione 4. La segnalazione errori è
-attiva di default, l'analisi è disattivata di default; entrambe possono essere
-modificate in qualsiasi momento nelle Impostazioni.</p>
+<strong>Chronos funziona localmente sul tuo dispositivo, non mostra mai
+pubblicità e non include SDK pubblicitari.</strong> Creare un account è
+completamente facoltativo — l'App è funzionale al 100% senza, e l'unico
+motivo per crearne uno è sincronizzare le tue sveglie e festività tra i tuoi
+dispositivi; vedi la sezione 3. Utilizza invece un servizio di segnalazione
+errori che ci aiuta a individuare i bug, e un servizio facoltativo e anonimo di
+analisi del prodotto per capire quali funzioni vengono usate — vedi la sezione
+5. La segnalazione errori è attiva di default, l'analisi è disattivata di
+default; entrambe possono essere modificate in qualsiasi momento nelle
+Impostazioni.</p>
 
 <h2>1. Dati memorizzati sul tuo dispositivo</h2>
 <p>Tutto ciò che configuri nell'App — sveglie, orari, sfide di spegnimento,
 festività e giorni liberi, impostazioni e stato premium — viene salvato
 <strong>localmente sul tuo dispositivo</strong>, nello spazio privato dell'App.
-Non gestiamo alcun server e questi dati non ci vengono mai inviati.
-Disinstallando l'App vengono eliminati.</p>
+Disinstallando l'App vengono eliminati. Questi dati vengono inviati altrove
+solo se scegli di creare un account per sincronizzarli tra dispositivi — vedi
+la sezione 3.</p>
 
 <h2>2. Posizione</h2>
 <p>Due funzioni opzionali usano la posizione del dispositivo, ed entrambe la
@@ -693,10 +995,50 @@ elaborano <strong>interamente sul tuo dispositivo</strong>:</p>
 che non viene mai salvata in alcuna cronologia né condivisa con nessuno. C'è
 un'eccezione mentre scegli la zona: la mappa su cui la indichi viene caricata da
 CARTO, quindi l'area che consulti — di norma quella in cui ti trovi — arriva a
-CARTO. Vedi la sezione 4. Se non usi queste funzioni, l'App non richiede mai
+CARTO. Vedi la sezione 5. Se non usi queste funzioni, l'App non richiede mai
 l'autorizzazione alla posizione.</p>
 
-<h2>3. Acquisti</h2>
+<h2>3. Account e sincronizzazione tra dispositivi</h2>
+<p>Creare un account è completamente facoltativo. Chronos è funzionale al 100%
+senza, su un solo dispositivo, per sempre — non hai mai bisogno di un account
+per creare sveglie, usare le funzioni premium, o qualsiasi altra cosa faccia
+l'App. L'unico motivo per crearne uno è tenere sincronizzate le tue sveglie e
+le festività che aggiungi manualmente se usi Chronos su più di un dispositivo,
+o per recuperarle dopo aver reinstallato l'App.</p>
+<p>Se scegli di creare un account (Impostazioni → Account), l'App usa
+<strong>Supabase</strong>, un fornitore di infrastruttura backend, per
+memorizzare:</p>
+<ul>
+  <li><strong>La tua e-mail e la tua password</strong>, usate solo per
+  accedere e, se lo richiedi, per reimpostare la password. La tua password è
+  gestita interamente dal servizio di autenticazione di Supabase — l'App non
+  la memorizza mai né vi ha accesso in chiaro. Non aggiungiamo mai la tua
+  e-mail a nessuna lista di distribuzione.</li>
+  <li><strong>Le tue sveglie e le festività che aggiungi manualmente</strong>
+  (non gli elenchi di festività scaricati automaticamente descritti nella
+  sezione 5, che sono uguali per tutti nel tuo paese e restano sempre
+  locali). Sono gli stessi dati descritti nella sezione 1 — con un account,
+  una copia vive anche nel tuo account Supabase, così da poter essere
+  ripristinata sui tuoi altri dispositivi o dopo una reinstallazione. Ogni
+  riga è collegata al tuo account e leggibile solo da te.</li>
+</ul>
+<p>Mentre hai effettuato l'accesso, l'App confronta e unisce le tue sveglie/
+festività locali con la copia del tuo account ogni volta che apri l'App o la
+riporti in primo piano, così che ogni dispositivo con accesso effettuato finisca
+per avere gli stessi dati. Non è in tempo reale: una modifica fatta su un
+dispositivo appare su un altro la prossima volta che l'App di quell'altro
+dispositivo viene aperta o ripresa, non istantaneamente.</p>
+<p>Puoi eliminare il tuo account in qualsiasi momento da Impostazioni →
+Account → Elimina account. Questo cancella immediatamente e permanentemente
+il tuo account, la tua e-mail e tutte le sveglie/festività sincronizzate dai
+nostri sistemi — non c'è alcun periodo di attesa e non devi scriverci per
+questo. Non può essere annullato.</p>
+<p>Supabase agisce come nostro responsabile del trattamento solo per questa
+funzione, ospitato nell'UE (Stoccolma, Svezia); non vendiamo né condividiamo
+questi dati con nessun altro. Consulta l'<a
+href="https://supabase.com/privacy">informativa sulla privacy di Supabase</a>.</p>
+
+<h2>4. Acquisti</h2>
 <p>Le funzioni premium sono vendute come acquisti in-app elaborati da
 <strong>Google Play Billing</strong>. Non vediamo mai i tuoi dati di pagamento
 (numeri di carta, ecc.) — Google gestisce interamente il pagamento.</p>
@@ -711,8 +1053,8 @@ del trattamento e non vende questi dati. Consulta l'<a
 href="https://www.revenuecat.com/privacy/">informativa sulla privacy di
 RevenueCat</a>.</p>
 
-<h2>4. Altri servizi di rete</h2>
-<p>L'App contatta quattro servizi per funzioni specifiche. Come per qualsiasi
+<h2>5. Altri servizi di rete</h2>
+<p>L'App contatta cinque servizi per funzioni specifiche. Come per qualsiasi
 richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p>
 <ul>
   <li><strong>Festività pubbliche (Nager.Date, date.nager.at):</strong> se
@@ -744,9 +1086,23 @@ richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p
   posizioni delle tue sveglie, né altro testo libero che hai inserito</strong>.
   Consulta l'<a href="https://aptabase.com/legal/privacy">informativa sulla privacy
   di Aptabase</a>.</li>
+  <li><strong>Analisi d'uso anonima con caratteristiche del dispositivo
+  (Amplitude):</strong> lo stesso interruttore "Condividi analisi d'uso
+  anonime" sopra invia lo stesso tipo di eventi anonimizzati sull'uso delle
+  funzioni anche ad Amplitude, oltre a un piccolo numero di caratteristiche a
+  livello di dispositivo allegate agli eventi futuri (ad es. "ha un
+  abbonamento premium attivo", "la checklist di affidabilità della sveglia è
+  completamente risolta", "usa la sveglia graduale"), così da sapere quali
+  funzioni tendono a essere usate insieme. Questi eventi e caratteristiche
+  <strong>non includono mai i nomi, le descrizioni o le posizioni delle tue
+  sveglie, né altro testo libero che hai inserito</strong>, e la funzione
+  opzionale di registrazione schermo di Amplitude ("Session Replay")
+  <strong>non è attivata</strong>. Consulta
+  l'<a href="https://amplitude.com/privacy">informativa sulla privacy di
+  Amplitude</a>.</li>
 </ul>
 
-<h2>5. Autorizzazioni richieste dall'App</h2>
+<h2>6. Autorizzazioni richieste dall'App</h2>
 <table>
   <tr><th>Autorizzazione</th><th>Perché</th></tr>
   <tr><td>Notifiche, sveglie a schermo intero</td><td>Per suonare e mostrare la schermata della sveglia, anche sopra la schermata di blocco.</td></tr>
@@ -754,31 +1110,33 @@ richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p
   <tr><td>Esecuzione all'avvio</td><td>Per riattivare le tue sveglie dopo il riavvio del telefono.</td></tr>
   <tr><td>Servizio in primo piano, wake lock, vibrazione</td><td>Perché la sveglia continui a suonare e vibrare in modo affidabile finché non la spegni.</td></tr>
   <tr><td>Posizione (in uso e in background)</td><td>Solo per le funzioni opzionali di geofencing e sveglie solari descritte sopra.</td></tr>
-  <tr><td>Internet</td><td>Solo per gli acquisti (RevenueCat), la sincronizzazione delle festività, i riquadri della mappa, la segnalazione errori (Sentry) e — se attivata — l'analisi d'uso (Aptabase), come descritto sopra.</td></tr>
+  <tr><td>Internet</td><td>Solo per gli acquisti (RevenueCat), la sincronizzazione delle festività, i riquadri della mappa, la segnalazione errori (Sentry), l'accesso e la sincronizzazione tra dispositivi se crei un account (Supabase) e — se attivata — l'analisi d'uso (Aptabase e Amplitude), come descritto sopra.</td></tr>
 </table>
 
-<h2>6. Condivisione e vendita di dati</h2>
+<h2>7. Condivisione e vendita di dati</h2>
 <p>Non vendiamo, affittiamo né scambiamo alcun dato. Gli unici terzi che
 trattano dati sono i fornitori di servizi elencati sopra (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase), ciascuno strettamente per la
-funzione descritta.</p>
+RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude e — se crei un
+account — Supabase), ciascuno strettamente per la funzione descritta.</p>
 
-<h2>7. Conservazione ed eliminazione dei dati</h2>
+<h2>8. Conservazione ed eliminazione dei dati</h2>
 <p>I dati locali risiedono solo sul tuo dispositivo: disinstallando l'App
-vengono eliminati. Per richiedere l'eliminazione dei record anonimi di acquisto
-conservati da RevenueCat, scrivici all'indirizzo e-mail qui sotto ed evaderemo
-la richiesta.</p>
+vengono eliminati. Se hai creato un account, eliminarlo da Impostazioni →
+Account → Elimina account cancella subito anche il tuo account, la tua
+e-mail e le sveglie/festività sincronizzate — vedi la sezione 3. Per
+richiedere l'eliminazione dei record anonimi di acquisto conservati da
+RevenueCat, scrivici all'indirizzo e-mail qui sotto ed evaderemo la richiesta.</p>
 
-<h2>8. Minori</h2>
+<h2>9. Minori</h2>
 <p>L'App non è rivolta a minori di 13 anni e non raccoglie consapevolmente
 informazioni personali da loro.</p>
 
-<h2>9. Modifiche a questa informativa</h2>
+<h2>10. Modifiche a questa informativa</h2>
 <p>Se modifichiamo questa informativa, aggiorneremo questa pagina e la data di
 entrata in vigore indicata sopra. Le modifiche rilevanti saranno segnalate nelle
 note di rilascio dell'App.</p>
 
-<h2>10. Contatto</h2>
+<h2>11. Contatto</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -789,16 +1147,18 @@ note di rilascio dell'App.</p>
 
 <p>Chronos（“本应用”）是由 Luis Martín（“我们”）开发的 Android 闹钟应用。
 本政策说明本应用处理哪些数据及其原因。简而言之：<strong>Chronos 在您的设备上
-本地运行，无需账号，不显示广告，也不包含任何广告 SDK。</strong>
-不过，本应用确实使用了一项错误报告服务，帮助我们发现程序缺陷，以及一项可选的、
-匿名的产品分析服务，用于了解哪些功能被使用——详见第 4 节。错误报告默认开启，
-分析功能默认关闭；您可以随时在设置中更改这两项。</p>
+本地运行，绝不显示广告，也不包含任何广告 SDK。</strong>创建账号完全是可选的——
+本应用无需账号即可 100% 正常使用，创建账号的唯一目的是在您的多台设备之间
+同步闹钟和节假日——详见第 3 节。此外，本应用确实使用了一项错误报告服务，
+帮助我们发现程序缺陷，以及一项可选的、匿名的产品分析服务，用于了解哪些功能
+被使用——详见第 5 节。错误报告默认开启，分析功能默认关闭；您可以随时在设置中
+更改这两项。</p>
 
 <h2>1. 存储在您设备上的数据</h2>
 <p>您在本应用中配置的所有内容——闹钟、时间表、关闭挑战、节假日和休息日、
 应用设置以及高级版状态——均<strong>本地存储在您的设备上</strong>（应用的私有
-存储空间中）。我们不运营任何服务器，这些数据也绝不会上传给我们。卸载本应用即
-删除这些数据。</p>
+存储空间中）。卸载本应用即删除这些数据。只有当您选择创建账号以便在设备之间
+同步数据时，这些数据才会被上传到其他地方——详见第 3 节。</p>
 
 <h2>2. 位置信息</h2>
 <p>有两项可选功能会使用设备的位置信息，且两者均<strong>完全在您的设备上</strong>
@@ -812,10 +1172,38 @@ note di rilascio dell'App.</p>
 </ul>
 <p>这两项功能都不会将您的位置信息传出设备，位置信息也不会存储在任何历史记录中
 或与任何人共享。但在您选择区域时有一个例外：用于标记的地图由 CARTO 加载，因此
-您查看的区域——通常就是您所在的区域——会传到 CARTO。详见第 4 节。如果您不使用
+您查看的区域——通常就是您所在的区域——会传到 CARTO。详见第 5 节。如果您不使用
 这些功能，本应用永远不会请求位置权限。</p>
 
-<h2>3. 购买</h2>
+<h2>3. 账号与跨设备同步</h2>
+<p>创建账号完全是可选的。Chronos 在单台设备上无需账号即可永久 100% 正常
+使用——您创建闹钟、使用高级版功能或本应用的任何其他功能，都不需要账号。创建
+账号的唯一目的，是在您使用 Chronos 的多台设备之间保持闹钟和您手动添加的
+节假日同步，或在重新安装后恢复它们。</p>
+<p>如果您选择创建账号（设置 → 账号），本应用会使用后端即服务提供商
+<strong>Supabase</strong> 来存储：</p>
+<ul>
+  <li><strong>您的电子邮箱和密码</strong>，仅用于登录以及（如您请求）重置密码。
+  您的密码完全由 Supabase 的身份验证服务处理——本应用绝不会以明文存储或访问
+  它。我们绝不会将您的邮箱添加到任何邮件列表。</li>
+  <li><strong>您的闹钟以及您手动添加的节假日</strong>（不包括第 5 节所述的
+  自动下载的公共节假日列表，这些列表对您所在国家/地区的所有人都相同，且始终
+  保留在本地）。这与第 1 节所述的数据相同——如果您拥有账号，副本还会保存在
+  您的 Supabase 账号中，以便在您的其他设备上或重新安装后恢复。每一行数据都
+  与您的账号绑定，仅您本人可读取。</li>
+</ul>
+<p>在您登录期间，每次打开本应用或将其切换到前台时，本应用都会比对并合并您本地
+的闹钟/节假日与您账号中的副本，使每台已登录的设备最终拥有相同的数据。这不是
+实时同步：在一台设备上所做的更改，要等到另一台设备下次打开或恢复本应用时才会
+出现，而不是立即生效。</p>
+<p>您可以随时在设置 → 账号 → 删除账号中删除您的账号。这会立即永久地从我们的
+系统中删除您的账号、邮箱以及所有已同步的闹钟和节假日——没有等待期，也无需
+给我们发邮件。此操作无法撤销。</p>
+<p>Supabase 仅为此功能担任我们的服务提供商（数据处理者），托管于欧盟
+（瑞典斯德哥尔摩）；我们不会将这些数据出售或与其他任何人共享。请参阅
+<a href="https://supabase.com/privacy">Supabase 隐私政策</a>。</p>
+
+<h2>4. 购买</h2>
 <p>高级版功能通过 <strong>Google Play 结算系统</strong>以应用内购买的形式出售。
 我们永远看不到您的付款信息（银行卡号等）——付款完全由 Google 处理。</p>
 <p>为了验证购买并在重新安装后保持您的高级版状态，本应用使用购买基础设施服务
@@ -825,8 +1213,8 @@ note di rilascio dell'App.</p>
 我们的服务提供商行事，不会出售这些数据。请参阅
 <a href="https://www.revenuecat.com/privacy/">RevenueCat 隐私政策</a>。</p>
 
-<h2>4. 其他网络服务</h2>
-<p>本应用会为特定功能连接四个服务。与任何互联网请求一样，这些服务在技术上
+<h2>5. 其他网络服务</h2>
+<p>本应用会为特定功能连接五个服务。与任何互联网请求一样，这些服务在技术上
 会收到您的 IP 地址：</p>
 <ul>
   <li><strong>公共节假日（Nager.Date，date.nager.at）：</strong>如果您启用节假日
@@ -849,9 +1237,17 @@ note di rilascio dell'App.</p>
   这些事件<strong>绝不会包含您闹钟的名称、描述、位置或您输入的任何其他自由文本
   内容</strong>。请参阅
   <a href="https://aptabase.com/legal/privacy">Aptabase 隐私政策</a>。</li>
+  <li><strong>带设备特征的匿名使用情况分析（Amplitude）：</strong>上文同一个
+  "分享匿名使用分析数据"开关也会向 Amplitude 发送同类型的匿名化功能使用事件，
+  并附加少量设备级特征到后续事件上（例如"拥有有效的高级订阅""闹钟可靠性检查
+  清单已全部完成""使用了渐醒模式"），以便我们了解哪些功能通常会一起被使用。
+  这些事件和特征<strong>绝不会包含您闹钟的名称、描述、位置或您输入的任何其他
+  自由文本内容</strong>，且 Amplitude 的可选屏幕录制功能（"Session
+  Replay"）<strong>未启用</strong>。请参阅
+  <a href="https://amplitude.com/privacy">Amplitude 隐私声明</a>。</li>
 </ul>
 
-<h2>5. 本应用请求的权限</h2>
+<h2>6. 本应用请求的权限</h2>
 <table>
   <tr><th>权限</th><th>用途</th></tr>
   <tr><td>通知、全屏闹钟</td><td>用于响铃并显示闹钟界面，包括在锁屏之上。</td></tr>
@@ -859,25 +1255,28 @@ note di rilascio dell'App.</p>
   <tr><td>开机自启动</td><td>在手机重启后重新设置您的闹钟。</td></tr>
   <tr><td>前台服务、唤醒锁、振动</td><td>确保闹钟持续可靠地响铃和振动，直到您将其关闭。</td></tr>
   <tr><td>位置（前台和后台）</td><td>仅用于上文所述的可选地理围栏和太阳闹钟功能。</td></tr>
-  <tr><td>互联网</td><td>仅用于上文所述的购买（RevenueCat）、节假日同步、地图图块、错误报告（Sentry），以及（如果您选择开启）使用情况分析（Aptabase）。</td></tr>
+  <tr><td>互联网</td><td>仅用于上文所述的购买（RevenueCat）、节假日同步、地图图块、错误报告（Sentry）、创建账号后的登录与跨设备同步（Supabase），以及（如果您选择开启）使用情况分析（Aptabase 和 Amplitude）。</td></tr>
 </table>
 
-<h2>6. 数据共享与出售</h2>
+<h2>7. 数据共享与出售</h2>
 <p>我们不出售、出租或交换任何数据。处理数据的第三方仅限于上文列出的服务提供商
-（Google Play、RevenueCat、Nager.Date、CARTO、Sentry、Aptabase），且各自严格限于所述功能。</p>
+（Google Play、RevenueCat、Nager.Date、CARTO、Sentry、Aptabase、Amplitude，以及在您创建账号后的
+Supabase），且各自严格限于所述功能。</p>
 
-<h2>7. 数据保留与删除</h2>
-<p>本地数据仅存在于您的设备上：卸载本应用即删除。如需删除 RevenueCat 保存的
-匿名购买记录，请通过下方电子邮箱联系我们，我们会处理您的请求。</p>
+<h2>8. 数据保留与删除</h2>
+<p>本地数据仅存在于您的设备上：卸载本应用即删除。如果您创建了账号，在设置 →
+账号 → 删除账号中删除账号会立即一并删除您的账号、邮箱以及已同步的闹钟/节假日
+——详见第 3 节。如需删除 RevenueCat 保存的匿名购买记录，请通过下方电子邮箱
+联系我们，我们会处理您的请求。</p>
 
-<h2>8. 儿童</h2>
+<h2>9. 儿童</h2>
 <p>本应用不面向 13 岁以下儿童，也不会有意收集他们的个人信息。</p>
 
-<h2>9. 本政策的变更</h2>
+<h2>10. 本政策的变更</h2>
 <p>如果我们更改本政策，将更新本页面及上方的生效日期。重大变更会在应用的版本
 说明中注明。</p>
 
-<h2>10. 联系方式</h2>
+<h2>11. 联系方式</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -889,18 +1288,21 @@ note di rilascio dell'App.</p>
 <p>Chronos（以下「本アプリ」）は、Luis Martín（以下「当方」）が開発した
 Android 向け目覚ましアプリです。本ポリシーでは、本アプリがどのようなデータを
 どのような目的で扱うかを説明します。要約すると、<strong>Chronos は端末内で
-ローカルに動作し、アカウント不要、広告なし、広告 SDK も一切含みません。</strong>
-ただし、不具合の把握に役立てるためのエラーレポートサービスと、どの機能が使われて
-いるかを把握するための、任意かつ匿名の製品分析サービスを利用しています
-（第4項参照）。エラーレポートはデフォルトで有効、分析機能はデフォルトで無効に
-なっており、いずれも設定からいつでも変更できます。</p>
+ローカルに動作し、広告は一切表示せず、広告 SDK も一切含みません。</strong>
+アカウントの作成は完全に任意です — 本アプリはアカウントなしでも100%
+利用できます。アカウントを作成する唯一の理由は、複数の端末間でアラームと
+祝日を同期するためです（第3項参照）。また、不具合の把握に役立てるための
+エラーレポートサービスと、どの機能が使われているかを把握するための、任意かつ
+匿名の製品分析サービスを利用しています（第5項参照）。エラーレポートはデフォルトで
+有効、分析機能はデフォルトで無効になっており、いずれも設定からいつでも変更
+できます。</p>
 
 <h2>1. 端末に保存されるデータ</h2>
 <p>本アプリで設定するすべての内容 — アラーム、スケジュール、解除チャレンジ、
 祝日や休日、アプリ設定、プレミアム状態 — は、本アプリの専用領域に
-<strong>端末内にローカル保存</strong>されます。当方はサーバーを運営しておらず、
-これらのデータが当方に送信されることはありません。本アプリをアンインストール
-すると削除されます。</p>
+<strong>端末内にローカル保存</strong>されます。本アプリをアンインストールすると
+削除されます。これらのデータは、複数端末間で同期するためにアカウントを
+作成した場合にのみ、他の場所に送信されます — 第3項をご覧ください。</p>
 
 <h2>2. 位置情報</h2>
 <p>2つのオプション機能が端末の位置情報を使用しますが、いずれも
@@ -917,10 +1319,48 @@ Android 向け目覚ましアプリです。本ポリシーでは、本アプリ
 <p>この2つの機能が位置情報を端末の外に送信することはなく、履歴として保存される
 ことも、誰かと共有されることもありません。ただしゾーンを選ぶ際に1点だけ例外が
 あります。場所を指定する地図は CARTO から読み込まれるため、閲覧している範囲——
-通常はあなたのいる範囲——が CARTO に伝わります。第4項をご覧ください。これらの
+通常はあなたのいる範囲——が CARTO に伝わります。第5項をご覧ください。これらの
 機能を使用しない場合、本アプリが位置情報の権限を求めることはありません。</p>
 
-<h2>3. 購入</h2>
+<h2>3. アカウントと端末間の同期</h2>
+<p>アカウントの作成は完全に任意です。Chronos は、単一の端末上であれば
+アカウントなしでも永久に100%利用できます — アラームの作成、プレミアム機能の
+利用、その他本アプリのあらゆる機能に、アカウントは一切必要ありません。
+アカウントを作成する唯一の理由は、Chronos を複数の端末で使用する場合に
+アラームと手動で追加した祝日を同期し続けるため、または再インストール後に
+それらを復元するためです。</p>
+<p>アカウントの作成を選択した場合（設定 → アカウント）、本アプリは
+バックエンド・アズ・ア・サービス提供事業者である<strong>Supabase</strong>を
+使用して、以下を保存します。</p>
+<ul>
+  <li><strong>メールアドレスとパスワード</strong> — ログイン、および（ご要望が
+  あれば）パスワードのリセットのみに使用されます。パスワードは Supabase の
+  認証サービスによって完全に管理され、本アプリがそれを平文で保存したり
+  アクセスしたりすることは一切ありません。お客様のメールアドレスを
+  メーリングリストに追加することもありません。</li>
+  <li><strong>アラームと、手動で追加した祝日</strong>（第5項で説明する
+  自動ダウンロードされる公共の祝日リストは含みません。こちらはお住まいの国の
+  全ユーザーで共通であり、常に端末内にとどまります）。これは第1項で説明した
+  データと同じものです — アカウントをお持ちの場合、他の端末や再インストール後に
+  復元できるよう、Supabase アカウント内にもコピーが保存されます。各データ行は
+  お客様のアカウントに紐づけられ、ご本人のみが読み取れます。</li>
+</ul>
+<p>サインイン中は、本アプリを開くか前面に戻すたびに、端末内のアラーム・祝日と
+アカウント内のコピーが比較・統合され、サインインしているすべての端末が
+最終的に同じデータを持つようになります。これはリアルタイムではありません —
+ある端末で行った変更は、別の端末の本アプリが次に開かれるか再開されたときに
+初めて反映され、即座に反映されるわけではありません。</p>
+<p>アカウントは、設定 → アカウント → アカウントを削除からいつでも削除できます。
+これにより、お客様のアカウント、メールアドレス、および同期済みのすべての
+アラーム・祝日が、当方のシステムから即座かつ完全に消去されます — 待機期間は
+なく、そのためにメールを送っていただく必要もありません。この操作は取り消せません。</p>
+<p>Supabase は、この機能に限り当方のサービスプロバイダー（データ処理者）として
+行動し、EU（スウェーデン・ストックホルム）でホストされています。当方はこれらの
+データを販売したり、他の誰かと共有したりすることはありません。詳細は
+<a href="https://supabase.com/privacy">Supabase のプライバシーポリシー</a>を
+ご覧ください。</p>
+
+<h2>4. 購入</h2>
 <p>プレミアム機能は、<strong>Google Play 課金システム</strong>で処理される
 アプリ内購入として販売されます。お支払い情報（カード番号など)を当方が見る
 ことはありません — 決済はすべて Google が処理します。</p>
@@ -934,8 +1374,8 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
 <a href="https://www.revenuecat.com/privacy/">RevenueCat のプライバシー
 ポリシー</a>をご覧ください。</p>
 
-<h2>4. その他のネットワークサービス</h2>
-<p>本アプリは、特定の機能のために4つのサービスに接続します。あらゆる
+<h2>5. その他のネットワークサービス</h2>
+<p>本アプリは、特定の機能のために5つのサービスに接続します。あらゆる
 インターネット通信と同様、技術上これらのサービスに IP アドレスが送信されます。</p>
 <ul>
   <li><strong>祝日（Nager.Date、date.nager.at）：</strong>祝日の自動同期を
@@ -965,9 +1405,20 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
   含まれることは一切ありません</strong>。詳細は
   <a href="https://aptabase.com/legal/privacy">Aptabase のプライバシーポリシー</a>を
   ご覧ください。</li>
+  <li><strong>端末特性を伴う匿名の利用状況分析（Amplitude）：</strong>上記と
+  同じ「匿名の利用分析を共有」設定が、同種の匿名化された機能利用イベントを
+  Amplitude にも送信するほか、今後のイベントに付随する少数の端末レベルの
+  特性（例:「有効なプレミアム契約がある」「アラーム信頼性チェックリストが
+  すべて完了している」「ジェントルウェイクを使用している」）も送信し、どの
+  機能が一緒に使われる傾向にあるかを把握します。これらのイベントと特性には
+  <strong>アラームの名前・説明・場所や、入力したその他の自由記述の内容が
+  含まれることは一切ありません</strong>。また Amplitude のオプション機能で
+  ある画面録画（「Session Replay」）は<strong>有効にしていません</strong>。
+  詳細は<a href="https://amplitude.com/privacy">Amplitude のプライバシー
+  通知</a>をご覧ください。</li>
 </ul>
 
-<h2>5. 本アプリが要求する権限</h2>
+<h2>6. 本アプリが要求する権限</h2>
 <table>
   <tr><th>権限</th><th>目的</th></tr>
   <tr><td>通知、全画面アラーム</td><td>ロック画面の上でも鳴動し、アラーム画面を表示するため。</td></tr>
@@ -975,28 +1426,31 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
   <tr><td>起動時の実行</td><td>端末の再起動後にアラームを再設定するため。</td></tr>
   <tr><td>フォアグラウンドサービス、ウェイクロック、バイブレーション</td><td>アラームを解除するまで確実に鳴動・振動させ続けるため。</td></tr>
   <tr><td>位置情報（フォアグラウンドおよびバックグラウンド）</td><td>上記のオプションのジオフェンス機能と太陽アラーム機能のためだけに使用します。</td></tr>
-  <tr><td>インターネット</td><td>上記のとおり、購入（RevenueCat）、祝日の同期、地図タイル、エラーレポート（Sentry）、そして（オンにした場合のみ）利用状況分析（Aptabase）のためだけに使用します。</td></tr>
+  <tr><td>インターネット</td><td>上記のとおり、購入（RevenueCat）、祝日の同期、地図タイル、エラーレポート（Sentry）、アカウント作成時のログインおよび端末間同期（Supabase）、そして（オンにした場合のみ）利用状況分析（Aptabase と Amplitude）のためだけに使用します。</td></tr>
 </table>
 
-<h2>6. データの共有と販売</h2>
+<h2>7. データの共有と販売</h2>
 <p>当方はいかなるデータも販売・貸与・交換しません。データを処理する第三者は
 上記のサービスプロバイダー（Google Play、RevenueCat、Nager.Date、CARTO、
-Sentry、Aptabase）のみで、それぞれ記載された機能に厳密に限定されます。</p>
+Sentry、Aptabase、Amplitude、そしてアカウントを作成した場合の Supabase）のみで、
+それぞれ記載された機能に厳密に限定されます。</p>
 
-<h2>7. データの保持と削除</h2>
+<h2>8. データの保持と削除</h2>
 <p>ローカルデータは端末内にのみ存在します。本アプリをアンインストールすると
-削除されます。RevenueCat が保持する匿名の購入記録の削除をご希望の場合は、
-下記メールアドレスまでご連絡ください。対応いたします。</p>
+削除されます。アカウントを作成した場合、設定 → アカウント → アカウントを削除
+から削除すると、アカウント・メールアドレス・同期済みのアラーム/祝日も
+即座に削除されます — 第3項をご覧ください。RevenueCat が保持する匿名の購入記録の
+削除をご希望の場合は、下記メールアドレスまでご連絡ください。対応いたします。</p>
 
-<h2>8. お子様について</h2>
+<h2>9. お子様について</h2>
 <p>本アプリは13歳未満の子供を対象としておらず、故意に子供の個人情報を収集する
 ことはありません。</p>
 
-<h2>9. 本ポリシーの変更</h2>
+<h2>10. 本ポリシーの変更</h2>
 <p>本ポリシーを変更する場合は、本ページと上記の発効日を更新します。重要な
 変更は本アプリのリリースノートでお知らせします。</p>
 
-<h2>10. お問い合わせ</h2>
+<h2>11. お問い合わせ</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 <hr class="divider">
@@ -1007,18 +1461,21 @@ Sentry、Aptabase）のみで、それぞれ記載された機能に厳密に限
 
 <p>Chronos(이하 "본 앱")는 Luis Martín(이하 "당사")이 개발한 Android 알람
 앱입니다. 본 방침은 본 앱이 어떤 데이터를 왜 처리하는지 설명합니다. 요약하면:
-<strong>Chronos는 기기에서 로컬로 작동하며, 계정이 필요 없고, 광고를 표시하지
-않으며, 광고 SDK를 일절 포함하지 않습니다.</strong> 다만 오류를 파악하는 데
-도움이 되는 오류 보고 서비스와, 어떤 기능이 사용되는지 확인하기 위한 선택적이고
-익명인 제품 분석 서비스를 사용합니다(4항 참조). 오류 보고는 기본적으로 켜져
-있고 분석 기능은 기본적으로 꺼져 있으며, 두 가지 모두 설정에서 언제든지 변경할
-수 있습니다.</p>
+<strong>Chronos는 기기에서 로컬로 작동하며, 광고를 절대 표시하지 않고, 광고
+SDK를 일절 포함하지 않습니다.</strong> 계정 생성은 전적으로 선택 사항입니다 —
+본 앱은 계정 없이도 100% 사용할 수 있으며, 계정을 만드는 유일한 이유는 여러
+기기 간에 알람과 공휴일을 동기화하기 위해서입니다(3항 참조). 또한 오류를
+파악하는 데 도움이 되는 오류 보고 서비스와, 어떤 기능이 사용되는지 확인하기
+위한 선택적이고 익명인 제품 분석 서비스를 사용합니다(5항 참조). 오류 보고는
+기본적으로 켜져 있고 분석 기능은 기본적으로 꺼져 있으며, 두 가지 모두 설정에서
+언제든지 변경할 수 있습니다.</p>
 
 <h2>1. 기기에 저장되는 데이터</h2>
 <p>본 앱에서 설정하는 모든 것 — 알람, 일정, 해제 챌린지, 공휴일과 휴일, 앱
 설정, 프리미엄 상태 — 은 본 앱의 전용 저장 공간에 <strong>기기 내 로컬로
-저장</strong>됩니다. 당사는 서버를 운영하지 않으며, 이 데이터가 당사로 전송되는
-일은 없습니다. 본 앱을 삭제하면 함께 삭제됩니다.</p>
+저장</strong>됩니다. 본 앱을 삭제하면 함께 삭제됩니다. 이 데이터는 기기 간
+동기화를 위해 계정을 생성하기로 선택한 경우에만 다른 곳으로 전송됩니다 —
+3항을 참조하세요.</p>
 
 <h2>2. 위치 정보</h2>
 <p>두 가지 선택 기능이 기기의 위치 정보를 사용하며, 둘 다 <strong>전적으로 기기
@@ -1034,10 +1491,45 @@ Sentry、Aptabase）のみで、それぞれ記載された機能に厳密に限
 <p>두 기능 모두 위치 정보를 기기 밖으로 전송하지 않으며, 위치 정보는 어떤
 기록에도 저장되지 않고 누구와도 공유되지 않습니다. 다만 구역을 선택하는 동안 한
 가지 예외가 있습니다. 위치를 표시하는 지도는 CARTO에서 불러오므로, 보고 있는
-영역 — 보통은 사용자가 있는 영역 — 이 CARTO에 전달됩니다. 4항을 참조하세요. 이
+영역 — 보통은 사용자가 있는 영역 — 이 CARTO에 전달됩니다. 5항을 참조하세요. 이
 기능들을 사용하지 않으면 본 앱은 위치 권한을 요청하지 않습니다.</p>
 
-<h2>3. 구매</h2>
+<h2>3. 계정 및 기기 간 동기화</h2>
+<p>계정 생성은 전적으로 선택 사항입니다. Chronos는 계정 없이도 단일 기기에서
+영구적으로 100% 사용할 수 있습니다 — 알람을 만들거나, 프리미엄 기능을
+사용하거나, 본 앱의 다른 어떤 기능을 사용하는 데도 계정이 필요하지 않습니다.
+계정을 만드는 유일한 이유는 Chronos를 여러 기기에서 사용할 때 알람과 수동으로
+추가한 공휴일을 동기화 상태로 유지하거나, 재설치 후 이를 복구하기 위해서입니다.</p>
+<p>계정 생성을 선택하면(설정 → 계정), 본 앱은 백엔드 서비스 제공업체인
+<strong>Supabase</strong>를 사용하여 다음을 저장합니다.</p>
+<ul>
+  <li><strong>이메일 주소와 비밀번호</strong> — 로그인 및 (요청 시) 비밀번호
+  재설정에만 사용됩니다. 비밀번호는 Supabase의 인증 서비스에서 전적으로
+  관리하며, 본 앱은 이를 절대 저장하거나 평문으로 접근하지 않습니다. 당사는
+  이메일 주소를 어떤 메일링 리스트에도 추가하지 않습니다.</li>
+  <li><strong>알람과 수동으로 추가한 공휴일</strong>(5항에서 설명한 자동
+  다운로드되는 공공 공휴일 목록은 제외 — 이 목록은 해당 국가의 모든 사용자에게
+  동일하며 항상 기기 내에 남아 있습니다). 이는 1항에서 설명한 것과 동일한
+  데이터입니다 — 계정이 있으면 다른 기기나 재설치 후 복구할 수 있도록 사본이
+  Supabase 계정에도 저장됩니다. 각 데이터 행은 사용자의 계정에 연결되며 본인만
+  읽을 수 있습니다.</li>
+</ul>
+<p>로그인되어 있는 동안, 본 앱을 열거나 다시 전면으로 가져올 때마다 기기 내
+알람/공휴일과 계정의 사본을 비교하고 병합하여, 로그인된 모든 기기가 결국
+동일한 데이터를 갖도록 합니다. 이는 실시간이 아닙니다 — 한 기기에서 변경한
+내용은 다른 기기의 본 앱이 다음에 열리거나 재개될 때 나타나며, 즉시 반영되지
+않습니다.</p>
+<p>설정 → 계정 → 계정 삭제에서 언제든지 계정을 삭제할 수 있습니다. 이렇게
+하면 계정, 이메일, 동기화된 모든 알람/공휴일이 당사 시스템에서 즉시 영구적으로
+삭제됩니다 — 대기 기간이 없으며, 이를 위해 당사에 이메일을 보낼 필요도
+없습니다. 이 작업은 되돌릴 수 없습니다.</p>
+<p>Supabase는 이 기능에 한해 당사의 서비스 제공업체(데이터 처리자)로
+활동하며, EU(스웨덴 스톡홀름)에서 호스팅됩니다. 당사는 이 데이터를 판매하거나
+다른 누구와도 공유하지 않습니다. 자세한 내용은
+<a href="https://supabase.com/privacy">Supabase 개인정보 처리방침</a>을
+참조하세요.</p>
+
+<h2>4. 구매</h2>
 <p>프리미엄 기능은 <strong>Google Play 결제</strong>로 처리되는 인앱 구매로
 판매됩니다. 당사는 결제 정보(카드 번호 등)를 절대 볼 수 없으며, 결제는 전적으로
 Google이 처리합니다.</p>
@@ -1050,8 +1542,8 @@ Google이 처리합니다.</p>
 <a href="https://www.revenuecat.com/privacy/">RevenueCat 개인정보
 처리방침</a>을 참조하세요.</p>
 
-<h2>4. 기타 네트워크 서비스</h2>
-<p>본 앱은 특정 기능을 위해 네 개의 서비스에 접속합니다. 모든 인터넷
+<h2>5. 기타 네트워크 서비스</h2>
+<p>본 앱은 특정 기능을 위해 다섯 개의 서비스에 접속합니다. 모든 인터넷
 요청과 마찬가지로 이들 서비스는 기술적으로 IP 주소를 수신합니다.</p>
 <ul>
   <li><strong>공휴일(Nager.Date, date.nager.at):</strong> 공휴일 자동 동기화를
@@ -1079,9 +1571,20 @@ Google이 처리합니다.</p>
   내용이 절대 포함되지 않습니다</strong>. 자세한 내용은
   <a href="https://aptabase.com/legal/privacy">Aptabase 개인정보 처리방침</a>을
   참조하세요.</li>
+  <li><strong>기기 특성을 포함한 익명 사용 분석(Amplitude):</strong> 위와
+  동일한 "익명 사용 분석 공유" 설정이 동일한 종류의 익명화된 기능 사용
+  이벤트를 Amplitude에도 전송하며, 향후 이벤트에 첨부되는 소수의 기기 수준
+  특성(예: "유효한 프리미엄 구독 보유", "알람 신뢰성 체크리스트 완전히
+  해결됨", "젠틀 웨이크 사용 중")도 함께 전송하여 어떤 기능이 함께 사용되는
+  경향이 있는지 파악합니다. 이 이벤트와 특성에는 <strong>알람의 이름, 설명,
+  위치 또는 사용자가 입력한 다른 자유 텍스트 내용이 절대 포함되지
+  않으며</strong>, Amplitude의 선택적 화면 녹화 기능("Session Replay")은
+  <strong>활성화되어 있지 않습니다</strong>. 자세한 내용은
+  <a href="https://amplitude.com/privacy">Amplitude 개인정보 처리방침</a>을
+  참조하세요.</li>
 </ul>
 
-<h2>5. 본 앱이 요청하는 권한</h2>
+<h2>6. 본 앱이 요청하는 권한</h2>
 <table>
   <tr><th>권한</th><th>용도</th></tr>
   <tr><td>알림, 전체 화면 알람</td><td>잠금 화면 위에서도 울리고 알람 화면을 표시하기 위해.</td></tr>
@@ -1089,28 +1592,31 @@ Google이 처리합니다.</p>
   <tr><td>부팅 시 실행</td><td>휴대폰 재부팅 후 알람을 다시 설정하기 위해.</td></tr>
   <tr><td>포그라운드 서비스, 웨이크락, 진동</td><td>알람을 끌 때까지 확실하게 계속 울리고 진동하도록 하기 위해.</td></tr>
   <tr><td>위치(포그라운드 및 백그라운드)</td><td>위에서 설명한 선택적 지오펜싱 및 태양 알람 기능에만 사용됩니다.</td></tr>
-  <tr><td>인터넷</td><td>위에서 설명한 구매(RevenueCat), 공휴일 동기화, 지도 타일, 오류 보고(Sentry), 그리고 (동의한 경우) 사용 분석(Aptabase)에만 사용됩니다.</td></tr>
+  <tr><td>인터넷</td><td>위에서 설명한 구매(RevenueCat), 공휴일 동기화, 지도 타일, 오류 보고(Sentry), 계정 생성 시 로그인 및 기기 간 동기화(Supabase), 그리고 (동의한 경우) 사용 분석(Aptabase 및 Amplitude)에만 사용됩니다.</td></tr>
 </table>
 
-<h2>6. 데이터 공유 및 판매</h2>
+<h2>7. 데이터 공유 및 판매</h2>
 <p>당사는 어떤 데이터도 판매·대여·교환하지 않습니다. 데이터를 처리하는 제3자는
 위에 나열된 서비스 제공업체(Google Play, RevenueCat, Nager.Date, CARTO,
-Sentry, Aptabase)뿐이며, 각각 설명된 기능에 엄격히 한정됩니다.</p>
+Sentry, Aptabase, Amplitude, 그리고 계정을 생성한 경우 Supabase)뿐이며,
+각각 설명된 기능에 엄격히 한정됩니다.</p>
 
-<h2>7. 데이터 보관 및 삭제</h2>
+<h2>8. 데이터 보관 및 삭제</h2>
 <p>로컬 데이터는 기기에만 존재합니다. 본 앱을 삭제하면 함께 삭제됩니다.
-RevenueCat이 보관하는 익명 구매 기록의 삭제를 원하시면 아래 이메일로 연락해
-주세요. 요청을 처리해 드리겠습니다.</p>
+계정을 생성한 경우, 설정 → 계정 → 계정 삭제에서 삭제하면 계정, 이메일,
+동기화된 알람/공휴일도 즉시 함께 삭제됩니다 — 3항을 참조하세요. RevenueCat이
+보관하는 익명 구매 기록의 삭제를 원하시면 아래 이메일로 연락해 주세요. 요청을
+처리해 드리겠습니다.</p>
 
-<h2>8. 아동</h2>
+<h2>9. 아동</h2>
 <p>본 앱은 13세 미만 아동을 대상으로 하지 않으며, 고의로 아동의 개인정보를
 수집하지 않습니다.</p>
 
-<h2>9. 본 방침의 변경</h2>
+<h2>10. 본 방침의 변경</h2>
 <p>본 방침을 변경할 경우 이 페이지와 위의 시행일을 업데이트합니다. 중요한
 변경 사항은 본 앱의 릴리스 노트에 안내됩니다.</p>
 
-<h2>10. 문의</h2>
+<h2>11. 문의</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
 
 </body>
