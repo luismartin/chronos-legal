@@ -4,23 +4,60 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chronos — Delete Your Account</title>
-<style>
-  body { font-family: -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans CJK SC", sans-serif;
-         max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; line-height: 1.6; color: #222; }
-  h1 { font-size: 1.6em; } h2 { font-size: 1.2em; margin-top: 2em; }
-  .lang-nav { background: #f2f2f2; padding: 8px 12px; border-radius: 8px; position: sticky; top: 0; }
-  hr.divider { margin: 48px 0; border: none; border-top: 2px solid #ccc; }
-  .muted { color: #666; font-size: 0.9em; }
-</style>
+<meta name="description" content="How to delete your optional Chronos account and the data synced to it.">
+<meta name="theme-color" content="#0b0912">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="legal.css">
+<script src="legal.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<p class="lang-nav">
-  <a href="#en">English</a> · <a href="#es">Español</a> · <a href="#fr">Français</a> ·
-  <a href="#de">Deutsch</a> · <a href="#pt">Português</a> · <a href="#it">Italiano</a> ·
-  <a href="#zh">中文</a> · <a href="#ja">日本語</a> · <a href="#ko">한국어</a>
-</p>
+<header id="top" class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="https://chronosintelligentalarm.com/">
+      <img src="assets/logo.png" alt="" width="34" height="34">
+      <span>Chronos<span class="dot">.</span></span>
+    </a>
+    <div class="top-right">
+      <a class="back" href="https://chronosintelligentalarm.com/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+        <span class="back-text"><span data-l="en">Back to the site</span><span data-l="es">Volver a la web</span><span data-l="fr">Retour au site</span><span data-l="de">Zurück zur Website</span><span data-l="pt">Voltar ao site</span><span data-l="it">Torna al sito</span><span data-l="zh">返回网站</span><span data-l="ja">サイトに戻る</span><span data-l="ko">사이트로 돌아가기</span></span>
+      </a>
+      <label class="lang-select">
+        <span class="sr-only">Language</span>
+        <select id="lang-select"><option value="en" lang="en">English</option><option value="es" lang="es">Español</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="pt" lang="pt">Português</option><option value="it" lang="it">Italiano</option><option value="zh" lang="zh">中文</option><option value="ja" lang="ja">日本語</option><option value="ko" lang="ko">한국어</option></select>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+      </label>
+    </div>
+  </div>
+</header>
 
+<main>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="glow-b" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div class="kicker">Legal</div>
+      <div class="hero-slot" id="hero-slot"></div>
+      <nav class="langs" aria-label="Language"><a href="#en" hreflang="en" lang="en">English</a><a href="#es" hreflang="es" lang="es">Español</a><a href="#fr" hreflang="fr" lang="fr">Français</a><a href="#de" hreflang="de" lang="de">Deutsch</a><a href="#pt" hreflang="pt" lang="pt">Português</a><a href="#it" hreflang="it" lang="it">Italiano</a><a href="#zh" hreflang="zh" lang="zh">中文</a><a href="#ja" hreflang="ja" lang="ja">日本語</a><a href="#ko" hreflang="ko" lang="ko">한국어</a></nav>
+    </div>
+  </section>
+
+  <div class="wrap layout">
+    <aside class="side">
+      <nav class="toc" aria-label="Contents">
+        <div class="toc-label"><span data-l="en">Contents</span><span data-l="es">Contenido</span><span data-l="fr">Sommaire</span><span data-l="de">Inhalt</span><span data-l="pt">Conteúdo</span><span data-l="it">Indice</span><span data-l="zh">目录</span><span data-l="ja">目次</span><span data-l="ko">목차</span></div>
+        <div class="toc-links" id="toc-links"></div>
+      </nav>
+    </aside>
+    <article class="doc" id="doc">
+<!-- LEGAL:BEGIN — Legal text, copied verbatim from the Chronos repo (docs/legal/). To republish,
+     replace everything between LEGAL:BEGIN and LEGAL:END with the updated language blocks
+     (<h1 id="en"> … <h1 id="ko"> …). The design is applied by legal.css / legal.js at runtime;
+     do not edit the text here. -->
 <!-- ============================== EN ============================== -->
 <h1 id="en">Chronos — Delete Your Account</h1>
 <p class="muted">Applies only if you created an optional Chronos account to sync your alarms and
@@ -288,6 +325,24 @@ memorizza un account.</p>
 
 <h2>문의</h2>
 <p>Luis Martín — <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a></p>
+<!-- LEGAL:END -->
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-brand">
+      <img src="assets/logo.png" alt="" width="28" height="28">
+      <span>Chronos<span class="dot" style="color: #ffb457;">.</span></span>
+    </div>
+    <div class="foot-links">
+      <a href="./"><span data-l="en">Privacy Policy</span><span data-l="es">Política de privacidad</span><span data-l="fr">Politique de confidentialité</span><span data-l="de">Datenschutzerklärung</span><span data-l="pt">Política de privacidade</span><span data-l="it">Informativa sulla privacy</span><span data-l="zh">隐私政策</span><span data-l="ja">プライバシーポリシー</span><span data-l="ko">개인정보 처리방침</span></a>
+      <a href="mailto:chronosintelligentalarm@gmail.com">chronosintelligentalarm@gmail.com</a>
+    </div>
+    <div><span data-l="en">© 2026 Luis Martín. Chronos is an Android app.</span><span data-l="es">© 2026 Luis Martín. Chronos es una app para Android.</span><span data-l="fr">© 2026 Luis Martín. Chronos est une application Android.</span><span data-l="de">© 2026 Luis Martín. Chronos ist eine Android-App.</span><span data-l="pt">© 2026 Luis Martín. Chronos é uma app para Android.</span><span data-l="it">© 2026 Luis Martín. Chronos è un'app per Android.</span><span data-l="zh">© 2026 Luis Martín。Chronos 是一款 Android 应用。</span><span data-l="ja">© 2026 Luis Martín。Chronos は Android アプリです。</span><span data-l="ko">© 2026 Luis Martín. Chronos는 Android 앱입니다.</span></div>
+  </div>
+</footer>
 
 </body>
 </html>
