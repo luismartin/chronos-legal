@@ -60,7 +60,7 @@
      do not edit the text here. -->
 <!-- ============================== EN ============================== -->
 <h1 id="en">Chronos — Privacy Policy</h1>
-<p class="muted">Effective date: August 6, 2026</p>
+<p class="muted">Effective date: September 11, 2026</p>
 
 <p>Chronos ("the App") is an Android alarm clock app developed by Luis Martín
 ("we", "us"). This policy explains what data the App handles and why. The short
@@ -93,10 +93,14 @@ you choose to create an account to sync it across devices — see Section 3.</p>
   the device.</li>
 </ul>
 <p>Neither feature transmits your location off your device, and it is never
-stored in any history nor shared with anyone. One exception applies while you
-are choosing the zone: the map you mark it on is loaded from CARTO, so the area
-you browse — normally the area you are in — reaches CARTO. See section 5. If you
-don't use these features, the App never requests location permission.</p>
+stored in any history nor shared with anyone. Two exceptions apply. While you
+are choosing the zone, the map you mark it on is loaded from the OpenStreetMap
+Foundation's tile servers, so the area you browse — normally the area you are
+in — reaches the OpenStreetMap Foundation. And if you enable
+the spoken weather briefing (a premium feature), the App sends your approximate
+location — rounded to about a kilometer, never an exact coordinate — to
+Open-Meteo to fetch today's local forecast. Both are covered in section 5. If
+you don't use these features, the App never requests location permission.</p>
 
 <h2>3. Accounts and cross-device sync</h2>
 <p>Creating an account is entirely optional. Chronos is 100% functional without
@@ -119,6 +123,14 @@ Chronos on more than one device, or to recover them after reinstalling.</p>
   Supabase account so it can be restored on your other devices or after a
   reinstall. Each row is tied to your account and only readable by you.</li>
 </ul>
+<p><strong>Signing in with Google.</strong> Instead of an email and password
+you can tap <em>Continue with Google</em>. Google then asks you which of your
+Google accounts to use and hands the App a signed token identifying that
+account; Supabase creates or finds your account from it. In this flow Google
+learns that you signed in to Chronos, and we receive your <strong>email
+address</strong> and the name on that Google account — nothing else, no contacts
+and no access to any other Google service. If you would rather Google not know
+you use Chronos, use the email and password option instead.</p>
 <p>While you're signed in, the App compares and merges your local alarms/holidays
 with the copy in your account each time you open the App or bring it back to the
 foreground, so every signed-in device eventually has the same data. This isn't
@@ -128,7 +140,8 @@ other device's App is opened or resumed, not instantly.</p>
 account. This immediately and permanently erases your account, email, and all
 synced alarms and holidays from our systems — there is no waiting period, and
 you don't need to email us for this. It cannot be undone.</p>
-<p>Supabase acts as our service provider (data processor) for this feature only,
+<p>Supabase acts as our service provider (data processor) for this feature and
+for the app-integrity check described in Section 5 — nothing else — and is
 hosted in the EU (Stockholm, Sweden); we don't sell or share this data with
 anyone else. See the
 <a href="https://supabase.com/privacy">Supabase Privacy Policy</a>.</p>
@@ -147,19 +160,28 @@ data. See the
 <a href="https://www.revenuecat.com/privacy/">RevenueCat Privacy Policy</a>.</p>
 
 <h2>5. Other network services</h2>
-<p>The App contacts five services for specific features. As with any internet
+<p>The App contacts seven services for specific features. As with any internet
 request, these services technically receive your IP address:</p>
 <ul>
   <li><strong>Public holidays (Nager.Date, date.nager.at):</strong> if you enable
   automatic holiday sync, the App downloads the public-holiday list for the
   country and year you selected. No personal data is sent — only the country
   code and year.</li>
-  <li><strong>Map tiles (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  <li><strong>Map tiles (OpenStreetMap Foundation, tile.openstreetmap.org):</strong>
   when you pick a location on the map while editing an alarm, the map images are
-  loaded from CARTO's servers. The tile requests reveal the map area you are
-  viewing, and when the map opens on your current position that area shows where
-  you are. The App sends CARTO no name, account, or identifier; as with any
-  internet request, CARTO receives your IP address.</li>
+  loaded from the OpenStreetMap Foundation's servers. The tile requests reveal the
+  map area you are viewing, and when the map opens on your current position that
+  area shows where you are. The App sends the OpenStreetMap Foundation no name,
+  account, or identifier about you; each request does identify the App itself
+  (its package name), as the Foundation's usage policy requires, and, as with any
+  internet request, the Foundation receives your IP address.</li>
+  <li><strong>Weather forecast (Open-Meteo, api.open-meteo.com):</strong> if you
+  enable the spoken weather briefing (a premium feature), the App requests
+  today's forecast for your area from Open-Meteo, using the approximate location
+  already cached for solar alarms — rounded to about a kilometer before it
+  leaves your device, never the exact coordinate. The App sends Open-Meteo no
+  name, account, or identifier; as with any internet request, Open-Meteo
+  receives your IP address.</li>
   <li><strong>Crash and error reporting (Sentry):</strong> to catch bugs that
   would otherwise fail silently — such as an alarm sound quietly failing to
   play — the App sends crash and error reports to Sentry. This is <strong>on by
@@ -186,9 +208,28 @@ request, these services technically receive your IP address:</p>
   Amplitude's optional screen-recording feature ("Session Replay") is
   <strong>not enabled</strong>. See the
   <a href="https://amplitude.com/privacy">Amplitude Privacy Notice</a>.</li>
+  <li><strong>App integrity check (Google Play Integrity and our Supabase
+  backend):</strong> once per app version — and <strong>whether or not you have
+  an account</strong> — the App asks Google Play whether this installation is a
+  genuine, unmodified copy, and sends Google's answer to our own Supabase
+  backend so we can see how many installations are tampered with. It contains no
+  name, account, or identifier of yours. To stop that endpoint being abused, the
+  backend keeps a salted, irreversible hash of the request's IP address for at
+  most an hour; it is linked to nothing else and is deleted daily.</li>
 </ul>
 
-<h2>6. Permissions the App requests</h2>
+<h2>6. Local automation integration (optional)</h2>
+<p>If you set an alarm's dismiss action to "Automation (Tasker)" (for use with
+Tasker, MacroDroid, or similar automation apps), dismissing that alarm sends a
+standard Android broadcast that any app on your device with a matching receiver
+can read — this is how local automation integrations work on Android, and it
+never leaves your device or reaches us. It carries the alarm's internal id (a
+random identifier, not linked to its name) and, if you typed one, the short tag
+you set for that alarm in the editor — nothing else, and never the alarm's name
+or description. This feature is off unless you explicitly choose "Automation
+(Tasker)" as the dismiss action for a specific alarm.</p>
+
+<h2>7. Permissions the App requests</h2>
 <table>
   <tr><th>Permission</th><th>Why</th></tr>
   <tr><td>Notifications, full-screen alarms</td><td>To ring and show the alarm screen, including over the lock screen.</td></tr>
@@ -196,38 +237,42 @@ request, these services technically receive your IP address:</p>
   <tr><td>Run at startup</td><td>To re-arm your alarms after the phone reboots.</td></tr>
   <tr><td>Foreground service, wake lock, vibration</td><td>To keep the alarm sounding and vibrating reliably until you dismiss it.</td></tr>
   <tr><td>Location (foreground &amp; background)</td><td>Only for the optional geofence and solar-alarm features described above.</td></tr>
-  <tr><td>Internet</td><td>Only for purchases (RevenueCat), holiday sync, map tiles, error reporting (Sentry), account sign-in and cross-device sync if you create an account (Supabase), and — if you opt in — usage analytics (Aptabase and Amplitude), as described above.</td></tr>
+  <tr><td>Internet</td><td>Only for purchases (RevenueCat), holiday sync, map tiles, weather forecasts (Open-Meteo), error reporting (Sentry), the app-integrity check (Google and Supabase), account sign-in and cross-device sync if you create an account (Supabase), and — if you opt in — usage analytics (Aptabase and Amplitude), as described above.</td></tr>
 </table>
 
-<h2>7. Data sharing and selling</h2>
+<h2>8. Data sharing and selling</h2>
 <p>We do not sell, rent, or trade any data. The only third parties that process
-any data are the service providers listed above (Google Play, RevenueCat,
-Nager.Date, CARTO, Sentry, Aptabase, Amplitude, and — if you create an account
-— Supabase), each strictly for the feature described.</p>
+any data over the network are the service providers listed above (Google Play,
+RevenueCat, Nager.Date, the OpenStreetMap Foundation, Open-Meteo, Sentry,
+Aptabase, Amplitude, Google (for the app-integrity check, and for Google Sign-In
+if you use it) and Supabase), each strictly for the feature described. The one
+other way data reaches anyone else is the local automation broadcast described
+in Section 6 — and only if you turn it on for an alarm: it never leaves your
+device, but any app installed there can register to receive it.</p>
 
-<h2>8. Data retention and deletion</h2>
+<h2>9. Data retention and deletion</h2>
 <p>Local data lives only on your device: uninstalling the App deletes it. If you
 created an account, deleting it from Settings → Account → Delete account
 immediately erases your account, email, and synced alarms/holidays too — see
 Section 3. To request deletion of the anonymous purchase records held by
 RevenueCat, contact us at the email below and we will process the request.</p>
 
-<h2>9. Children</h2>
+<h2>10. Children</h2>
 <p>The App is not directed at children under 13 and does not knowingly collect
 personal information from them.</p>
 
-<h2>10. Changes to this policy</h2>
+<h2>11. Changes to this policy</h2>
 <p>If we change this policy, we will update this page and the effective date
 above. Material changes will be noted in the App's release notes.</p>
 
-<h2>11. Contact</h2>
+<h2>12. Contact</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">Contact form</a></p>
 
 <hr class="divider">
 
 <!-- ============================== ES ============================== -->
 <h1 id="es">Chronos — Política de Privacidad</h1>
-<p class="muted">Fecha de entrada en vigor: 6 de agosto de 2026</p>
+<p class="muted">Fecha de entrada en vigor: 11 de septiembre de 2026</p>
 
 <p>Chronos («la App») es una aplicación de alarmas para Android desarrollada por
 Luis Martín («nosotros»). Esta política explica qué datos maneja la App y por
@@ -263,11 +308,15 @@ procesan <strong>íntegramente en tu dispositivo</strong>:</p>
   esas horas en el propio dispositivo.</li>
 </ul>
 <p>Ninguna de las dos funciones envía tu ubicación fuera del dispositivo, que
-tampoco se guarda en ningún historial ni se comparte con nadie. Hay una
-excepción mientras eliges la zona: el mapa en el que la marcas se carga desde
-CARTO, así que la zona que consultas — normalmente aquella en la que estás —
-llega a CARTO. Ver la sección 5. Si no usas estas funciones, la App nunca
-solicita el permiso de ubicación.</p>
+tampoco se guarda en ningún historial ni se comparte con nadie. Hay dos
+excepciones. Mientras eliges la zona, el mapa en el que la marcas se carga desde
+los servidores de teselas de la OpenStreetMap Foundation, así que la zona que
+consultas — normalmente aquella en la que estás — llega a la OpenStreetMap
+Foundation. Y si activas el briefing hablado del tiempo (función premium),
+la App envía tu ubicación aproximada — redondeada a un kilómetro
+aproximadamente, nunca una coordenada exacta — a Open-Meteo para consultar la
+previsión local del día. Ambas se explican en la sección 5. Si no usas estas
+funciones, la App nunca solicita el permiso de ubicación.</p>
 
 <h2>3. Cuentas y sincronización entre dispositivos</h2>
 <p>Crear una cuenta es totalmente opcional. Chronos es 100 % funcional sin
@@ -293,6 +342,15 @@ guardar:</p>
   dispositivos o tras una reinstalación. Cada fila está vinculada a tu cuenta y
   solo tú puedes leerla.</li>
 </ul>
+<p><strong>Iniciar sesión con Google.</strong> En lugar de correo y contraseña
+puedes pulsar <em>Continuar con Google</em>. Google te pregunta entonces cuál de
+tus cuentas de Google quieres usar y entrega a la App un token firmado que
+identifica esa cuenta; Supabase crea o localiza tu cuenta a partir de él. En ese
+flujo Google se entera de que has iniciado sesión en Chronos, y nosotros
+recibimos tu <strong>dirección de correo</strong> y el nombre de esa cuenta de
+Google — nada más: ni contactos, ni acceso a ningún otro servicio de Google. Si
+prefieres que Google no sepa que usas Chronos, usa la opción de correo y
+contraseña.</p>
 <p>Mientras tienes la sesión iniciada, la App compara y fusiona tus alarmas y
 festivos locales con la copia de tu cuenta cada vez que abres la App o la
 vuelves a poner en primer plano, para que todos tus dispositivos con sesión
@@ -304,7 +362,8 @@ Eliminar cuenta. Esto borra de inmediato y de forma permanente tu cuenta, tu
 correo y todas las alarmas y festivos sincronizados de nuestros sistemas — no
 hay ningún periodo de espera y no necesitas escribirnos para esto. No se puede
 deshacer.</p>
-<p>Supabase actúa como nuestro encargado de tratamiento solo para esta función,
+<p>Supabase actúa como nuestro encargado de tratamiento para esta función y para
+la comprobación de integridad descrita en la Sección 5 —para nada más—, y está
 alojado en la UE (Estocolmo, Suecia); no vendemos ni compartimos estos datos
 con nadie más. Consulta la
 <a href="https://supabase.com/privacy">Política de Privacidad de Supabase</a>.</p>
@@ -324,7 +383,7 @@ Consulta la <a href="https://www.revenuecat.com/privacy/">Política de
 Privacidad de RevenueCat</a>.</p>
 
 <h2>5. Otros servicios de red</h2>
-<p>La App se conecta a cinco servicios para funciones concretas. Como en
+<p>La App se conecta a siete servicios para funciones concretas. Como en
 cualquier petición por internet, estos servicios reciben técnicamente tu
 dirección IP:</p>
 <ul>
@@ -332,13 +391,23 @@ dirección IP:</p>
   la sincronización automática de festivos, la App descarga la lista de festivos
   del país y año que seleccionaste. No se envía ningún dato personal — solo el
   código de país y el año.</li>
-  <li><strong>Teselas de mapa (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  <li><strong>Teselas de mapa (OpenStreetMap Foundation, tile.openstreetmap.org):</strong>
   al elegir una ubicación en el mapa mientras editas una alarma, las imágenes del
-  mapa se cargan desde los servidores de CARTO. Las peticiones revelan la zona
-  del mapa que estás viendo y, cuando el mapa se abre en tu posición actual, esa
-  zona muestra dónde estás. La App no envía a CARTO tu nombre, tu cuenta ni
-  ningún identificador; como en cualquier petición por internet, CARTO recibe tu
-  dirección IP.</li>
+  mapa se cargan desde los servidores de la OpenStreetMap Foundation. Las
+  peticiones revelan la zona del mapa que estás viendo y, cuando el mapa se abre
+  en tu posición actual, esa zona muestra dónde estás. La App no envía a la
+  OpenStreetMap Foundation tu nombre, tu cuenta ni ningún identificador tuyo;
+  cada petición sí identifica a la propia App (su nombre de paquete), como exige
+  la política de uso de la Fundación, y, como en cualquier petición por internet,
+  la Fundación recibe tu dirección IP.</li>
+  <li><strong>Previsión meteorológica (Open-Meteo, api.open-meteo.com):</strong>
+  si activas el briefing hablado del tiempo (función premium), la App pide a
+  Open-Meteo la previsión del día para tu zona, usando la ubicación aproximada
+  ya guardada en caché para las alarmas solares — redondeada a un kilómetro
+  aproximadamente antes de salir del dispositivo, nunca la coordenada exacta.
+  La App no envía a Open-Meteo tu nombre, tu cuenta ni ningún identificador;
+  como en cualquier petición por internet, Open-Meteo recibe tu dirección
+  IP.</li>
   <li><strong>Informes de errores (Sentry):</strong> para detectar fallos que de
   otro modo pasarían inadvertidos — como un sonido de alarma que deja de
   funcionar sin ningún aviso — la App envía informes de errores y cierres
@@ -371,9 +440,31 @@ dirección IP:</p>
   Amplitude ("Session Replay") <strong>no está activada</strong>. Consulta el
   <a href="https://amplitude.com/privacy">Aviso de Privacidad de
   Amplitude</a>.</li>
+  <li><strong>Comprobación de integridad de la app (Google Play Integrity y
+  nuestro backend de Supabase):</strong> una vez por versión de la app —y
+  <strong>tengas cuenta o no</strong>— la App pregunta a Google Play si esta
+  instalación es una copia genuina y sin modificar, y envía la respuesta de
+  Google a nuestro propio backend de Supabase para que podamos saber cuántas
+  instalaciones están manipuladas. No incluye tu nombre, tu cuenta ni ningún
+  identificador tuyo. Para evitar el abuso de ese punto de acceso, el backend
+  guarda un hash irreversible y salado de la dirección IP de la petición durante
+  como mucho una hora; no se vincula a nada más y se borra a diario.</li>
 </ul>
 
-<h2>6. Permisos que solicita la App</h2>
+<h2>6. Integración con la automatización local (opcional)</h2>
+<p>Si configuras la acción al apagar de una alarma como "Automatización
+(Tasker)" (para usarla con Tasker, MacroDroid o apps de automatización
+similares), al apagar esa alarma la App envía una difusión estándar de Android
+que puede leer cualquier app de tu dispositivo que tenga registrado un receptor
+para ella — así es como funcionan en Android las integraciones de automatización
+locales, y esa difusión nunca sale de tu dispositivo ni llega hasta nosotros.
+Lleva el identificador interno de la alarma (un identificador aleatorio, no
+vinculado a su nombre) y, si la escribiste, la etiqueta corta que le pusiste a
+esa alarma en el editor — nada más, y nunca el nombre ni la descripción de la
+alarma. Esta función está desactivada salvo que elijas expresamente
+"Automatización (Tasker)" como acción al apagar de una alarma concreta.</p>
+
+<h2>7. Permisos que solicita la App</h2>
 <table>
   <tr><th>Permiso</th><th>Para qué</th></tr>
   <tr><td>Notificaciones, alarmas a pantalla completa</td><td>Para sonar y mostrar la pantalla de alarma, incluso sobre la pantalla de bloqueo.</td></tr>
@@ -381,16 +472,22 @@ dirección IP:</p>
   <tr><td>Ejecutarse al inicio</td><td>Para reprogramar tus alarmas tras reiniciar el teléfono.</td></tr>
   <tr><td>Servicio en primer plano, wake lock, vibración</td><td>Para que la alarma siga sonando y vibrando de forma fiable hasta que la apagues.</td></tr>
   <tr><td>Ubicación (en uso y en segundo plano)</td><td>Solo para las funciones opcionales de geovallas y alarmas solares descritas arriba.</td></tr>
-  <tr><td>Internet</td><td>Solo para compras (RevenueCat), sincronización de festivos, teselas de mapa, informes de errores (Sentry), inicio de sesión y sincronización entre dispositivos si creas una cuenta (Supabase) y — si la activas — analítica de uso (Aptabase y Amplitude), según lo descrito arriba.</td></tr>
+  <tr><td>Internet</td><td>Solo para compras (RevenueCat), sincronización de festivos, teselas de mapa, previsión meteorológica (Open-Meteo), informes de errores (Sentry), la comprobación de integridad (Google y Supabase), inicio de sesión y sincronización entre dispositivos si creas una cuenta (Supabase) y — si la activas — analítica de uso (Aptabase y Amplitude), según lo descrito arriba.</td></tr>
 </table>
 
-<h2>7. Compartición y venta de datos</h2>
+<h2>8. Compartición y venta de datos</h2>
 <p>No vendemos, alquilamos ni intercambiamos ningún dato. Los únicos terceros
-que procesan algún dato son los proveedores de servicio listados arriba (Google
-Play, RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude y — si creas
-una cuenta — Supabase), cada uno estrictamente para la función descrita.</p>
+que procesan algún dato a través de la red son los proveedores de servicio
+listados arriba (Google Play, RevenueCat, Nager.Date, la OpenStreetMap
+Foundation, Open-Meteo, Sentry, Aptabase, Amplitude, Google (para la
+comprobación de integridad, y para el inicio de sesión con Google si lo usas) y
+Supabase), cada uno estrictamente para la función descrita. La única otra vía
+por la que algún dato llega a otros es la difusión de automatización local
+descrita en la sección 6 — y solo si la activas en alguna alarma: nunca sale de
+tu dispositivo, pero cualquier app instalada en él puede registrarse para
+recibirla.</p>
 
-<h2>8. Conservación y eliminación de datos</h2>
+<h2>9. Conservación y eliminación de datos</h2>
 <p>Los datos locales viven solo en tu dispositivo: al desinstalar la App se
 eliminan. Si creaste una cuenta, eliminarla desde Ajustes → Cuenta → Eliminar
 cuenta borra de inmediato tu cuenta, tu correo y las alarmas/festivos
@@ -398,23 +495,23 @@ sincronizados también — ver la sección 3. Para solicitar la eliminación de 
 registros anónimos de compra que conserva RevenueCat, escríbenos al correo de
 abajo y tramitaremos la solicitud.</p>
 
-<h2>9. Menores</h2>
+<h2>10. Menores</h2>
 <p>La App no está dirigida a menores de 13 años y no recoge conscientemente
 información personal de menores.</p>
 
-<h2>10. Cambios en esta política</h2>
+<h2>11. Cambios en esta política</h2>
 <p>Si cambiamos esta política, actualizaremos esta página y la fecha de entrada
 en vigor. Los cambios relevantes se indicarán en las notas de versión de la
 App.</p>
 
-<h2>11. Contacto</h2>
+<h2>12. Contacto</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">Formulario de contacto</a></p>
 
 <hr class="divider">
 
 <!-- ============================== FR ============================== -->
 <h1 id="fr">Chronos — Politique de Confidentialité</h1>
-<p class="muted">Date d'entrée en vigueur : 6 août 2026</p>
+<p class="muted">Date d'entrée en vigueur : 11 septembre 2026</p>
 
 <p>Chronos (« l'App ») est une application de réveil pour Android développée par
 Luis Martín (« nous »). Cette politique explique quelles données l'App traite et
@@ -452,12 +549,17 @@ toutes deux la traitent <strong>entièrement sur votre appareil</strong> :</p>
   approximative pour calculer ces horaires sur l'appareil.</li>
 </ul>
 <p>Aucune de ces deux fonctions ne transmet votre position hors de votre
-appareil ; elle n'est jamais conservée dans un historique ni partagée. Une
-exception s'applique pendant que vous choisissez la zone : la carte sur laquelle
-vous la placez est chargée depuis CARTO, de sorte que la zone que vous consultez
-— normalement celle où vous vous trouvez — parvient à CARTO. Voir la section 5.
-Si vous n'utilisez pas ces fonctions, l'App ne demande jamais l'autorisation de
-localisation.</p>
+appareil ; elle n'est jamais conservée dans un historique ni partagée. Deux
+exceptions s'appliquent. Pendant que vous choisissez la zone, la carte sur
+laquelle vous la placez est chargée depuis les serveurs de tuiles de
+l'OpenStreetMap Foundation, de sorte que la zone que vous consultez —
+normalement celle où vous vous trouvez — parvient à l'OpenStreetMap Foundation.
+Et si
+vous activez le briefing vocal météo (fonction premium), l'App envoie votre
+position approximative — arrondie à environ un kilomètre, jamais une coordonnée
+exacte — à Open-Meteo pour récupérer les prévisions locales du jour. Les deux
+sont détaillées à la section 5. Si vous n'utilisez pas ces fonctions, l'App ne
+demande jamais l'autorisation de localisation.</p>
 
 <h2>3. Comptes et synchronisation entre appareils</h2>
 <p>Créer un compte est entièrement optionnel. Chronos est fonctionnelle à 100 %
@@ -484,6 +586,15 @@ stocker :</p>
   être restaurée sur vos autres appareils ou après une réinstallation. Chaque
   ligne est liée à votre compte et n'est lisible que par vous.</li>
 </ul>
+<p><strong>Se connecter avec Google.</strong> Au lieu d'un e-mail et d'un mot de
+passe, vous pouvez appuyer sur <em>Continuer avec Google</em>. Google vous
+demande alors lequel de vos comptes Google utiliser et remet à l'App un jeton
+signé identifiant ce compte ; Supabase crée ou retrouve votre compte à partir de
+celui-ci. Dans ce parcours, Google apprend que vous vous êtes connecté à
+Chronos, et nous recevons votre <strong>adresse e-mail</strong> et le nom de ce
+compte Google — rien d'autre : ni contacts, ni accès à un quelconque autre
+service Google. Si vous préférez que Google ignore que vous utilisez Chronos,
+utilisez plutôt l'option e-mail et mot de passe.</p>
 <p>Tant que vous êtes connecté, l'App compare et fusionne vos alarmes/jours
 fériés locaux avec la copie de votre compte à chaque fois que vous ouvrez l'App
 ou la ramenez au premier plan, afin que chaque appareil connecté finisse par
@@ -495,7 +606,8 @@ appareil est ouverte ou reprise, pas instantanément.</p>
 compte, votre e-mail et toutes les alarmes/jours fériés synchronisés de nos
 systèmes — il n'y a aucun délai d'attente et vous n'avez pas besoin de nous
 écrire pour cela. C'est irréversible.</p>
-<p>Supabase agit comme notre sous-traitant uniquement pour cette fonction,
+<p>Supabase agit comme notre sous-traitant pour cette fonction et pour la
+vérification d'intégrité décrite dans la section 5 — rien d'autre — et est
 hébergé dans l'UE (Stockholm, Suède) ; nous ne vendons ni ne partageons ces
 données avec personne d'autre. Voir la
 <a href="https://supabase.com/privacy">politique de confidentialité de
@@ -516,20 +628,31 @@ RevenueCat agit comme notre sous-traitant et ne vend pas ces données. Voir la
 RevenueCat</a>.</p>
 
 <h2>5. Autres services réseau</h2>
-<p>L'App contacte cinq services pour des fonctions précises. Comme pour toute
+<p>L'App contacte sept services pour des fonctions précises. Comme pour toute
 requête internet, ces services reçoivent techniquement votre adresse IP :</p>
 <ul>
   <li><strong>Jours fériés (Nager.Date, date.nager.at) :</strong> si vous activez
   la synchronisation automatique des jours fériés, l'App télécharge la liste des
   jours fériés du pays et de l'année sélectionnés. Aucune donnée personnelle
   n'est envoyée — uniquement le code pays et l'année.</li>
-  <li><strong>Tuiles de carte (CARTO / OpenStreetMap, basemaps.cartocdn.com) :</strong>
+  <li><strong>Tuiles de carte (OpenStreetMap Foundation, tile.openstreetmap.org) :</strong>
   lorsque vous choisissez un lieu sur la carte en modifiant une alarme, les
-  images de la carte sont chargées depuis les serveurs de CARTO. Ces requêtes
-  révèlent la zone de carte consultée et, quand la carte s'ouvre sur votre
-  position actuelle, cette zone indique où vous êtes. L'App n'envoie à CARTO ni
-  votre nom, ni votre compte, ni aucun identifiant ; comme pour toute requête
-  internet, CARTO reçoit votre adresse IP.</li>
+  images de la carte sont chargées depuis les serveurs de l'OpenStreetMap
+  Foundation. Ces requêtes révèlent la zone de carte consultée et, quand la carte
+  s'ouvre sur votre position actuelle, cette zone indique où vous êtes. L'App
+  n'envoie à l'OpenStreetMap Foundation ni votre nom, ni votre compte, ni aucun
+  identifiant vous concernant ; chaque requête identifie en revanche l'App
+  elle-même (son nom de paquet), comme l'exige la politique d'utilisation de la
+  Fondation, et, comme pour toute requête internet, la Fondation reçoit votre
+  adresse IP.</li>
+  <li><strong>Prévisions météo (Open-Meteo, api.open-meteo.com) :</strong> si
+  vous activez le briefing vocal météo (fonction premium), l'App demande à
+  Open-Meteo les prévisions du jour pour votre zone, en utilisant la position
+  approximative déjà mise en cache pour les alarmes solaires — arrondie à
+  environ un kilomètre avant de quitter votre appareil, jamais la coordonnée
+  exacte. L'App n'envoie à Open-Meteo ni votre nom, ni votre compte, ni aucun
+  identifiant ; comme pour toute requête internet, Open-Meteo reçoit votre
+  adresse IP.</li>
   <li><strong>Rapports d'erreurs (Sentry) :</strong> pour détecter les bugs qui
   passeraient autrement inaperçus — comme un son d'alarme qui cesse
   silencieusement de fonctionner — l'App envoie des rapports de plantage et
@@ -564,9 +687,33 @@ requête internet, ces services reçoivent techniquement votre adresse IP :</p>
   Replay ») n'est <strong>pas activée</strong>. Voir l'
   <a href="https://amplitude.com/privacy">avis de confidentialité
   d'Amplitude</a>.</li>
+  <li><strong>Vérification d'intégrité de l'application (Google Play Integrity
+  et notre backend Supabase) :</strong> une fois par version de l'application —
+  et <strong>que vous ayez un compte ou non</strong> — l'App demande à Google
+  Play si cette installation est une copie authentique et non modifiée, et
+  envoie la réponse de Google à notre propre backend Supabase afin que nous
+  puissions savoir combien d'installations sont altérées. Elle ne contient ni
+  votre nom, ni votre compte, ni aucun identifiant vous concernant. Pour éviter
+  les abus de ce point d'accès, le backend conserve une empreinte irréversible
+  et salée de l'adresse IP de la requête pendant une heure au maximum ; elle
+  n'est reliée à rien d'autre et est supprimée quotidiennement.</li>
 </ul>
 
-<h2>6. Autorisations demandées par l'App</h2>
+<h2>6. Intégration avec l'automatisation locale (optionnelle)</h2>
+<p>Si vous réglez l'action à l'arrêt d'une alarme sur « Automatisation
+(Tasker) » (pour l'utiliser avec Tasker, MacroDroid ou des applications
+d'automatisation similaires), arrêter cette alarme envoie une diffusion Android
+standard que toute application de votre appareil ayant enregistré un récepteur
+correspondant peut lire — c'est ainsi que fonctionnent les intégrations
+d'automatisation locales sur Android, et cette diffusion ne quitte jamais votre
+appareil et ne nous parvient jamais. Elle contient l'identifiant interne de
+l'alarme (un identifiant aléatoire, sans lien avec son nom) et, si vous l'avez
+saisie, la courte étiquette que vous avez définie pour cette alarme dans
+l'éditeur — rien d'autre, et jamais le nom ni la description de l'alarme. Cette
+fonction est désactivée tant que vous ne choisissez pas explicitement
+« Automatisation (Tasker) » comme action à l'arrêt d'une alarme précise.</p>
+
+<h2>7. Autorisations demandées par l'App</h2>
 <table>
   <tr><th>Autorisation</th><th>Pourquoi</th></tr>
   <tr><td>Notifications, alarmes plein écran</td><td>Pour sonner et afficher l'écran d'alarme, y compris sur l'écran de verrouillage.</td></tr>
@@ -574,16 +721,22 @@ requête internet, ces services reçoivent techniquement votre adresse IP :</p>
   <tr><td>Exécution au démarrage</td><td>Pour réarmer vos alarmes après un redémarrage du téléphone.</td></tr>
   <tr><td>Service au premier plan, wake lock, vibration</td><td>Pour que l'alarme continue de sonner et de vibrer de manière fiable jusqu'à ce que vous l'arrêtiez.</td></tr>
   <tr><td>Localisation (active et en arrière-plan)</td><td>Uniquement pour les fonctions optionnelles de géorepérage et d'alarmes solaires décrites ci-dessus.</td></tr>
-  <tr><td>Internet</td><td>Uniquement pour les achats (RevenueCat), la synchronisation des jours fériés, les tuiles de carte, les rapports d'erreurs (Sentry), la connexion et la synchronisation entre appareils si vous créez un compte (Supabase) et — si vous l'activez — les statistiques d'utilisation (Aptabase et Amplitude), comme décrit ci-dessus.</td></tr>
+  <tr><td>Internet</td><td>Uniquement pour les achats (RevenueCat), la synchronisation des jours fériés, les tuiles de carte, les prévisions météo (Open-Meteo), les rapports d'erreurs (Sentry), la vérification d'intégrité (Google et Supabase), la connexion et la synchronisation entre appareils si vous créez un compte (Supabase) et — si vous l'activez — les statistiques d'utilisation (Aptabase et Amplitude), comme décrit ci-dessus.</td></tr>
 </table>
 
-<h2>7. Partage et vente de données</h2>
+<h2>8. Partage et vente de données</h2>
 <p>Nous ne vendons, ne louons ni n'échangeons aucune donnée. Les seuls tiers qui
-traitent des données sont les prestataires listés ci-dessus (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude et — si vous créez un
-compte — Supabase), chacun strictement pour la fonction décrite.</p>
+traitent des données via le réseau sont les prestataires listés ci-dessus
+(Google Play, RevenueCat, Nager.Date, l'OpenStreetMap Foundation, Open-Meteo,
+Sentry, Aptabase, Amplitude, Google (pour la vérification d'intégrité, et pour
+la connexion Google si vous l'utilisez) et Supabase), chacun strictement pour la
+fonction décrite. La seule autre façon dont des données parviennent à quelqu'un
+d'autre est la diffusion d'automatisation locale décrite à la section 6 — et
+uniquement si vous l'activez pour une alarme : elle ne quitte jamais votre
+appareil, mais toute application qui y est installée peut s'enregistrer pour la
+recevoir.</p>
 
-<h2>8. Conservation et suppression des données</h2>
+<h2>9. Conservation et suppression des données</h2>
 <p>Les données locales ne résident que sur votre appareil : désinstaller l'App
 les supprime. Si vous avez créé un compte, le supprimer depuis Paramètres →
 Compte → Supprimer le compte efface immédiatement votre compte, votre e-mail
@@ -592,23 +745,23 @@ demander la suppression des enregistrements d'achat anonymes conservés par
 RevenueCat, contactez-nous à l'adresse ci-dessous et nous traiterons la
 demande.</p>
 
-<h2>9. Enfants</h2>
+<h2>10. Enfants</h2>
 <p>L'App ne s'adresse pas aux enfants de moins de 13 ans et ne collecte pas
 sciemment d'informations personnelles les concernant.</p>
 
-<h2>10. Modifications de cette politique</h2>
+<h2>11. Modifications de cette politique</h2>
 <p>Si nous modifions cette politique, nous mettrons à jour cette page et la date
 d'entrée en vigueur ci-dessus. Les changements importants seront signalés dans
 les notes de version de l'App.</p>
 
-<h2>11. Contact</h2>
+<h2>12. Contact</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">Formulaire de contact</a></p>
 
 <hr class="divider">
 
 <!-- ============================== DE ============================== -->
 <h1 id="de">Chronos — Datenschutzerklärung</h1>
-<p class="muted">Gültig ab: 6. August 2026</p>
+<p class="muted">Gültig ab: 11. September 2026</p>
 
 <p>Chronos („die App") ist eine Wecker-App für Android, entwickelt von Luis
 Martín („wir"). Diese Erklärung beschreibt, welche Daten die App verarbeitet und
@@ -646,12 +799,16 @@ ihn <strong>vollständig auf Ihrem Gerät</strong>:</p>
   Standort, um diese Zeiten auf dem Gerät zu berechnen.</li>
 </ul>
 <p>Keine der beiden Funktionen überträgt Ihren Standort von Ihrem Gerät; er wird
-auch nie in einem Verlauf gespeichert oder mit Dritten geteilt. Eine Ausnahme
-gilt, während Sie die Zone festlegen: Die Karte, auf der Sie sie markieren, wird
-von CARTO geladen, sodass der betrachtete Ausschnitt — normalerweise der, in dem
-Sie sich befinden — bei CARTO ankommt. Siehe Abschnitt 5. Wenn Sie diese
-Funktionen nicht nutzen, fordert die App die Standortberechtigung gar nicht erst
-an.</p>
+auch nie in einem Verlauf gespeichert oder mit Dritten geteilt. Es gelten zwei
+Ausnahmen. Während Sie die Zone festlegen, wird die Karte, auf der Sie sie
+markieren, von den Kachelservern der OpenStreetMap Foundation geladen, sodass
+der betrachtete Ausschnitt — normalerweise der, in dem Sie sich befinden — bei
+der OpenStreetMap Foundation ankommt. Und wenn Sie das gesprochene
+Wetterbriefing (eine Premium-Funktion) aktivieren, sendet die App Ihren
+ungefähren Standort — auf etwa einen Kilometer gerundet, nie eine exakte
+Koordinate — an Open-Meteo, um die lokale Vorhersage abzurufen. Beides ist in
+Abschnitt 5 beschrieben. Wenn Sie diese Funktionen nicht nutzen, fordert die App
+die Standortberechtigung gar nicht erst an.</p>
 
 <h2>3. Konten und geräteübergreifende Synchronisierung</h2>
 <p>Ein Konto anzulegen ist vollkommen optional. Chronos ist auf einem einzigen
@@ -678,6 +835,15 @@ Backend-as-a-Service-Anbieter, um Folgendes zu speichern:</p>
   Geräten oder nach einer Neuinstallation wiederhergestellt werden kann. Jede
   Zeile ist an Ihr Konto gebunden und nur von Ihnen lesbar.</li>
 </ul>
+<p><strong>Anmeldung mit Google.</strong> Statt E-Mail und Passwort können Sie
+auf <em>Mit Google fortfahren</em> tippen. Google fragt Sie dann, welches Ihrer
+Google-Konten verwendet werden soll, und übergibt der App ein signiertes Token,
+das dieses Konto identifiziert; Supabase erstellt oder findet damit Ihr Konto.
+In diesem Ablauf erfährt Google, dass Sie sich bei Chronos angemeldet haben, und
+wir erhalten Ihre <strong>E-Mail-Adresse</strong> und den Namen dieses
+Google-Kontos — sonst nichts: keine Kontakte und keinen Zugriff auf irgendeinen
+anderen Google-Dienst. Wenn Google nicht erfahren soll, dass Sie Chronos nutzen,
+verwenden Sie stattdessen E-Mail und Passwort.</p>
 <p>Solange Sie angemeldet sind, gleicht die App Ihre lokalen Wecker/Feiertage
 mit der Kopie in Ihrem Konto ab und führt sie zusammen, jedes Mal, wenn Sie die
 App öffnen oder in den Vordergrund holen, sodass jedes angemeldete Gerät
@@ -690,7 +856,8 @@ entfernen. Dadurch werden Ihr Konto, Ihre E-Mail-Adresse und alle
 synchronisierten Wecker und Feiertage sofort und dauerhaft aus unseren
 Systemen gelöscht — es gibt keine Wartezeit, und Sie müssen uns dafür keine
 E-Mail schreiben. Dies kann nicht rückgängig gemacht werden.</p>
-<p>Supabase handelt nur für diese Funktion als unser Auftragsverarbeiter,
+<p>Supabase handelt für diese Funktion und für die in Abschnitt 5 beschriebene
+Integritätsprüfung als unser Auftragsverarbeiter — für nichts anderes — und wird
 gehostet in der EU (Stockholm, Schweden); wir verkaufen oder teilen diese
 Daten mit niemandem sonst. Siehe die
 <a href="https://supabase.com/privacy">Datenschutzerklärung von Supabase</a>.</p>
@@ -710,20 +877,29 @@ Siehe die <a href="https://www.revenuecat.com/privacy/">Datenschutzerklärung vo
 RevenueCat</a>.</p>
 
 <h2>5. Weitere Netzwerkdienste</h2>
-<p>Die App kontaktiert fünf Dienste für bestimmte Funktionen. Wie bei jeder
+<p>Die App kontaktiert sieben Dienste für bestimmte Funktionen. Wie bei jeder
 Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
 <ul>
   <li><strong>Gesetzliche Feiertage (Nager.Date, date.nager.at):</strong> Wenn
   Sie die automatische Feiertagssynchronisierung aktivieren, lädt die App die
   Feiertagsliste für das gewählte Land und Jahr herunter. Es werden keine
   personenbezogenen Daten gesendet — nur Ländercode und Jahr.</li>
-  <li><strong>Kartenkacheln (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  <li><strong>Kartenkacheln (OpenStreetMap Foundation, tile.openstreetmap.org):</strong>
   Wenn Sie beim Bearbeiten eines Weckers einen Ort auf der Karte auswählen,
-  werden die Kartenbilder von den Servern von CARTO geladen. Die Anfragen
-  verraten den betrachteten Kartenausschnitt, und wenn die Karte auf Ihrer
-  aktuellen Position öffnet, zeigt dieser Ausschnitt, wo Sie sind. Die App sendet
-  CARTO weder Namen noch Konto noch eine Kennung; wie bei jeder Internetanfrage
-  erhält CARTO Ihre IP-Adresse.</li>
+  werden die Kartenbilder von den Servern der OpenStreetMap Foundation geladen.
+  Die Anfragen verraten den betrachteten Kartenausschnitt, und wenn die Karte auf
+  Ihrer aktuellen Position öffnet, zeigt dieser Ausschnitt, wo Sie sind. Die App
+  sendet der OpenStreetMap Foundation weder Ihren Namen noch Ihr Konto noch eine
+  Kennung zu Ihrer Person; jede Anfrage identifiziert jedoch die App selbst
+  (ihren Paketnamen), wie es die Nutzungsrichtlinie der Foundation verlangt, und
+  wie bei jeder Internetanfrage erhält die Foundation Ihre IP-Adresse.</li>
+  <li><strong>Wettervorhersage (Open-Meteo, api.open-meteo.com):</strong> Wenn
+  Sie das gesprochene Wetterbriefing (eine Premium-Funktion) aktivieren, fragt
+  die App bei Open-Meteo die heutige Vorhersage für Ihre Gegend ab und verwendet
+  dabei den ungefähren Standort, der bereits für Solar-Wecker zwischengespeichert
+  ist — auf etwa einen Kilometer gerundet, bevor er Ihr Gerät verlässt, nie die
+  exakte Koordinate. Die App sendet Open-Meteo weder Namen noch Konto noch eine
+  Kennung; wie bei jeder Internetanfrage erhält Open-Meteo Ihre IP-Adresse.</li>
   <li><strong>Absturz- und Fehlerberichte (Sentry):</strong> um Bugs zu
   erkennen, die sonst unbemerkt blieben — etwa einen Weckton, der lautlos
   aufhört zu funktionieren — sendet die App Absturz- und Fehlerberichte an
@@ -756,9 +932,34 @@ Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
   Bildschirmaufzeichnungsfunktion („Session Replay") ist <strong>nicht
   aktiviert</strong>. Siehe den
   <a href="https://amplitude.com/privacy">Amplitude-Datenschutzhinweis</a>.</li>
+  <li><strong>Integritätsprüfung der App (Google Play Integrity und unser
+  Supabase-Backend):</strong> einmal pro App-Version — und <strong>unabhängig
+  davon, ob Sie ein Konto haben</strong> — fragt die App bei Google Play nach, ob
+  diese Installation eine echte, unveränderte Kopie ist, und sendet Googles
+  Antwort an unser eigenes Supabase-Backend, damit wir sehen können, wie viele
+  Installationen manipuliert sind. Sie enthält weder Ihren Namen noch Ihr Konto
+  noch eine Kennung von Ihnen. Um Missbrauch dieses Endpunkts zu verhindern,
+  speichert das Backend höchstens eine Stunde lang einen gesalzenen, nicht
+  umkehrbaren Hash der IP-Adresse der Anfrage; er wird mit nichts anderem
+  verknüpft und täglich gelöscht.</li>
 </ul>
 
-<h2>6. Von der App angeforderte Berechtigungen</h2>
+<h2>6. Integration mit lokaler Automatisierung (optional)</h2>
+<p>Wenn Sie die Aktion beim Ausschalten eines Weckers auf „Automatisierung
+(Tasker)" stellen (zur Nutzung mit Tasker, MacroDroid oder ähnlichen
+Automatisierungs-Apps), sendet das Ausschalten dieses Weckers einen gewöhnlichen
+Android-Broadcast, den jede App auf Ihrem Gerät mit einem passenden
+registrierten Receiver lesen kann — so funktionieren lokale
+Automatisierungs-Integrationen unter Android; der Broadcast verlässt Ihr Gerät
+nie und erreicht auch uns nicht. Er enthält die interne ID des Weckers (eine
+zufällige Kennung, die nicht mit seinem Namen verknüpft ist) und, falls Sie eine
+eingegeben haben, die kurze Bezeichnung, die Sie für diesen Wecker im Editor
+gesetzt haben — sonst nichts, und niemals den Namen oder die Beschreibung des
+Weckers. Diese Funktion ist deaktiviert, solange Sie nicht ausdrücklich
+„Automatisierung (Tasker)" als Aktion beim Ausschalten eines bestimmten Weckers
+auswählen.</p>
+
+<h2>7. Von der App angeforderte Berechtigungen</h2>
 <table>
   <tr><th>Berechtigung</th><th>Zweck</th></tr>
   <tr><td>Benachrichtigungen, Vollbild-Wecker</td><td>Um zu klingeln und den Weckbildschirm anzuzeigen, auch über dem Sperrbildschirm.</td></tr>
@@ -766,17 +967,22 @@ Internetanfrage erhalten diese Dienste technisch bedingt Ihre IP-Adresse:</p>
   <tr><td>Start beim Hochfahren</td><td>Um Ihre Wecker nach einem Neustart des Telefons neu zu aktivieren.</td></tr>
   <tr><td>Vordergrunddienst, Wake Lock, Vibration</td><td>Damit der Wecker zuverlässig weiterklingelt und vibriert, bis Sie ihn ausschalten.</td></tr>
   <tr><td>Standort (Vordergrund &amp; Hintergrund)</td><td>Nur für die oben beschriebenen optionalen Geofencing- und Solar-Wecker-Funktionen.</td></tr>
-  <tr><td>Internet</td><td>Nur für Käufe (RevenueCat), Feiertagssynchronisierung, Kartenkacheln, Fehlerberichte (Sentry), Anmeldung und geräteübergreifende Synchronisierung bei Kontoerstellung (Supabase) und — falls aktiviert — Nutzungsanalyse (Aptabase und Amplitude), wie oben beschrieben.</td></tr>
+  <tr><td>Internet</td><td>Nur für Käufe (RevenueCat), Feiertagssynchronisierung, Kartenkacheln, Wettervorhersagen (Open-Meteo), Fehlerberichte (Sentry), die Integritätsprüfung (Google und Supabase), Anmeldung und geräteübergreifende Synchronisierung bei Kontoerstellung (Supabase) und — falls aktiviert — Nutzungsanalyse (Aptabase und Amplitude), wie oben beschrieben.</td></tr>
 </table>
 
-<h2>7. Weitergabe und Verkauf von Daten</h2>
+<h2>8. Weitergabe und Verkauf von Daten</h2>
 <p>Wir verkaufen, vermieten oder tauschen keinerlei Daten. Die einzigen Dritten,
-die Daten verarbeiten, sind die oben genannten Dienstleister (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude und — falls Sie ein
-Konto anlegen — Supabase), jeweils ausschließlich für die beschriebene
-Funktion.</p>
+die Daten über das Netz verarbeiten, sind die oben genannten Dienstleister
+(Google Play, RevenueCat, Nager.Date, die OpenStreetMap Foundation, Open-Meteo,
+Sentry, Aptabase, Amplitude, Google (für die Integritätsprüfung und, falls Sie
+sie nutzen, für die Google-Anmeldung) und Supabase), jeweils ausschließlich für
+die beschriebene Funktion. Der einzige weitere Weg, auf dem Daten an jemand
+anderen gelangen, ist der in Abschnitt 6 beschriebene lokale
+Automatisierungs-Broadcast — und nur, wenn Sie ihn für einen Wecker aktivieren:
+Er verlässt Ihr Gerät nie, aber jede dort installierte App kann sich für seinen
+Empfang registrieren.</p>
 
-<h2>8. Aufbewahrung und Löschung von Daten</h2>
+<h2>9. Aufbewahrung und Löschung von Daten</h2>
 <p>Lokale Daten existieren nur auf Ihrem Gerät: Beim Deinstallieren der App
 werden sie gelöscht. Falls Sie ein Konto angelegt haben, löscht das Entfernen
 über Einstellungen → Konto → Konto löschen sofort auch Ihr Konto, Ihre
@@ -785,23 +991,23 @@ Um die Löschung der von RevenueCat gespeicherten anonymen Kaufdaten zu
 beantragen, kontaktieren Sie uns unter der unten stehenden E-Mail-Adresse —
 wir bearbeiten die Anfrage.</p>
 
-<h2>9. Kinder</h2>
+<h2>10. Kinder</h2>
 <p>Die App richtet sich nicht an Kinder unter 13 Jahren und erhebt wissentlich
 keine personenbezogenen Daten von ihnen.</p>
 
-<h2>10. Änderungen dieser Erklärung</h2>
+<h2>11. Änderungen dieser Erklärung</h2>
 <p>Wenn wir diese Erklärung ändern, aktualisieren wir diese Seite und das oben
 genannte Gültigkeitsdatum. Wesentliche Änderungen werden in den
 Versionshinweisen der App vermerkt.</p>
 
-<h2>11. Kontakt</h2>
+<h2>12. Kontakt</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">Kontaktformular</a></p>
 
 <hr class="divider">
 
 <!-- ============================== PT ============================== -->
 <h1 id="pt">Chronos — Política de Privacidade</h1>
-<p class="muted">Data de entrada em vigor: 6 de agosto de 2026</p>
+<p class="muted">Data de entrada em vigor: 11 de setembro de 2026</p>
 
 <p>O Chronos («a App») é uma aplicação de despertador para Android desenvolvida
 por Luis Martín («nós»). Esta política explica que dados a App trata e porquê.
@@ -837,11 +1043,15 @@ secção 3.</p>
   calcular essas horas no próprio dispositivo.</li>
 </ul>
 <p>Nenhuma das duas funções envia a sua localização para fora do dispositivo, que
-também nunca é guardada em nenhum histórico nem partilhada com ninguém. Há uma
-exceção enquanto escolhe a zona: o mapa onde a marca é carregado da CARTO, por
-isso a área que consulta — normalmente aquela em que está — chega à CARTO. Ver a
-secção 5. Se não usar estas funções, a App nunca pede a permissão de
-localização.</p>
+também nunca é guardada em nenhum histórico nem partilhada com ninguém. Há duas
+exceções. Enquanto escolhe a zona, o mapa onde a marca é carregado dos
+servidores de mosaicos da OpenStreetMap Foundation, por isso a área que
+consulta — normalmente aquela em que está — chega à OpenStreetMap Foundation.
+E se ativar o briefing falado do tempo (função premium), a App envia a sua
+localização aproximada — arredondada a cerca de um quilómetro, nunca uma
+coordenada exata — para a Open-Meteo, para obter a previsão local do dia.
+Ambas são explicadas na secção 5. Se não usar estas funções, a App nunca pede a
+permissão de localização.</p>
 
 <h2>3. Contas e sincronização entre dispositivos</h2>
 <p>Criar uma conta é totalmente opcional. O Chronos é 100% funcional sem ela,
@@ -867,6 +1077,15 @@ guardar:</p>
   seus outros dispositivos ou depois de reinstalar. Cada linha está associada
   à sua conta e só é legível por si.</li>
 </ul>
+<p><strong>Iniciar sessão com a Google.</strong> Em vez de e-mail e palavra-passe
+pode tocar em <em>Continuar com a Google</em>. A Google pergunta-lhe então qual
+das suas contas Google quer usar e entrega à App um token assinado que
+identifica essa conta; o Supabase cria ou encontra a sua conta a partir dele.
+Nesse fluxo a Google fica a saber que iniciou sessão no Chronos, e nós recebemos
+o seu <strong>endereço de e-mail</strong> e o nome dessa conta Google — nada
+mais: nem contactos, nem acesso a qualquer outro serviço da Google. Se preferir
+que a Google não saiba que usa o Chronos, use a opção de e-mail e
+palavra-passe.</p>
 <p>Enquanto tem a sessão iniciada, a App compara e funde os seus alarmes/
 feriados locais com a cópia da sua conta cada vez que abre a App ou a traz de
 volta para primeiro plano, para que todos os dispositivos com sessão iniciada
@@ -878,7 +1097,8 @@ Eliminar conta. Isto apaga imediata e permanentemente a sua conta, o seu
 e-mail e todos os alarmes/feriados sincronizados dos nossos sistemas — não há
 qualquer período de espera e não precisa de nos escrever para isso. Não pode
 ser desfeito.</p>
-<p>O Supabase atua como o nosso subcontratante apenas para esta função,
+<p>O Supabase atua como o nosso subcontratante para esta função e para a
+verificação de integridade descrita na Secção 5 — nada mais — e está
 alojado na UE (Estocolmo, Suécia); não vendemos nem partilhamos estes dados
 com mais ninguém. Consulte a
 <a href="https://supabase.com/privacy">Política de Privacidade do Supabase</a>.</p>
@@ -898,20 +1118,30 @@ RevenueCat atua como nosso subcontratante e não vende estes dados. Consulte a
 RevenueCat</a>.</p>
 
 <h2>5. Outros serviços de rede</h2>
-<p>A App liga-se a cinco serviços para funções concretas. Como em qualquer
+<p>A App liga-se a sete serviços para funções concretas. Como em qualquer
 pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</p>
 <ul>
   <li><strong>Feriados públicos (Nager.Date, date.nager.at):</strong> se ativar
   a sincronização automática de feriados, a App descarrega a lista de feriados
   do país e do ano que selecionou. Não é enviado nenhum dado pessoal — apenas o
   código do país e o ano.</li>
-  <li><strong>Mosaicos de mapa (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  <li><strong>Mosaicos de mapa (OpenStreetMap Foundation, tile.openstreetmap.org):</strong>
   ao escolher uma localização no mapa enquanto edita um alarme, as imagens do
-  mapa são carregadas dos servidores da CARTO. Os pedidos revelam a área do mapa
-  que está a ver e, quando o mapa abre na sua posição atual, essa área mostra
-  onde está. A App não envia à CARTO o seu nome, a sua conta nem qualquer
-  identificador; como em qualquer pedido pela internet, a CARTO recebe o seu
-  endereço IP.</li>
+  mapa são carregadas dos servidores da OpenStreetMap Foundation. Os pedidos
+  revelam a área do mapa que está a ver e, quando o mapa abre na sua posição
+  atual, essa área mostra onde está. A App não envia à OpenStreetMap Foundation
+  o seu nome, a sua conta nem qualquer identificador seu; cada pedido
+  identifica, isso sim, a própria App (o seu nome de pacote), como exige a
+  política de utilização da Fundação, e, como em qualquer pedido pela internet,
+  a Fundação recebe o seu endereço IP.</li>
+  <li><strong>Previsão meteorológica (Open-Meteo, api.open-meteo.com):</strong>
+  se ativar o briefing falado do tempo (função premium), a App pede à
+  Open-Meteo a previsão do dia para a sua zona, usando a localização
+  aproximada já guardada em cache para os alarmes solares — arredondada a
+  cerca de um quilómetro antes de sair do dispositivo, nunca a coordenada
+  exata. A App não envia à Open-Meteo o seu nome, a sua conta nem qualquer
+  identificador; como em qualquer pedido pela internet, a Open-Meteo recebe o
+  seu endereço IP.</li>
   <li><strong>Relatórios de erro (Sentry):</strong> para detetar falhas que de
   outra forma passariam despercebidas — como um som de alarme que deixa de
   funcionar silenciosamente — a App envia relatórios de erro e de falhas ao
@@ -946,9 +1176,31 @@ pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</
   ativada</strong>. Consulte o
   <a href="https://amplitude.com/privacy">Aviso de Privacidade da
   Amplitude</a>.</li>
+  <li><strong>Verificação de integridade da app (Google Play Integrity e o nosso
+  backend Supabase):</strong> uma vez por versão da app — e <strong>tenha ou não
+  uma conta</strong> — a App pergunta ao Google Play se esta instalação é uma
+  cópia genuína e não modificada, e envia a resposta da Google para o nosso
+  próprio backend Supabase para podermos saber quantas instalações estão
+  adulteradas. Não inclui o seu nome, a sua conta nem qualquer identificador
+  seu. Para evitar o abuso desse ponto de acesso, o backend guarda um hash
+  irreversível e com sal do endereço IP do pedido durante no máximo uma hora;
+  não é associado a mais nada e é eliminado diariamente.</li>
 </ul>
 
-<h2>6. Permissões que a App solicita</h2>
+<h2>6. Integração com automação local (opcional)</h2>
+<p>Se definir a ação ao desligar de um alarme como "Automação (Tasker)" (para
+usar com o Tasker, o MacroDroid ou apps de automação semelhantes), desligar esse
+alarme envia uma transmissão padrão do Android que qualquer app do seu
+dispositivo com um recetor registado para ela consegue ler — é assim que
+funcionam no Android as integrações de automação locais, e essa transmissão
+nunca sai do seu dispositivo nem chega até nós. Leva o identificador interno do
+alarme (um identificador aleatório, não associado ao seu nome) e, se a tiver
+escrito, a tag curta que definiu para esse alarme no editor — nada mais, e nunca
+o nome nem a descrição do alarme. Esta funcionalidade está desativada a menos
+que escolha expressamente "Automação (Tasker)" como ação ao desligar de um
+alarme concreto.</p>
+
+<h2>7. Permissões que a App solicita</h2>
 <table>
   <tr><th>Permissão</th><th>Para quê</th></tr>
   <tr><td>Notificações, alarmes em ecrã inteiro</td><td>Para tocar e mostrar o ecrã de alarme, mesmo sobre o ecrã de bloqueio.</td></tr>
@@ -956,16 +1208,21 @@ pedido pela internet, estes serviços recebem tecnicamente o seu endereço IP:</
   <tr><td>Executar no arranque</td><td>Para reprogramar os seus alarmes depois de o telemóvel reiniciar.</td></tr>
   <tr><td>Serviço em primeiro plano, wake lock, vibração</td><td>Para que o alarme continue a tocar e a vibrar de forma fiável até o desligar.</td></tr>
   <tr><td>Localização (em uso e em segundo plano)</td><td>Apenas para as funções opcionais de geovedação e alarmes solares descritas acima.</td></tr>
-  <tr><td>Internet</td><td>Apenas para compras (RevenueCat), sincronização de feriados, mosaicos de mapa, relatórios de erro (Sentry), início de sessão e sincronização entre dispositivos se criar uma conta (Supabase) e — se ativar — análise de utilização (Aptabase e Amplitude), conforme descrito acima.</td></tr>
+  <tr><td>Internet</td><td>Apenas para compras (RevenueCat), sincronização de feriados, mosaicos de mapa, previsões meteorológicas (Open-Meteo), relatórios de erro (Sentry), a verificação de integridade (Google e Supabase), início de sessão e sincronização entre dispositivos se criar uma conta (Supabase) e — se ativar — análise de utilização (Aptabase e Amplitude), conforme descrito acima.</td></tr>
 </table>
 
-<h2>7. Partilha e venda de dados</h2>
+<h2>8. Partilha e venda de dados</h2>
 <p>Não vendemos, alugamos nem trocamos nenhum dado. Os únicos terceiros que
-processam dados são os fornecedores de serviços listados acima (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude e — se criar uma
-conta — Supabase), cada um estritamente para a função descrita.</p>
+processam dados através da rede são os fornecedores de serviços listados acima
+(Google Play, RevenueCat, Nager.Date, a OpenStreetMap Foundation, Open-Meteo,
+Sentry, Aptabase, Amplitude, Google (para a verificação de integridade e, se a
+usar, para o início de sessão com a Google) e Supabase), cada um estritamente
+para a função descrita. A única outra via pela qual algum dado chega a outrem é
+a transmissão de automação local descrita na secção 6 — e apenas se a ativar
+num alarme: nunca sai do seu dispositivo, mas qualquer app aí instalada pode
+registar-se para a receber.</p>
 
-<h2>8. Conservação e eliminação de dados</h2>
+<h2>9. Conservação e eliminação de dados</h2>
 <p>Os dados locais vivem apenas no seu dispositivo: ao desinstalar a App, são
 eliminados. Se criou uma conta, eliminá-la em Configurações → Conta →
 Eliminar conta apaga imediatamente a sua conta, o seu e-mail e os alarmes/
@@ -973,23 +1230,23 @@ feriados sincronizados também — ver a secção 3. Para pedir a eliminação d
 registos anónimos de compra guardados pelo RevenueCat, escreva-nos para o
 e-mail abaixo e trataremos do pedido.</p>
 
-<h2>9. Menores</h2>
+<h2>10. Menores</h2>
 <p>A App não se destina a menores de 13 anos e não recolhe conscientemente
 informações pessoais de menores.</p>
 
-<h2>10. Alterações a esta política</h2>
+<h2>11. Alterações a esta política</h2>
 <p>Se alterarmos esta política, atualizaremos esta página e a data de entrada em
 vigor acima. As alterações relevantes serão indicadas nas notas de versão da
 App.</p>
 
-<h2>11. Contacto</h2>
+<h2>12. Contacto</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">Formulário de contacto</a></p>
 
 <hr class="divider">
 
 <!-- ============================== IT ============================== -->
 <h1 id="it">Chronos — Informativa sulla Privacy</h1>
-<p class="muted">Data di entrata in vigore: 6 agosto 2026</p>
+<p class="muted">Data di entrata in vigore: 11 settembre 2026</p>
 
 <p>Chronos («l'App») è un'app sveglia per Android sviluppata da Luis Martín
 («noi»). Questa informativa spiega quali dati tratta l'App e perché. In breve:
@@ -1026,11 +1283,16 @@ elaborano <strong>interamente sul tuo dispositivo</strong>:</p>
   calcolare quegli orari sul dispositivo.</li>
 </ul>
 <p>Nessuna delle due funzioni trasmette la tua posizione fuori dal dispositivo,
-che non viene mai salvata in alcuna cronologia né condivisa con nessuno. C'è
-un'eccezione mentre scegli la zona: la mappa su cui la indichi viene caricata da
-CARTO, quindi l'area che consulti — di norma quella in cui ti trovi — arriva a
-CARTO. Vedi la sezione 5. Se non usi queste funzioni, l'App non richiede mai
-l'autorizzazione alla posizione.</p>
+che non viene mai salvata in alcuna cronologia né condivisa con nessuno. Ci
+sono due eccezioni. Mentre scegli la zona, la mappa su cui la indichi viene
+caricata dai server di riquadri della OpenStreetMap Foundation, quindi l'area
+che consulti — di norma quella in cui ti trovi — arriva alla OpenStreetMap
+Foundation. E se attivi il briefing vocale meteo (funzione
+premium), l'App invia la tua posizione approssimativa — arrotondata a circa un
+chilometro, mai una coordinata esatta — a Open-Meteo per ottenere le
+previsioni locali del giorno. Entrambe sono descritte nella sezione 5. Se non
+usi queste funzioni, l'App non richiede mai l'autorizzazione alla
+posizione.</p>
 
 <h2>3. Account e sincronizzazione tra dispositivi</h2>
 <p>Creare un account è completamente facoltativo. Chronos è funzionale al 100%
@@ -1056,6 +1318,14 @@ memorizzare:</p>
   ripristinata sui tuoi altri dispositivi o dopo una reinstallazione. Ogni
   riga è collegata al tuo account e leggibile solo da te.</li>
 </ul>
+<p><strong>Accedere con Google.</strong> Al posto di e-mail e password puoi
+toccare <em>Continua con Google</em>. Google ti chiede quindi quale dei tuoi
+account Google usare e consegna all'App un token firmato che identifica quell'account;
+Supabase crea o ritrova il tuo account a partire da esso. In questo flusso Google
+viene a sapere che hai effettuato l'accesso a Chronos, e noi riceviamo il tuo
+<strong>indirizzo e-mail</strong> e il nome di quell'account Google — nient'altro:
+nessun contatto e nessun accesso ad altri servizi Google. Se preferisci che
+Google non sappia che usi Chronos, usa invece l'opzione e-mail e password.</p>
 <p>Mentre hai effettuato l'accesso, l'App confronta e unisce le tue sveglie/
 festività locali con la copia del tuo account ogni volta che apri l'App o la
 riporti in primo piano, così che ogni dispositivo con accesso effettuato finisca
@@ -1067,8 +1337,9 @@ Account → Elimina account. Questo cancella immediatamente e permanentemente
 il tuo account, la tua e-mail e tutte le sveglie/festività sincronizzate dai
 nostri sistemi — non c'è alcun periodo di attesa e non devi scriverci per
 questo. Non può essere annullato.</p>
-<p>Supabase agisce come nostro responsabile del trattamento solo per questa
-funzione, ospitato nell'UE (Stoccolma, Svezia); non vendiamo né condividiamo
+<p>Supabase agisce come nostro responsabile del trattamento per questa funzione e
+per la verifica di integrità descritta nella Sezione 5 — nient'altro — ed è
+ospitato nell'UE (Stoccolma, Svezia); non vendiamo né condividiamo
 questi dati con nessun altro. Consulta l'<a
 href="https://supabase.com/privacy">informativa sulla privacy di Supabase</a>.</p>
 
@@ -1088,20 +1359,31 @@ href="https://www.revenuecat.com/privacy/">informativa sulla privacy di
 RevenueCat</a>.</p>
 
 <h2>5. Altri servizi di rete</h2>
-<p>L'App contatta cinque servizi per funzioni specifiche. Come per qualsiasi
+<p>L'App contatta sette servizi per funzioni specifiche. Come per qualsiasi
 richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p>
 <ul>
   <li><strong>Festività pubbliche (Nager.Date, date.nager.at):</strong> se
   attivi la sincronizzazione automatica delle festività, l'App scarica l'elenco
   delle festività del paese e dell'anno selezionati. Non viene inviato alcun
   dato personale — solo il codice del paese e l'anno.</li>
-  <li><strong>Riquadri della mappa (CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
+  <li><strong>Riquadri della mappa (OpenStreetMap Foundation, tile.openstreetmap.org):</strong>
   quando scegli una posizione sulla mappa mentre modifichi una sveglia, le
-  immagini della mappa vengono caricate dai server di CARTO. Le richieste
-  rivelano l'area della mappa che stai guardando e, quando la mappa si apre sulla
-  tua posizione attuale, quell'area mostra dove ti trovi. L'App non invia a CARTO
-  il tuo nome, il tuo account né alcun identificatore; come per qualsiasi
-  richiesta internet, CARTO riceve il tuo indirizzo IP.</li>
+  immagini della mappa vengono caricate dai server della OpenStreetMap
+  Foundation. Le richieste rivelano l'area della mappa che stai guardando e,
+  quando la mappa si apre sulla tua posizione attuale, quell'area mostra dove ti
+  trovi. L'App non invia alla OpenStreetMap Foundation il tuo nome, il tuo
+  account né alcun identificatore che ti riguardi; ogni richiesta identifica
+  invece l'App stessa (il suo nome di pacchetto), come richiede la politica d'uso
+  della Foundation, e, come per qualsiasi richiesta internet, la Foundation
+  riceve il tuo indirizzo IP.</li>
+  <li><strong>Previsioni meteo (Open-Meteo, api.open-meteo.com):</strong> se
+  attivi il briefing vocale meteo (funzione premium), l'App chiede a
+  Open-Meteo le previsioni del giorno per la tua zona, usando la posizione
+  approssimativa già salvata in cache per le sveglie solari — arrotondata a
+  circa un chilometro prima di lasciare il dispositivo, mai la coordinata
+  esatta. L'App non invia a Open-Meteo il tuo nome, il tuo account né alcun
+  identificatore; come per qualsiasi richiesta internet, Open-Meteo riceve il
+  tuo indirizzo IP.</li>
   <li><strong>Segnalazione di errori e crash (Sentry):</strong> per individuare
   bug che altrimenti passerebbero inosservati — come un suono della sveglia che
   smette di funzionare silenziosamente — l'App invia segnalazioni di crash ed
@@ -1134,9 +1416,31 @@ richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p
   <strong>non è attivata</strong>. Consulta
   l'<a href="https://amplitude.com/privacy">informativa sulla privacy di
   Amplitude</a>.</li>
+  <li><strong>Verifica di integrità dell'app (Google Play Integrity e il nostro
+  backend Supabase):</strong> una volta per versione dell'app — e <strong>che tu
+  abbia un account oppure no</strong> — l'App chiede a Google Play se questa
+  installazione è una copia autentica e non modificata, e invia la risposta di
+  Google al nostro backend Supabase per poter sapere quante installazioni sono
+  manomesse. Non contiene il tuo nome, il tuo account né alcun identificatore
+  che ti riguardi. Per impedire abusi di quell'endpoint, il backend conserva un
+  hash irreversibile e con sale dell'indirizzo IP della richiesta per un'ora al
+  massimo; non è collegato a nient'altro e viene eliminato ogni giorno.</li>
 </ul>
 
-<h2>6. Autorizzazioni richieste dall'App</h2>
+<h2>6. Integrazione con l'automazione locale (opzionale)</h2>
+<p>Se imposti l'azione allo spegnimento di una sveglia su "Automazione
+(Tasker)" (per usarla con Tasker, MacroDroid o app di automazione simili),
+spegnere quella sveglia invia un normale broadcast Android che qualsiasi app sul
+tuo dispositivo con un receiver registrato corrispondente può leggere — è così
+che funzionano su Android le integrazioni di automazione locali, e quel
+broadcast non lascia mai il tuo dispositivo né arriva a noi. Contiene l'id
+interno della sveglia (un identificatore casuale, non collegato al suo nome) e,
+se lo hai scritto, il breve tag che hai impostato per quella sveglia
+nell'editor — nient'altro, e mai il nome o la descrizione della sveglia. Questa
+funzione è disattivata a meno che tu non scelga esplicitamente "Automazione
+(Tasker)" come azione allo spegnimento di una sveglia specifica.</p>
+
+<h2>7. Autorizzazioni richieste dall'App</h2>
 <table>
   <tr><th>Autorizzazione</th><th>Perché</th></tr>
   <tr><td>Notifiche, sveglie a schermo intero</td><td>Per suonare e mostrare la schermata della sveglia, anche sopra la schermata di blocco.</td></tr>
@@ -1144,16 +1448,21 @@ richiesta internet, questi servizi ricevono tecnicamente il tuo indirizzo IP:</p
   <tr><td>Esecuzione all'avvio</td><td>Per riattivare le tue sveglie dopo il riavvio del telefono.</td></tr>
   <tr><td>Servizio in primo piano, wake lock, vibrazione</td><td>Perché la sveglia continui a suonare e vibrare in modo affidabile finché non la spegni.</td></tr>
   <tr><td>Posizione (in uso e in background)</td><td>Solo per le funzioni opzionali di geofencing e sveglie solari descritte sopra.</td></tr>
-  <tr><td>Internet</td><td>Solo per gli acquisti (RevenueCat), la sincronizzazione delle festività, i riquadri della mappa, la segnalazione errori (Sentry), l'accesso e la sincronizzazione tra dispositivi se crei un account (Supabase) e — se attivata — l'analisi d'uso (Aptabase e Amplitude), come descritto sopra.</td></tr>
+  <tr><td>Internet</td><td>Solo per gli acquisti (RevenueCat), la sincronizzazione delle festività, i riquadri della mappa, le previsioni meteo (Open-Meteo), la segnalazione errori (Sentry), la verifica di integrità (Google e Supabase), l'accesso e la sincronizzazione tra dispositivi se crei un account (Supabase) e — se attivata — l'analisi d'uso (Aptabase e Amplitude), come descritto sopra.</td></tr>
 </table>
 
-<h2>7. Condivisione e vendita di dati</h2>
+<h2>8. Condivisione e vendita di dati</h2>
 <p>Non vendiamo, affittiamo né scambiamo alcun dato. Gli unici terzi che
-trattano dati sono i fornitori di servizi elencati sopra (Google Play,
-RevenueCat, Nager.Date, CARTO, Sentry, Aptabase, Amplitude e — se crei un
-account — Supabase), ciascuno strettamente per la funzione descritta.</p>
+trattano dati attraverso la rete sono i fornitori di servizi elencati sopra
+(Google Play, RevenueCat, Nager.Date, la OpenStreetMap Foundation, Open-Meteo,
+Sentry, Aptabase, Amplitude, Google (per la verifica di integrità e, se lo usi,
+per l'accesso con Google) e Supabase), ciascuno strettamente per la funzione
+descritta. L'unico altro modo in cui dei dati arrivano a qualcun altro è il
+broadcast di automazione locale descritto nella sezione 6 — e solo se lo attivi
+per una sveglia: non lascia mai il tuo dispositivo, ma qualsiasi app installata
+su di esso può registrarsi per riceverlo.</p>
 
-<h2>8. Conservazione ed eliminazione dei dati</h2>
+<h2>9. Conservazione ed eliminazione dei dati</h2>
 <p>I dati locali risiedono solo sul tuo dispositivo: disinstallando l'App
 vengono eliminati. Se hai creato un account, eliminarlo da Impostazioni →
 Account → Elimina account cancella subito anche il tuo account, la tua
@@ -1161,23 +1470,23 @@ e-mail e le sveglie/festività sincronizzate — vedi la sezione 3. Per
 richiedere l'eliminazione dei record anonimi di acquisto conservati da
 RevenueCat, scrivici all'indirizzo e-mail qui sotto ed evaderemo la richiesta.</p>
 
-<h2>9. Minori</h2>
+<h2>10. Minori</h2>
 <p>L'App non è rivolta a minori di 13 anni e non raccoglie consapevolmente
 informazioni personali da loro.</p>
 
-<h2>10. Modifiche a questa informativa</h2>
+<h2>11. Modifiche a questa informativa</h2>
 <p>Se modifichiamo questa informativa, aggiorneremo questa pagina e la data di
 entrata in vigore indicata sopra. Le modifiche rilevanti saranno segnalate nelle
 note di rilascio dell'App.</p>
 
-<h2>11. Contatto</h2>
+<h2>12. Contatto</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">Modulo di contatto</a></p>
 
 <hr class="divider">
 
 <!-- ============================== ZH ============================== -->
 <h1 id="zh">Chronos — 隐私政策</h1>
-<p class="muted">生效日期：2026年8月6日</p>
+<p class="muted">生效日期：2026年9月11日</p>
 
 <p>Chronos（“本应用”）是由 Luis Martín（“我们”）开发的 Android 闹钟应用。
 本政策说明本应用处理哪些数据及其原因。简而言之：<strong>Chronos 在您的设备上
@@ -1205,9 +1514,12 @@ note di rilascio dell'App.</p>
   本应用会使用您的大致位置在设备上计算这些时间。</li>
 </ul>
 <p>这两项功能都不会将您的位置信息传出设备，位置信息也不会存储在任何历史记录中
-或与任何人共享。但在您选择区域时有一个例外：用于标记的地图由 CARTO 加载，因此
-您查看的区域——通常就是您所在的区域——会传到 CARTO。详见第 5 节。如果您不使用
-这些功能，本应用永远不会请求位置权限。</p>
+或与任何人共享。这里有两个例外：在您选择区域时，用于标记的地图由 OpenStreetMap
+基金会（OpenStreetMap Foundation）的图块服务器加载，因此您查看的区域——通常就是
+您所在的区域——会传到 OpenStreetMap 基金会。此外，如果您启用了
+语音天气播报（高级版功能），本应用会将您的大致位置——精确到约 1 公里，从不是
+精确坐标——发送给 Open-Meteo，以获取当天的本地天气预报。两者均在第 5 节说明。
+如果您不使用这些功能，本应用永远不会请求位置权限。</p>
 
 <h2>3. 账号与跨设备同步</h2>
 <p>创建账号完全是可选的。Chronos 在单台设备上无需账号即可永久 100% 正常
@@ -1226,6 +1538,12 @@ note di rilascio dell'App.</p>
   您的 Supabase 账号中，以便在您的其他设备上或重新安装后恢复。每一行数据都
   与您的账号绑定，仅您本人可读取。</li>
 </ul>
+<p><strong>使用 Google 登录。</strong>除了电子邮件和密码，您也可以点按
+<em>使用 Google 继续</em>。届时 Google 会询问您要使用哪个 Google 账户，并向本应用
+提供一个标识该账户的签名令牌；Supabase 据此创建或找到您的账户。在此流程中，Google
+会得知您登录了 Chronos，而我们会收到您的<strong>电子邮件地址</strong>以及该 Google
+账户上的姓名——仅此而已：不包括通讯录，也不包括对任何其他 Google 服务的访问权限。
+如果您不希望 Google 知道您在使用 Chronos，请改用电子邮件和密码登录。</p>
 <p>在您登录期间，每次打开本应用或将其切换到前台时，本应用都会比对并合并您本地
 的闹钟/节假日与您账号中的副本，使每台已登录的设备最终拥有相同的数据。这不是
 实时同步：在一台设备上所做的更改，要等到另一台设备下次打开或恢复本应用时才会
@@ -1233,7 +1551,8 @@ note di rilascio dell'App.</p>
 <p>您可以随时在设置 → 账号 → 删除账号中删除您的账号。这会立即永久地从我们的
 系统中删除您的账号、邮箱以及所有已同步的闹钟和节假日——没有等待期，也无需
 给我们发邮件。此操作无法撤销。</p>
-<p>Supabase 仅为此功能担任我们的服务提供商（数据处理者），托管于欧盟
+<p>Supabase 仅为此功能以及第 5 节所述的完整性检查担任我们的服务提供商（数据处理者），
+不用于其他任何用途，托管于欧盟
 （瑞典斯德哥尔摩）；我们不会将这些数据出售或与其他任何人共享。请参阅
 <a href="https://supabase.com/privacy">Supabase 隐私政策</a>。</p>
 
@@ -1248,17 +1567,23 @@ note di rilascio dell'App.</p>
 <a href="https://www.revenuecat.com/privacy/">RevenueCat 隐私政策</a>。</p>
 
 <h2>5. 其他网络服务</h2>
-<p>本应用会为特定功能连接五个服务。与任何互联网请求一样，这些服务在技术上
+<p>本应用会为特定功能连接七个服务。与任何互联网请求一样，这些服务在技术上
 会收到您的 IP 地址：</p>
 <ul>
   <li><strong>公共节假日（Nager.Date，date.nager.at）：</strong>如果您启用节假日
   自动同步，本应用会下载您所选国家/地区和年份的公共节假日列表。不会发送任何
   个人数据——仅发送国家/地区代码和年份。</li>
-  <li><strong>地图图块（CARTO / OpenStreetMap，basemaps.cartocdn.com）：</strong>
-  当您在编辑闹钟时在地图上选择位置，地图图像会从 CARTO 的服务器加载。这些请求
-  会显示您正在查看的地图区域；当地图在您的当前位置打开时，该区域即表明您身在
-  何处。本应用不会向 CARTO 发送您的姓名、账号或任何标识符；与任何互联网请求
-  一样，CARTO 会收到您的 IP 地址。</li>
+  <li><strong>地图图块（OpenStreetMap 基金会，tile.openstreetmap.org）：</strong>
+  当您在编辑闹钟时在地图上选择位置，地图图像会从 OpenStreetMap 基金会的服务器
+  加载。这些请求会显示您正在查看的地图区域；当地图在您的当前位置打开时，该区域
+  即表明您身在何处。本应用不会向 OpenStreetMap 基金会发送您的姓名、账号或任何
+  关于您的标识符；但每个请求都会按该基金会使用政策的要求标明本应用自身（其包名）。
+  与任何互联网请求一样，该基金会会收到您的 IP 地址。</li>
+  <li><strong>天气预报（Open-Meteo，api.open-meteo.com）：</strong>如果您启用了
+  语音天气播报（高级版功能），本应用会使用已为太阳闹钟缓存的大致位置——在离开
+  您的设备前精确到约 1 公里，从不是精确坐标——向 Open-Meteo 请求您所在地区
+  当天的天气预报。本应用不会向 Open-Meteo 发送您的姓名、账号或任何标识符；
+  与任何互联网请求一样，Open-Meteo 会收到您的 IP 地址。</li>
   <li><strong>崩溃与错误报告（Sentry）：</strong>为了发现那些原本会被悄悄忽略的
   程序缺陷——例如闹钟铃声无声无息地失效——本应用会向 Sentry 发送崩溃与错误报告。
   该功能<strong>默认开启</strong>；您可以随时在设置中关闭（“发送匿名错误报告”）。
@@ -1279,9 +1604,25 @@ note di rilascio dell'App.</p>
   自由文本内容</strong>，且 Amplitude 的可选屏幕录制功能（"Session
   Replay"）<strong>未启用</strong>。请参阅
   <a href="https://amplitude.com/privacy">Amplitude 隐私声明</a>。</li>
+  <li><strong>应用完整性检查（Google Play Integrity 与我们的 Supabase 后端）：</strong>
+  每个应用版本一次，且<strong>无论您是否拥有账户</strong>，本应用都会询问 Google Play
+  此安装是否为未经修改的正版副本，并将 Google 的答复发送至我们自己的 Supabase 后端，
+  以便我们了解有多少安装被篡改。其中不包含您的姓名、账户或任何标识符。为防止该端点被
+  滥用，后端会将请求 IP 地址的加盐不可逆哈希值最多保留一小时；它不与任何其他信息关联，
+  并且每天删除。</li>
 </ul>
 
-<h2>6. 本应用请求的权限</h2>
+<h2>6. 本地自动化集成（可选）</h2>
+<p>如果您将某个闹钟关闹钟时执行的操作设为“自动化（Tasker）”（以便配合 Tasker、
+MacroDroid 等自动化应用使用），关掉该闹钟时本应用会发送一条标准的 Android 广播，
+您设备上任何注册了相应接收器的应用都能读取它——Android 上的本地自动化集成正是
+这样工作的；该广播绝不会离开您的设备，也不会传到我们这里。它只携带该闹钟的内部
+id（一个随机标识符，与闹钟名称无关），以及您在编辑界面为该闹钟填写的简短标签
+（如果您填写了）——除此之外别无其他，绝不会包含闹钟的名称或描述。除非您明确为
+某个具体的闹钟选择“自动化（Tasker）”作为关闹钟时执行的操作，否则此功能处于关闭
+状态。</p>
+
+<h2>7. 本应用请求的权限</h2>
 <table>
   <tr><th>权限</th><th>用途</th></tr>
   <tr><td>通知、全屏闹钟</td><td>用于响铃并显示闹钟界面，包括在锁屏之上。</td></tr>
@@ -1289,35 +1630,38 @@ note di rilascio dell'App.</p>
   <tr><td>开机自启动</td><td>在手机重启后重新设置您的闹钟。</td></tr>
   <tr><td>前台服务、唤醒锁、振动</td><td>确保闹钟持续可靠地响铃和振动，直到您将其关闭。</td></tr>
   <tr><td>位置（前台和后台）</td><td>仅用于上文所述的可选地理围栏和太阳闹钟功能。</td></tr>
-  <tr><td>互联网</td><td>仅用于上文所述的购买（RevenueCat）、节假日同步、地图图块、错误报告（Sentry）、创建账号后的登录与跨设备同步（Supabase），以及（如果您选择开启）使用情况分析（Aptabase 和 Amplitude）。</td></tr>
+  <tr><td>互联网</td><td>仅用于上文所述的购买（RevenueCat）、节假日同步、地图图块、天气预报（Open-Meteo）、错误报告（Sentry）、完整性检查（Google 与 Supabase）、创建账号后的登录与跨设备同步（Supabase），以及（如果您选择开启）使用情况分析（Aptabase 和 Amplitude）。</td></tr>
 </table>
 
-<h2>7. 数据共享与出售</h2>
-<p>我们不出售、出租或交换任何数据。处理数据的第三方仅限于上文列出的服务提供商
-（Google Play、RevenueCat、Nager.Date、CARTO、Sentry、Aptabase、Amplitude，以及在您创建账号后的
-Supabase），且各自严格限于所述功能。</p>
+<h2>8. 数据共享与出售</h2>
+<p>我们不出售、出租或交换任何数据。通过网络处理数据的第三方仅限于上文列出的服务
+提供商（Google Play、RevenueCat、Nager.Date、OpenStreetMap 基金会、Open-Meteo、Sentry、
+Aptabase、Amplitude、Google（用于完整性检查，以及您使用时的 Google 登录）和 Supabase），
+且各自严格限于所述功能。数据到达他人手中的唯一另一种途径，是第 6 节所述的本地
+自动化广播——而且只有在您为某个闹钟开启它时才会发生：它绝不会离开您的设备，但
+设备上安装的任何应用都可以注册接收它。</p>
 
-<h2>8. 数据保留与删除</h2>
+<h2>9. 数据保留与删除</h2>
 <p>本地数据仅存在于您的设备上：卸载本应用即删除。如果您创建了账号，在设置 →
 账号 → 删除账号中删除账号会立即一并删除您的账号、邮箱以及已同步的闹钟/节假日
 ——详见第 3 节。如需删除 RevenueCat 保存的匿名购买记录，请通过下方电子邮箱
 联系我们，我们会处理您的请求。</p>
 
-<h2>9. 儿童</h2>
+<h2>10. 儿童</h2>
 <p>本应用不面向 13 岁以下儿童，也不会有意收集他们的个人信息。</p>
 
-<h2>10. 本政策的变更</h2>
+<h2>11. 本政策的变更</h2>
 <p>如果我们更改本政策，将更新本页面及上方的生效日期。重大变更会在应用的版本
 说明中注明。</p>
 
-<h2>11. 联系方式</h2>
+<h2>12. 联系方式</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">联系表单</a></p>
 
 <hr class="divider">
 
 <!-- ============================== JA ============================== -->
 <h1 id="ja">Chronos — プライバシーポリシー</h1>
-<p class="muted">発効日：2026年8月6日</p>
+<p class="muted">発効日：2026年9月11日</p>
 
 <p>Chronos（以下「本アプリ」）は、Luis Martín（以下「当方」）が開発した
 Android 向け目覚ましアプリです。本ポリシーでは、本アプリがどのようなデータを
@@ -1351,10 +1695,14 @@ Android 向け目覚ましアプリです。本ポリシーでは、本アプリ
   計算します。</li>
 </ul>
 <p>この2つの機能が位置情報を端末の外に送信することはなく、履歴として保存される
-ことも、誰かと共有されることもありません。ただしゾーンを選ぶ際に1点だけ例外が
-あります。場所を指定する地図は CARTO から読み込まれるため、閲覧している範囲——
-通常はあなたのいる範囲——が CARTO に伝わります。第5項をご覧ください。これらの
-機能を使用しない場合、本アプリが位置情報の権限を求めることはありません。</p>
+ことも、誰かと共有されることもありません。ただし例外が2点あります。ゾーンを
+選ぶ際、場所を指定する地図は OpenStreetMap 財団（OpenStreetMap Foundation）の
+タイルサーバーから読み込まれるため、閲覧している範囲——通常はあなたのいる範囲——
+が OpenStreetMap 財団に伝わります。また、音声天気ブリーフィング
+（プレミアム機能）を有効にした場合、本アプリはおおよその位置情報——約1km単位に
+丸めたもので、正確な座標ではありません——を Open-Meteo に送信し、当日の
+天気予報を取得します。いずれも第5項で説明しています。これらの機能を使用しない
+場合、本アプリが位置情報の権限を求めることはありません。</p>
 
 <h2>3. アカウントと端末間の同期</h2>
 <p>アカウントの作成は完全に任意です。Chronos は、単一の端末上であれば
@@ -1379,6 +1727,15 @@ Android 向け目覚ましアプリです。本ポリシーでは、本アプリ
   復元できるよう、Supabase アカウント内にもコピーが保存されます。各データ行は
   お客様のアカウントに紐づけられ、ご本人のみが読み取れます。</li>
 </ul>
+<p><strong>Google でのログイン。</strong>メールアドレスとパスワードの代わりに
+<em>Google で続行</em>をタップすることもできます。その場合、Google はどの Google
+アカウントを使用するかを尋ね、そのアカウントを識別する署名付きトークンを本アプリに
+渡します。Supabase はそれをもとにお客様のアカウントを作成または検索します。この
+フローでは、お客様が Chronos にログインしたことを Google が知ることになり、当社は
+お客様の<strong>メールアドレス</strong>とその Google アカウントの名前を受け取ります
+——それ以外は何も受け取りません。連絡先も、他の Google サービスへのアクセス権も
+含まれません。Google に Chronos の利用を知られたくない場合は、メールアドレスと
+パスワードでのログインをご利用ください。</p>
 <p>サインイン中は、本アプリを開くか前面に戻すたびに、端末内のアラーム・祝日と
 アカウント内のコピーが比較・統合され、サインインしているすべての端末が
 最終的に同じデータを持つようになります。これはリアルタイムではありません —
@@ -1388,7 +1745,8 @@ Android 向け目覚ましアプリです。本ポリシーでは、本アプリ
 これにより、お客様のアカウント、メールアドレス、および同期済みのすべての
 アラーム・祝日が、当方のシステムから即座かつ完全に消去されます — 待機期間は
 なく、そのためにメールを送っていただく必要もありません。この操作は取り消せません。</p>
-<p>Supabase は、この機能に限り当方のサービスプロバイダー（データ処理者）として
+<p>Supabase は、この機能および第 5 節に記載の整合性チェックに限り当方のサービス
+プロバイダー（データ処理者）として
 行動し、EU（スウェーデン・ストックホルム）でホストされています。当方はこれらの
 データを販売したり、他の誰かと共有したりすることはありません。詳細は
 <a href="https://supabase.com/privacy">Supabase のプライバシーポリシー</a>を
@@ -1409,18 +1767,26 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
 ポリシー</a>をご覧ください。</p>
 
 <h2>5. その他のネットワークサービス</h2>
-<p>本アプリは、特定の機能のために5つのサービスに接続します。あらゆる
+<p>本アプリは、特定の機能のために7つのサービスに接続します。あらゆる
 インターネット通信と同様、技術上これらのサービスに IP アドレスが送信されます。</p>
 <ul>
   <li><strong>祝日（Nager.Date、date.nager.at）：</strong>祝日の自動同期を
   有効にすると、本アプリは選択した国と年の祝日リストをダウンロードします。
   個人データは送信されません — 国コードと年のみです。</li>
-  <li><strong>地図タイル（CARTO / OpenStreetMap、basemaps.cartocdn.com）：</strong>
-  アラーム編集中に地図上で場所を選ぶと、地図画像が CARTO のサーバーから
+  <li><strong>地図タイル（OpenStreetMap 財団、tile.openstreetmap.org）：</strong>
+  アラーム編集中に地図上で場所を選ぶと、地図画像が OpenStreetMap 財団のサーバーから
   読み込まれます。このリクエストから閲覧中の地図の範囲が分かり、地図が現在地を
   中心に開いた場合、その範囲はあなたの居場所を示します。本アプリがあなたの氏名・
-  アカウント・識別子を CARTO に送ることはありません。あらゆるインターネット通信と
-  同様、CARTO には IP アドレスが送信されます。</li>
+  アカウント・識別子を OpenStreetMap 財団に送ることはありません。ただし各リクエストは、
+  同財団の利用ポリシーの要件に従い、本アプリ自体（パッケージ名）を示します。あらゆる
+  インターネット通信と同様、同財団には IP アドレスが送信されます。</li>
+  <li><strong>天気予報（Open-Meteo、api.open-meteo.com）：</strong>音声天気
+  ブリーフィング（プレミアム機能）を有効にすると、本アプリは太陽アラーム用に
+  すでにキャッシュされているおおよその位置情報——端末を出る前に約1km単位に
+  丸めたもので、正確な座標ではありません——を使って、Open-Meteo にお住まいの
+  地域の当日の天気予報を要求します。本アプリがあなたの氏名・アカウント・識別子を
+  Open-Meteo に送ることはありません。あらゆるインターネット通信と同様、
+  Open-Meteo には IP アドレスが送信されます。</li>
   <li><strong>クラッシュ・エラーレポート（Sentry）：</strong>アラーム音が
   気づかれないまま鳴らなくなるといった、本来なら気づけない不具合を発見するため、
   本アプリはクラッシュおよびエラーのレポートを Sentry に送信します。これは
@@ -1450,9 +1816,29 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
   ある画面録画（「Session Replay」）は<strong>有効にしていません</strong>。
   詳細は<a href="https://amplitude.com/privacy">Amplitude のプライバシー
   通知</a>をご覧ください。</li>
+  <li><strong>アプリの整合性チェック（Google Play Integrity と当社の Supabase
+  バックエンド）：</strong>アプリのバージョンごとに1回、<strong>アカウントの有無に
+  かかわらず</strong>、本アプリは Google Play にこのインストールが改変されていない
+  正規のコピーかどうかを問い合わせ、Google の回答を当社の Supabase バックエンドへ
+  送信します。これにより、改ざんされたインストールがどれだけあるかを把握します。
+  お客様の氏名、アカウント、識別子は一切含まれません。このエンドポイントの悪用を
+  防ぐため、バックエンドはリクエストの IP アドレスのソルト付き不可逆ハッシュを最大
+  1時間保持します。他の情報とは一切結び付けられず、毎日削除されます。</li>
 </ul>
 
-<h2>6. 本アプリが要求する権限</h2>
+<h2>6. ローカル自動化との連携（任意）</h2>
+<p>アラームの停止時のアクションを「自動化（Tasker）」に設定すると（Tasker や
+MacroDroid などの自動化アプリと組み合わせて使うための設定です）、そのアラームを
+停止したときに本アプリは通常の Android ブロードキャストを送信します。これは、
+対応するレシーバーを登録している端末内のどのアプリでも受け取れるもので——Android の
+ローカル自動化連携はこのような仕組みで動作します——端末の外に出ることはなく、
+当方に届くこともありません。含まれるのは、そのアラームの内部 ID（名前とは
+結び付いていないランダムな識別子）と、入力していれば、編集画面でそのアラームに
+付けた短いタグだけです。それ以外は何も含まれず、アラームの名前や説明文が含まれる
+ことは一切ありません。この機能は、特定のアラームの停止時のアクションとして
+「自動化（Tasker）」をご自身で明示的に選択しない限り、無効のままです。</p>
+
+<h2>7. 本アプリが要求する権限</h2>
 <table>
   <tr><th>権限</th><th>目的</th></tr>
   <tr><td>通知、全画面アラーム</td><td>ロック画面の上でも鳴動し、アラーム画面を表示するため。</td></tr>
@@ -1460,38 +1846,42 @@ RevenueCat は当方のサービスプロバイダーとして行動し、これ
   <tr><td>起動時の実行</td><td>端末の再起動後にアラームを再設定するため。</td></tr>
   <tr><td>フォアグラウンドサービス、ウェイクロック、バイブレーション</td><td>アラームを解除するまで確実に鳴動・振動させ続けるため。</td></tr>
   <tr><td>位置情報（フォアグラウンドおよびバックグラウンド）</td><td>上記のオプションのジオフェンス機能と太陽アラーム機能のためだけに使用します。</td></tr>
-  <tr><td>インターネット</td><td>上記のとおり、購入（RevenueCat）、祝日の同期、地図タイル、エラーレポート（Sentry）、アカウント作成時のログインおよび端末間同期（Supabase）、そして（オンにした場合のみ）利用状況分析（Aptabase と Amplitude）のためだけに使用します。</td></tr>
+  <tr><td>インターネット</td><td>上記のとおり、購入（RevenueCat）、祝日の同期、地図タイル、天気予報（Open-Meteo）、エラーレポート（Sentry）、整合性チェック（Google と Supabase）、アカウント作成時のログインおよび端末間同期（Supabase）、そして（オンにした場合のみ）利用状況分析（Aptabase と Amplitude）のためだけに使用します。</td></tr>
 </table>
 
-<h2>7. データの共有と販売</h2>
-<p>当方はいかなるデータも販売・貸与・交換しません。データを処理する第三者は
-上記のサービスプロバイダー（Google Play、RevenueCat、Nager.Date、CARTO、
-Sentry、Aptabase、Amplitude、そしてアカウントを作成した場合の Supabase）のみで、
-それぞれ記載された機能に厳密に限定されます。</p>
+<h2>8. データの共有と販売</h2>
+<p>当方はいかなるデータも販売・貸与・交換しません。ネットワークを介してデータを
+処理する第三者は上記のサービスプロバイダー（Google Play、RevenueCat、Nager.Date、
+OpenStreetMap 財団、Open-Meteo、Sentry、Aptabase、Amplitude、Google（整合性チェック、
+およびご利用の場合は Google ログイン）、Supabase）のみで、それぞれ記載された機能に
+厳密に限定されます。データが他者に渡る経路はこのほかに一つだけ、第6項で説明した
+ローカル自動化のブロードキャストがあります。これはアラームごとに有効にした場合に
+限られ、端末の外に出ることはありませんが、端末にインストールされているアプリで
+あればどれでも受信登録できます。</p>
 
-<h2>8. データの保持と削除</h2>
+<h2>9. データの保持と削除</h2>
 <p>ローカルデータは端末内にのみ存在します。本アプリをアンインストールすると
 削除されます。アカウントを作成した場合、設定 → アカウント → アカウントを削除
 から削除すると、アカウント・メールアドレス・同期済みのアラーム/祝日も
 即座に削除されます — 第3項をご覧ください。RevenueCat が保持する匿名の購入記録の
 削除をご希望の場合は、下記メールアドレスまでご連絡ください。対応いたします。</p>
 
-<h2>9. お子様について</h2>
+<h2>10. お子様について</h2>
 <p>本アプリは13歳未満の子供を対象としておらず、故意に子供の個人情報を収集する
 ことはありません。</p>
 
-<h2>10. 本ポリシーの変更</h2>
+<h2>11. 本ポリシーの変更</h2>
 <p>本ポリシーを変更する場合は、本ページと上記の発効日を更新します。重要な
 変更は本アプリのリリースノートでお知らせします。</p>
 
-<h2>11. お問い合わせ</h2>
+<h2>12. お問い合わせ</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">お問い合わせフォーム</a></p>
 
 <hr class="divider">
 
 <!-- ============================== KO ============================== -->
 <h1 id="ko">Chronos — 개인정보 처리방침</h1>
-<p class="muted">시행일: 2026년 8월 6일</p>
+<p class="muted">시행일: 2026년 9월 11일</p>
 
 <p>Chronos(이하 "본 앱")는 Luis Martín(이하 "당사")이 개발한 Android 알람
 앱입니다. 본 방침은 본 앱이 어떤 데이터를 왜 처리하는지 설명합니다. 요약하면:
@@ -1523,9 +1913,13 @@ SDK를 일절 포함하지 않습니다.</strong> 계정 생성은 전적으로 
   위치를 사용해 해당 시각을 기기에서 계산합니다.</li>
 </ul>
 <p>두 기능 모두 위치 정보를 기기 밖으로 전송하지 않으며, 위치 정보는 어떤
-기록에도 저장되지 않고 누구와도 공유되지 않습니다. 다만 구역을 선택하는 동안 한
-가지 예외가 있습니다. 위치를 표시하는 지도는 CARTO에서 불러오므로, 보고 있는
-영역 — 보통은 사용자가 있는 영역 — 이 CARTO에 전달됩니다. 5항을 참조하세요. 이
+기록에도 저장되지 않고 누구와도 공유되지 않습니다. 다만 두 가지 예외가
+있습니다. 구역을 선택하는 동안, 위치를 표시하는 지도는 OpenStreetMap 재단
+(OpenStreetMap Foundation)의 타일 서버에서 불러오므로, 보고 있는 영역 — 보통은
+사용자가 있는 영역 — 이 OpenStreetMap 재단에 전달됩니다. 그리고
+음성 날씨 브리핑(프리미엄 기능)을 활성화하면, 본 앱은 대략적인 위치 —
+약 1km 단위로 반올림되며 정확한 좌표가 아닙니다 — 를 Open-Meteo로 전송해
+당일의 지역 일기예보를 가져옵니다. 두 가지 모두 5항에서 설명합니다. 이
 기능들을 사용하지 않으면 본 앱은 위치 권한을 요청하지 않습니다.</p>
 
 <h2>3. 계정 및 기기 간 동기화</h2>
@@ -1548,6 +1942,14 @@ SDK를 일절 포함하지 않습니다.</strong> 계정 생성은 전적으로 
   Supabase 계정에도 저장됩니다. 각 데이터 행은 사용자의 계정에 연결되며 본인만
   읽을 수 있습니다.</li>
 </ul>
+<p><strong>Google로 로그인.</strong> 이메일과 비밀번호 대신 <em>Google로 계속하기</em>를
+누를 수도 있습니다. 그러면 Google이 어떤 Google 계정을 사용할지 묻고, 해당 계정을
+식별하는 서명된 토큰을 본 앱에 전달합니다. Supabase는 이를 바탕으로 귀하의 계정을
+만들거나 찾습니다. 이 과정에서 Google은 귀하가 Chronos에 로그인했다는 사실을 알게
+되며, 당사는 귀하의 <strong>이메일 주소</strong>와 해당 Google 계정의 이름을
+받습니다 — 그 외에는 아무것도 받지 않으며, 연락처나 다른 Google 서비스에 대한
+접근 권한은 포함되지 않습니다. Google이 Chronos 사용 사실을 알기를 원하지 않으시면
+이메일과 비밀번호 방식을 이용하세요.</p>
 <p>로그인되어 있는 동안, 본 앱을 열거나 다시 전면으로 가져올 때마다 기기 내
 알람/공휴일과 계정의 사본을 비교하고 병합하여, 로그인된 모든 기기가 결국
 동일한 데이터를 갖도록 합니다. 이는 실시간이 아닙니다 — 한 기기에서 변경한
@@ -1557,7 +1959,8 @@ SDK를 일절 포함하지 않습니다.</strong> 계정 생성은 전적으로 
 하면 계정, 이메일, 동기화된 모든 알람/공휴일이 당사 시스템에서 즉시 영구적으로
 삭제됩니다 — 대기 기간이 없으며, 이를 위해 당사에 이메일을 보낼 필요도
 없습니다. 이 작업은 되돌릴 수 없습니다.</p>
-<p>Supabase는 이 기능에 한해 당사의 서비스 제공업체(데이터 처리자)로
+<p>Supabase는 이 기능과 제5절에 설명된 무결성 확인에 한해 당사의 서비스
+제공업체(데이터 처리자)로
 활동하며, EU(스웨덴 스톡홀름)에서 호스팅됩니다. 당사는 이 데이터를 판매하거나
 다른 누구와도 공유하지 않습니다. 자세한 내용은
 <a href="https://supabase.com/privacy">Supabase 개인정보 처리방침</a>을
@@ -1577,18 +1980,25 @@ Google이 처리합니다.</p>
 처리방침</a>을 참조하세요.</p>
 
 <h2>5. 기타 네트워크 서비스</h2>
-<p>본 앱은 특정 기능을 위해 다섯 개의 서비스에 접속합니다. 모든 인터넷
+<p>본 앱은 특정 기능을 위해 일곱 개의 서비스에 접속합니다. 모든 인터넷
 요청과 마찬가지로 이들 서비스는 기술적으로 IP 주소를 수신합니다.</p>
 <ul>
   <li><strong>공휴일(Nager.Date, date.nager.at):</strong> 공휴일 자동 동기화를
   활성화하면 본 앱은 선택한 국가와 연도의 공휴일 목록을 다운로드합니다. 개인
   데이터는 전송되지 않으며 국가 코드와 연도만 전송됩니다.</li>
-  <li><strong>지도 타일(CARTO / OpenStreetMap, basemaps.cartocdn.com):</strong>
-  알람을 편집하며 지도에서 위치를 선택하면 지도 이미지가 CARTO 서버에서
+  <li><strong>지도 타일(OpenStreetMap 재단, tile.openstreetmap.org):</strong>
+  알람을 편집하며 지도에서 위치를 선택하면 지도 이미지가 OpenStreetMap 재단 서버에서
   로드됩니다. 이 요청으로 보고 있는 지도 영역이 드러나며, 지도가 현재 위치를
-  중심으로 열리면 그 영역은 사용자가 어디에 있는지를 나타냅니다. 본 앱은 CARTO에
-  이름, 계정, 식별자를 보내지 않습니다. 모든 인터넷 요청과 마찬가지로 CARTO는 IP
-  주소를 수신합니다.</li>
+  중심으로 열리면 그 영역은 사용자가 어디에 있는지를 나타냅니다. 본 앱은 OpenStreetMap
+  재단에 사용자의 이름, 계정, 식별자를 보내지 않습니다. 다만 각 요청은 재단의 이용
+  정책이 요구하는 대로 본 앱 자체(패키지 이름)를 식별합니다. 모든 인터넷 요청과
+  마찬가지로 재단은 IP 주소를 수신합니다.</li>
+  <li><strong>일기예보(Open-Meteo, api.open-meteo.com):</strong> 음성 날씨
+  브리핑(프리미엄 기능)을 활성화하면, 본 앱은 태양 알람을 위해 이미 캐시된
+  대략적인 위치 — 기기를 떠나기 전에 약 1km 단위로 반올림되며 정확한 좌표가
+  아닙니다 — 를 사용해 Open-Meteo에 사용자 지역의 당일 일기예보를 요청합니다.
+  본 앱은 Open-Meteo에 이름, 계정, 식별자를 보내지 않습니다. 모든 인터넷 요청과
+  마찬가지로 Open-Meteo는 IP 주소를 수신합니다.</li>
   <li><strong>충돌 및 오류 보고(Sentry):</strong> 알람 소리가 아무 알림 없이
   조용히 재생되지 않는 것처럼, 그렇지 않으면 알아채지 못할 문제를 찾아내기
   위해 본 앱은 충돌 및 오류 보고를 Sentry로 전송합니다. 이 기능은
@@ -1616,9 +2026,27 @@ Google이 처리합니다.</p>
   <strong>활성화되어 있지 않습니다</strong>. 자세한 내용은
   <a href="https://amplitude.com/privacy">Amplitude 개인정보 처리방침</a>을
   참조하세요.</li>
+  <li><strong>앱 무결성 확인(Google Play Integrity 및 당사 Supabase 백엔드):</strong>
+  앱 버전당 한 번, <strong>계정 보유 여부와 관계없이</strong> 본 앱은 이 설치본이
+  변조되지 않은 정품 사본인지 Google Play에 문의하고, Google의 답변을 당사 Supabase
+  백엔드로 전송하여 변조된 설치가 얼마나 되는지 파악합니다. 여기에는 귀하의 이름,
+  계정, 식별자가 전혀 포함되지 않습니다. 해당 엔드포인트의 악용을 막기 위해 백엔드는
+  요청 IP 주소의 솔트 적용 비가역 해시를 최대 1시간 동안 보관하며, 다른 어떤 정보와도
+  연결되지 않고 매일 삭제됩니다.</li>
 </ul>
 
-<h2>6. 본 앱이 요청하는 권한</h2>
+<h2>6. 로컬 자동화 연동(선택)</h2>
+<p>알람의 해제 시 동작을 "자동화(Tasker)"로 설정하면(Tasker, MacroDroid 등
+자동화 앱과 함께 쓰기 위한 설정입니다), 그 알람을 해제할 때 본 앱은 표준 Android
+브로드캐스트를 전송하며, 이에 맞는 리시버를 등록해 둔 기기 내의 모든 앱이 이를
+읽을 수 있습니다 — Android에서 로컬 자동화 연동은 이런 방식으로 동작하며, 이
+브로드캐스트는 기기를 벗어나지 않고 당사에도 전달되지 않습니다. 여기에는 해당
+알람의 내부 id(이름과 연결되지 않은 무작위 식별자)와, 입력하셨다면 편집 화면에서
+그 알람에 지정한 짧은 태그만 담기며 — 그 외에는 아무것도 담기지 않고, 알람의
+이름이나 설명은 절대 포함되지 않습니다. 이 기능은 특정 알람의 해제 시 동작으로
+"자동화(Tasker)"를 직접 선택하지 않는 한 꺼져 있습니다.</p>
+
+<h2>7. 본 앱이 요청하는 권한</h2>
 <table>
   <tr><th>권한</th><th>용도</th></tr>
   <tr><td>알림, 전체 화면 알람</td><td>잠금 화면 위에서도 울리고 알람 화면을 표시하기 위해.</td></tr>
@@ -1626,31 +2054,35 @@ Google이 처리합니다.</p>
   <tr><td>부팅 시 실행</td><td>휴대폰 재부팅 후 알람을 다시 설정하기 위해.</td></tr>
   <tr><td>포그라운드 서비스, 웨이크락, 진동</td><td>알람을 끌 때까지 확실하게 계속 울리고 진동하도록 하기 위해.</td></tr>
   <tr><td>위치(포그라운드 및 백그라운드)</td><td>위에서 설명한 선택적 지오펜싱 및 태양 알람 기능에만 사용됩니다.</td></tr>
-  <tr><td>인터넷</td><td>위에서 설명한 구매(RevenueCat), 공휴일 동기화, 지도 타일, 오류 보고(Sentry), 계정 생성 시 로그인 및 기기 간 동기화(Supabase), 그리고 (동의한 경우) 사용 분석(Aptabase 및 Amplitude)에만 사용됩니다.</td></tr>
+  <tr><td>인터넷</td><td>위에서 설명한 구매(RevenueCat), 공휴일 동기화, 지도 타일, 일기예보(Open-Meteo), 오류 보고(Sentry), 무결성 확인(Google 및 Supabase), 계정 생성 시 로그인 및 기기 간 동기화(Supabase), 그리고 (동의한 경우) 사용 분석(Aptabase 및 Amplitude)에만 사용됩니다.</td></tr>
 </table>
 
-<h2>7. 데이터 공유 및 판매</h2>
-<p>당사는 어떤 데이터도 판매·대여·교환하지 않습니다. 데이터를 처리하는 제3자는
-위에 나열된 서비스 제공업체(Google Play, RevenueCat, Nager.Date, CARTO,
-Sentry, Aptabase, Amplitude, 그리고 계정을 생성한 경우 Supabase)뿐이며,
-각각 설명된 기능에 엄격히 한정됩니다.</p>
+<h2>8. 데이터 공유 및 판매</h2>
+<p>당사는 어떤 데이터도 판매·대여·교환하지 않습니다. 네트워크를 통해 데이터를
+처리하는 제3자는 위에 나열된 서비스 제공업체(Google Play, RevenueCat, Nager.Date,
+OpenStreetMap 재단, Open-Meteo, Sentry, Aptabase, Amplitude, Google(무결성 확인 및
+사용하시는 경우 Google 로그인), Supabase)뿐이며, 각각 설명된 기능에 엄격히
+한정됩니다. 데이터가 다른 곳에 전달되는 경로는 이 밖에 하나뿐으로, 6항에서 설명한
+로컬 자동화 브로드캐스트입니다. 이는 어떤 알람에 대해 직접 켠 경우에만 발생하며,
+기기를 벗어나지는 않지만 기기에 설치된 어떤 앱이든 수신하도록 등록할 수
+있습니다.</p>
 
-<h2>8. 데이터 보관 및 삭제</h2>
+<h2>9. 데이터 보관 및 삭제</h2>
 <p>로컬 데이터는 기기에만 존재합니다. 본 앱을 삭제하면 함께 삭제됩니다.
 계정을 생성한 경우, 설정 → 계정 → 계정 삭제에서 삭제하면 계정, 이메일,
 동기화된 알람/공휴일도 즉시 함께 삭제됩니다 — 3항을 참조하세요. RevenueCat이
 보관하는 익명 구매 기록의 삭제를 원하시면 아래 이메일로 연락해 주세요. 요청을
 처리해 드리겠습니다.</p>
 
-<h2>9. 아동</h2>
+<h2>10. 아동</h2>
 <p>본 앱은 13세 미만 아동을 대상으로 하지 않으며, 고의로 아동의 개인정보를
 수집하지 않습니다.</p>
 
-<h2>10. 본 방침의 변경</h2>
+<h2>11. 본 방침의 변경</h2>
 <p>본 방침을 변경할 경우 이 페이지와 위의 시행일을 업데이트합니다. 중요한
 변경 사항은 본 앱의 릴리스 노트에 안내됩니다.</p>
 
-<h2>11. 문의</h2>
+<h2>12. 문의</h2>
 <p>Luis Martín — <a href="https://chronosintelligentalarm.com/contact/">문의 양식</a></p>
 <!-- LEGAL:END -->
     </article>
